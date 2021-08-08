@@ -1,0 +1,24 @@
+{
+    "ak47": {
+        "damage": 10,
+        "speed": 5,
+        "accuracy": 1,
+        "strike": 0,
+        "cost": 5,
+        "size": 0.01,
+        "kind": "normal_bullet",
+        "frequency": 5.0,
+        "knockback": 20.0
+    },
+    "mk14": {
+        "damage": 15,
+        "speed": 20.0,
+        "accuracy": 1,
+        "strike": 0.05,
+        "cost": 1,
+        "size": 0.01,
+        "kind": "normal_bullet",
+        "frequency": 15,
+        "knockback": 3.0
+    }
+}
