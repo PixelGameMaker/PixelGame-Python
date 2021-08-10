@@ -22,7 +22,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN
 pygame.display.set_caption(TITLE)
 
 clock = pygame.time.Clock()
-font  = pygame.font.Font('assets/OCRAEXT.TTF', 16)
+font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
 music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
     
 displayInfo = pygame.display.Info()
