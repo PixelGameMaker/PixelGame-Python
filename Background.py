@@ -14,8 +14,7 @@ def background_surf_init():
     global background_surf
     background_surf = {}
     
-    floor_image = {'floor':'assets/image/background/floor.png',
-                        }
+    floor_image = {'floor':'assets/image/background/floor.png'}
     wall_image = {'wall' :'assets/image/background/wall.png'}
     
     
