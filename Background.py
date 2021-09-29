@@ -8,6 +8,8 @@ import pygame
 
 pygame.init()
 
+displayInfo = pygame.display.Info()
+
 def background_surf_init():
     global background_surf
     background_surf = {}
@@ -19,6 +21,7 @@ def background_surf_init():
     
     for name, path in floor_image.items():
         surf = pygame.image.load(path).convert()
+        surf = pygame.transform.smoothscale(surf, (displayInfo.current_w, displayInfo.current_h))
         surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         background_surf[name] = surf
         
