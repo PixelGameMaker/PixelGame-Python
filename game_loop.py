@@ -30,8 +30,7 @@ pygame.display.set_caption(TITLE)
 clock = pygame.time.Clock()
 font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
 music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
-fps = 60
-
+    
 
     
 character_surf_initialize()
@@ -67,9 +66,9 @@ all_sprite.add(enemy_left_text)
 
 #player_situation 
 player_text = Text(font, 'player:', (SCREEN_WIDTH -120, 5))
-player_mp_text = Text(font, 'mp:', (SCREEN_WIDTH -120, 20))
-player_hp_text = Text(font, 'hp:', (SCREEN_WIDTH -120, 35))
-player_weapon_text = Text(font, 'weapon:', (SCREEN_WIDTH -120, 50))
+player_mp_text = Text(font, 'mp:', (SCREEN_HEIGHT -120, 20))
+player_hp_text = Text(font, 'hp:', (SCREEN_HEIGHT -120, 35))
+player_weapon_text = Text(font, 'weapon:', (SCREEN_HEIGHT -120, 50))
 all_sprite.add(player_text)
 all_sprite.add(player_mp_text)
 all_sprite.add(player_hp_text)
@@ -109,8 +108,8 @@ while True:
                 if events.key == pygame.K_3:
                     weapon.switch_weapon(3)
             
-                #if events.key == pygame.K_q:
-                #    weapon.next_weapon()
+                if events.key == pygame.K_q:
+                    weapon.next_weapon()
                     
                 if events.key == pygame.K_m:
                     if music.getBusy():
@@ -118,7 +117,7 @@ while True:
                     else:
                         music.playMusic()
                     
-                if events.key == pygame.K_ESCAPE:
+                if events.key == pygame.K_l:
                     pygame.quit()
                     import sys
                     sys.exit(0)
@@ -263,6 +262,6 @@ while True:
         
         
         
-        clock.tick(fps)
+        clock.tick(30)
         pygame.display.flip()
             
