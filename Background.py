@@ -25,7 +25,7 @@ def background_surf_init():
         surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         background_surf[name] = surf
         
-    size = (60, 100)
+    size = (int(displayInfo.current_w /32), int(displayInfo.current_h /10.8))
     for name, path in wall_image.items():
         surf = pygame.image.load(path).convert()
         surf = pygame.transform.smoothscale(surf, size)
@@ -87,8 +87,8 @@ def wallGenerater(dtype, groups, pos):
         for y in range(len(wall[dtype][x])):
             #print(x, y)
             if wall[dtype][x][y] == '1':
-                pos_x = (x - len(wall[dtype]) /2) *60
-                pos_y = (y - len(wall[dtype]) /2) *40
+                pos_x = (x - len(wall[dtype]) /2) *(displayInfo.current_w /32)
+                pos_y = (y - len(wall[dtype]) /2) *(displayInfo.current_h /27)
                 summon_wall = Wall((pos_x, pos_y))
                 for group in groups:
                     group.add(summon_wall)
