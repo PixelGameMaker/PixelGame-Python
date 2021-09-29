@@ -7,7 +7,7 @@ Created on Mon Jul 19 16:01:18 2021
 
 from Character import character_surf_initialize, get_update_direction
 from Character import Player, Bullet, Enemy, Weapon, Text
-from Background import background_surf_init, Floor
+from Background import background_surf_init, Floor, wallGenerater
 from BackGroundMusic import BackGroundMusic
 
 import pygame.locals
@@ -33,6 +33,7 @@ background_surf_init()
 bullet_cd = time.time()
 dps_clock = time.time()
 
+wall = pygame.sprite.Group()
 floor = pygame.sprite.Group()
 bullet = pygame.sprite.Group()
 enemy = pygame.sprite.Group()
@@ -67,10 +68,12 @@ all_sprite.add(player_mp_text)
 all_sprite.add(player_hp_text)
 all_sprite.add(player_weapon_text)
 
+groups = (all_sprite, wall)
+wallGenerater('room', groups, (0, 0))
 
 att=0
 dps={}
-music.playMusic()
+#music.playMusic()
 
 
 while True:
@@ -113,10 +116,26 @@ while True:
                     import sys
                     sys.exit(0)
                     
-        key_pressed = pygame.key.get_pressed()
+        key_pressed = list(pygame.key.get_pressed())
+        
+        
+        
         direction = [key_pressed[pygame.K_d] - key_pressed[pygame.K_a],
                      key_pressed[pygame.K_s] - key_pressed[pygame.K_w]]
                     
+        
+        #wall
+        
+        wall.update(player.speed, [direction[0], 0])
+        if pygame.sprite.spritecollide(player, wall, False) != []:
+            wall.update(player.speed, [-direction[0], 0])
+            direction[0] =0
+            
+        wall.update(player.speed, [0, direction[1]])
+        if pygame.sprite.spritecollide(player, wall, False) != []:
+            wall.update(player.speed, [0, -direction[1]])
+            direction[1] =0
+        
         #floor
         
         for sprite in floor:
@@ -140,7 +159,11 @@ while True:
                 player.speedup_cd = time.time()
                 player.speedup = 8
         
+        
+        
         player.update(direction)
+        
+        
         #print(direction)
         
         #enemy
@@ -184,6 +207,8 @@ while True:
         att_text.update('att:' + str(att))
         
         
+        
+        
         for current_time in list(dps.keys()):
             if time.time() - current_time > 1:
                 dps.pop(current_time)
@@ -200,10 +225,10 @@ while True:
         #if dps != {} : print(dps)
         
         for entity in bullet:
-            if  entity.rect.x > displayInfo.current_w or\
-                entity.rect.x < 0 or\
-                entity.rect.y > displayInfo.current_h or\
-                entity.rect.y < 0:
+            if  entity.rect.x > displayInfo.current_w *2 or\
+                entity.rect.x < -displayInfo.current_w or\
+                entity.rect.y > displayInfo.current_h *2 or\
+                entity.rect.y < -displayInfo.current_h:
                     entity.kill()
                     bullet.remove(entity)
                     del entity

@@ -9,6 +9,7 @@ import pygame
 import time
 import random
 import json
+import math
 
 pygame.init()
 
@@ -31,8 +32,8 @@ def character_surf_initialize():
     bullet_images = {'normal_bullet' : 'assets/image/bullet/normal_bullet.png',
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png'}
     
-    size = (int(displayInfo.current_h / 10),
-            int(displayInfo.current_h / 10))
+    size = (int(displayInfo.current_h / 15),
+            int(displayInfo.current_h / 15))
     for name, path in player_images.items():
         surf = pygame.image.load(path).convert()
         surf = pygame.transform.smoothscale(surf, size)
@@ -45,8 +46,8 @@ def character_surf_initialize():
             surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
             player_surf[name+'_reverse'] = surf
     
-    size = (int(displayInfo.current_h / 10),
-            int(displayInfo.current_h / 10))
+    size = (int(displayInfo.current_h / 12),
+            int(displayInfo.current_h / 12))
     for name, path in enemy_images.items():
         surf = pygame.image.load(path).convert()
         surf = pygame.transform.smoothscale(surf, size)
@@ -61,7 +62,7 @@ def character_surf_initialize():
     
     for name, path in bullet_images.items():
         surf = pygame.image.load(path).convert()
-        surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
+        surf.set_colorkey((0, 0, 0), pygame.RLEACCEL)
         bullet_surf[name] = surf
 
 def update_img(entity, direction):
@@ -86,6 +87,13 @@ def update_img(entity, direction):
         else:
             entity.surf = entity.surf_dict['standing']
             entity.images['now'] = 'standing'
+
+
+def update_bullet_image(image, direction):
+    angle = math.degrees(math.atan(direction[1] /direction[0]))
+    image = pygame.transform.rotate(image, angle)
+    return image
+    
 
 def get_update_direction(direction):
     if abs(direction[0]) > abs(direction[1]):
@@ -133,6 +141,7 @@ class Player(pygame.sprite.Sprite):
         self.walking_cd = time.time()
         self.speedup_cd = time.time()
         
+            
         
     def update(self, direction):
         update_img(self, direction)
@@ -280,25 +289,8 @@ class Weapon(pygame.sprite.Sprite):
         del fo
         self.weapon_list = list(self.data.keys())
         self.main_hand = 'mk14'
-        self.inventory = []
         self.detail = self.data[self.main_hand]
         
-    def switch_weapon(self, i):
-        index = i -1
-        if index > len(self.weapon_list)-1:
-            return
-        self.main_hand = self.weapon_list[index]
-        self.detail = self.data[self.main_hand]
-        
-    def add_weapon(self, weapon):
-        self.inventory.append(weapon)
-        
-    def next_weapon(self):
-        index = self.weapon_list.index(self.main_hand)+1
-        if index > len(self.weapon_list)-1:
-            index -= len(self.weapon_list)
-        self.main_hand = self.weapon_list[index]
-        self.detail = self.data[self.main_hand]
         
 
 class Text(pygame.sprite.Sprite):
