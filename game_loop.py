@@ -13,11 +13,17 @@ from BackGroundMusic import BackGroundMusic
 import pygame.locals
 import time
 import random
-    
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
+
+pygame.init()
+
+displayInfo = pygame.display.Info()
+
+SCREEN_WIDTH = displayInfo.current_w
+SCREEN_HEIGHT = displayInfo.current_h
 TITLE = 'charater'
     
+
+
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
 pygame.display.set_caption(TITLE)
 
@@ -25,7 +31,7 @@ clock = pygame.time.Clock()
 font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
 music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
     
-displayInfo = pygame.display.Info()
+
     
 character_surf_initialize()
 background_surf_init()
@@ -40,8 +46,8 @@ enemy = pygame.sprite.Group()
 situation_text = pygame.sprite.Group()
 all_sprite = pygame.sprite.Group()
 
-for x in range(-1920, 1920, 1920):
-    for y in range(-1080, 1080, 1080):
+for x in range(-SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_WIDTH):
+    for y in range(-SCREEN_HEIGHT, SCREEN_HEIGHT, SCREEN_HEIGHT):
         summon_floor = Floor([x, y])
         floor.add(summon_floor)
         all_sprite.add(summon_floor)
@@ -59,10 +65,10 @@ all_sprite.add(dps_text)
 all_sprite.add(enemy_left_text)
 
 #player_situation 
-player_text = Text(font, 'player:', (1800, 5))
-player_mp_text = Text(font, 'mp:', (1800, 20))
-player_hp_text = Text(font, 'hp:', (1800, 35))
-player_weapon_text = Text(font, 'weapon:', (1800, 50))
+player_text = Text(font, 'player:', (SCREEN_WIDTH -120, 5))
+player_mp_text = Text(font, 'mp:', (SCREEN_HEIGHT -120, 20))
+player_hp_text = Text(font, 'hp:', (SCREEN_HEIGHT -120, 35))
+player_weapon_text = Text(font, 'weapon:', (SCREEN_HEIGHT -120, 50))
 all_sprite.add(player_text)
 all_sprite.add(player_mp_text)
 all_sprite.add(player_hp_text)
@@ -141,14 +147,14 @@ while True:
         for sprite in floor:
             new_x = None
             new_y = None
-            if sprite.rect.x < -1920:
-                sprite.rect.x += 3840
-            if sprite.rect.x > 1920:
-                sprite.rect.x -= 3840
-            if sprite.rect.y < -1080:
-                sprite.rect.y += 2160
-            if sprite.rect.y > 1080:
-                sprite.rect.y -= 2160
+            if sprite.rect.x < -SCREEN_WIDTH:
+                sprite.rect.x += SCREEN_WIDTH *2
+            if sprite.rect.x > SCREEN_WIDTH:
+                sprite.rect.x -= SCREEN_WIDTH *2
+            if sprite.rect.y < -SCREEN_HEIGHT:
+                sprite.rect.y += SCREEN_HEIGHT *2
+            if sprite.rect.y > SCREEN_HEIGHT:
+                sprite.rect.y -= SCREEN_HEIGHT *2
             
         floor.update(player.speed, direction)
         
