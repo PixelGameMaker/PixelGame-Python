@@ -1,0 +1,22 @@
+{
+    "Archer": {
+        "health": 100,
+        "max_mp": 100,
+        "speed": 3
+    },
+    "Knight": {
+        "health": 200,
+        "max_mp": 50,
+        "speed": 7
+    },
+    "Magician": {
+        "health": 100,
+        "max_mp": 200,
+        "speed": 5
+    },
+    "Assassin": {
+        "health": 50,
+        "max_mp": 50,
+        "speed": 10
+    }
+}

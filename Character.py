@@ -129,11 +129,23 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery = displayInfo.current_h / 2
         
         #setting
-        self.health = 100
-        self.max_mp = 100
-        self.set_speed = 5
-        self.speed = self.set_speed
-        self.mp = 100
+        file = 'assets/profession.json'
+        #self.profession = {'Archer',
+        #                   'Knight',
+        #                   'Magician',
+        #                   'Assassin'
+        #                   }
+        
+        fo = open(file, 'r')
+        self.profession = json.load(fo)
+        fo.close()
+        del fo
+        
+        #self.health = 100
+        #self.max_mp = 100
+        #self.set_speed = 5
+        #self.speed = self.set_speed
+        #self.mp = 100
         
         self.walking = False
         self.speedup = 0
@@ -142,7 +154,17 @@ class Player(pygame.sprite.Sprite):
         self.speedup_cd = time.time()
         
             
+    def set_profession(self, profession):
+        self.health = self.profession[profession]['health']
+        self.max_mp = self.profession[profession]['max_mp']
+        self.set_speed = self.profession[profession]['speed']
         
+        self.mp = self.max_mp
+        self.speed = self.set_speed
+        
+        
+        
+    
     def update(self, direction):
         update_img(self, direction)
         if self.mp < self.max_mp:
