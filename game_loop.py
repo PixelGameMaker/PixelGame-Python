@@ -100,15 +100,15 @@ while True:
                     enemy.add(summon_enemy)
                     all_sprite.add(summon_enemy)
                 
-                if events.key == pygame.K_1:
-                    weapon.switch_weapon(1)
-                
-                if events.key == pygame.K_2:
-                    weapon.switch_weapon(2)
-                    
-                if events.key == pygame.K_3:
-                    weapon.switch_weapon(3)
-            
+                #if events.key == pygame.K_1:
+                #    weapon.switch_weapon(1)
+                # 
+                #if events.key == pygame.K_2:
+                #    weapon.switch_weapon(2)
+                #    
+                #if events.key == pygame.K_3:
+                #    weapon.switch_weapon(3)
+                #
                 #if events.key == pygame.K_q:
                 #    weapon.next_weapon()
                     
