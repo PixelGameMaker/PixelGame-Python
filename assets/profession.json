@@ -1,0 +1,26 @@
+{
+    "Archer": {
+        "health": 100,
+        "max_mp": 100,
+        "speed": 3,
+        "weapon": "bow"
+    },
+    "Knight": {
+        "health": 200,
+        "max_mp": 50,
+        "speed": 7,
+        "weapon": "sword"
+    },
+    "Magician": {
+        "health": 100,
+        "max_mp": 200,
+        "speed": 5,
+        "weapon": "magic"
+    },
+    "Assassin": {
+        "health": 50,
+        "max_mp": 50,
+        "speed": 10,
+        "weapon": "dagger"
+    }
+}

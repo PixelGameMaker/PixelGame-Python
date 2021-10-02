@@ -37,7 +37,7 @@ fps = 60
 character_surf_initialize()
 background_surf_init()
     
-bullet_cd = time.time()
+bullet_cd = time.time() -10
 dps_clock = time.time()
 
 wall = pygame.sprite.Group()
@@ -56,7 +56,10 @@ for x in range(-SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_WIDTH):
 player = Player()
 all_sprite.add(player)
 
+player.set_profession('Archer')
+
 weapon = Weapon()
+weapon.set_weapon(player.weapon)
 
 att_text = Text(font, 'att:', (5, 5))
 dps_text = Text(font, 'dps:', (5, 20))

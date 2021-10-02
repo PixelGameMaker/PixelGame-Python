@@ -30,7 +30,8 @@ def character_surf_initialize():
                      'walking_2': 'assets/image/enemy/walking_2.png'
                      }
     bullet_images = {'normal_bullet' : 'assets/image/bullet/normal_bullet.png',
-                     'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png'}
+                     'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
+                     'arrow'         : 'assets/image/bullet/arrow.png'}
     
     size = (int(displayInfo.current_h / 15),
             int(displayInfo.current_h / 15))
@@ -89,8 +90,8 @@ def update_img(entity, direction):
             entity.images['now'] = 'standing'
 
 
-def update_bullet_image(image, direction):
-    angle = math.degrees(math.atan(direction[1] /direction[0]))
+def update_bullet_image_direction(image, direction):
+    angle = 180-math.degrees(math.atan(direction[1] /direction[0]))
     image = pygame.transform.rotate(image, angle)
     return image
     
@@ -158,9 +159,11 @@ class Player(pygame.sprite.Sprite):
         self.health = self.profession[profession]['health']
         self.max_mp = self.profession[profession]['max_mp']
         self.set_speed = self.profession[profession]['speed']
+        self.weapon = self.profession[profession]['weapon']
         
         self.mp = self.max_mp
         self.speed = self.set_speed
+        
         
         
         
@@ -268,6 +271,7 @@ class Bullet(pygame.sprite.Sprite):
         self.direction = [0, 0]
         self.kind = 'normal_bullet'
         self.knockback = 5
+        self.range = 1
         
         for key, value in detail.items():
             setattr(self, key, value)
@@ -276,6 +280,7 @@ class Bullet(pygame.sprite.Sprite):
                      int(displayInfo.current_h * self.size))
             
         self.surf = bullet_surf[self.kind].copy()
+        self.surf = update_bullet_image_direction(self.surf, self.direction)
         self.surf = pygame.transform.smoothscale(self.surf, self.size)
         self.rect = self.surf.get_rect()
         
@@ -309,10 +314,11 @@ class Weapon(pygame.sprite.Sprite):
         self.data = json.load(fo)
         fo.close()
         del fo
-        self.weapon_list = list(self.data.keys())
-        self.main_hand = 'mk14'
-        self.detail = self.data[self.main_hand]
         
+    
+    def set_weapon(self, weapon):
+        self.main_hand = weapon
+        self.detail = self.data[self.main_hand]
         
 
 class Text(pygame.sprite.Sprite):
