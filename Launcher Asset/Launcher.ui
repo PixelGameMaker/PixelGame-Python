@@ -6,12 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>445</height>
+    <width>720</width>
+    <height>480</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>720</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>720</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Unifont</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="enabled">
@@ -19,8 +39,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>340</y>
+     <x>510</x>
+     <y>380</y>
      <width>201</width>
      <height>91</height>
     </rect>
@@ -37,6 +57,22 @@
    </property>
    <property name="checkable">
     <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>11</y>
+     <width>691</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../../../../Pictures/31251762_p0.jpg</pixmap>
    </property>
   </widget>
  </widget>
