@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Main_Window</class>
+ <widget class="QDialog" name="Main_Window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -33,7 +33,7 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="Play_Button">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -59,12 +59,12 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="Background">
    <property name="geometry">
     <rect>
-     <x>16</x>
+     <x>10</x>
      <y>11</y>
-     <width>691</width>
+     <width>701</width>
      <height>351</height>
     </rect>
    </property>
@@ -73,6 +73,25 @@
    </property>
    <property name="pixmap">
     <pixmap>../../../../Pictures/31251762_p0.jpg</pixmap>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Graphics_Button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>422</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Graphics
+Option</string>
    </property>
   </widget>
  </widget>
