@@ -7,40 +7,48 @@ Created on Mon Jul 19 16:01:18 2021
 
 from Character import character_surf_initialize, get_update_direction
 from Character import Player, Bullet, Enemy, Weapon, Text
-from Background import background_surf_init, Floor
+from Background import background_surf_init, Floor, wallGenerater
 from BackGroundMusic import BackGroundMusic
 
 import pygame.locals
 import time
 import random
-    
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
+
+pygame.init()
+
+displayInfo = pygame.display.Info()
+
+SCREEN_WIDTH = displayInfo.current_w
+SCREEN_HEIGHT = displayInfo.current_h
 TITLE = 'charater'
     
+
+
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
 pygame.display.set_caption(TITLE)
 
 clock = pygame.time.Clock()
 font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
 music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
-    
-displayInfo = pygame.display.Info()
+fps = 60
+
+
     
 character_surf_initialize()
 background_surf_init()
     
-bullet_cd = time.time()
+bullet_cd = time.time() -10
 dps_clock = time.time()
 
+wall = pygame.sprite.Group()
 floor = pygame.sprite.Group()
 bullet = pygame.sprite.Group()
 enemy = pygame.sprite.Group()
 situation_text = pygame.sprite.Group()
 all_sprite = pygame.sprite.Group()
 
-for x in range(-1920, 1920, 1920):
-    for y in range(-1080, 1080, 1080):
+for x in range(-SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_WIDTH):
+    for y in range(-SCREEN_HEIGHT, SCREEN_HEIGHT, SCREEN_HEIGHT):
         summon_floor = Floor([x, y])
         floor.add(summon_floor)
         all_sprite.add(summon_floor)
@@ -48,7 +56,10 @@ for x in range(-1920, 1920, 1920):
 player = Player()
 all_sprite.add(player)
 
+player.set_profession('Archer')
+
 weapon = Weapon()
+weapon.set_weapon(player.weapon)
 
 att_text = Text(font, 'att:', (5, 5))
 dps_text = Text(font, 'dps:', (5, 20))
@@ -58,19 +69,21 @@ all_sprite.add(dps_text)
 all_sprite.add(enemy_left_text)
 
 #player_situation 
-player_text = Text(font, 'player:', (1800, 5))
-player_mp_text = Text(font, 'mp:', (1800, 20))
-player_hp_text = Text(font, 'hp:', (1800, 35))
-player_weapon_text = Text(font, 'weapon:', (1800, 50))
+player_text = Text(font, 'player:', (SCREEN_WIDTH -120, 5))
+player_mp_text = Text(font, 'mp:', (SCREEN_WIDTH -120, 20))
+player_hp_text = Text(font, 'hp:', (SCREEN_WIDTH -120, 35))
+player_weapon_text = Text(font, 'weapon:', (SCREEN_WIDTH -120, 50))
 all_sprite.add(player_text)
 all_sprite.add(player_mp_text)
 all_sprite.add(player_hp_text)
 all_sprite.add(player_weapon_text)
 
+groups = (all_sprite, wall)
+wallGenerater('room', groups, (0, 0))
 
 att=0
 dps={}
-music.playMusic()
+#music.playMusic()
 
 
 while True:
@@ -90,17 +103,17 @@ while True:
                     enemy.add(summon_enemy)
                     all_sprite.add(summon_enemy)
                 
-                if events.key == pygame.K_1:
-                    weapon.switch_weapon(1)
-                
-                if events.key == pygame.K_2:
-                    weapon.switch_weapon(2)
-                    
-                if events.key == pygame.K_3:
-                    weapon.switch_weapon(3)
-            
-                if events.key == pygame.K_q:
-                    weapon.next_weapon()
+                #if events.key == pygame.K_1:
+                #    weapon.switch_weapon(1)
+                # 
+                #if events.key == pygame.K_2:
+                #    weapon.switch_weapon(2)
+                #    
+                #if events.key == pygame.K_3:
+                #    weapon.switch_weapon(3)
+                #
+                #if events.key == pygame.K_q:
+                #    weapon.next_weapon()
                     
                 if events.key == pygame.K_m:
                     if music.getBusy():
@@ -108,28 +121,44 @@ while True:
                     else:
                         music.playMusic()
                     
-                if events.key == pygame.K_l:
+                if events.key == pygame.K_ESCAPE:
                     pygame.quit()
                     import sys
                     sys.exit(0)
                     
-        key_pressed = pygame.key.get_pressed()
+        key_pressed = list(pygame.key.get_pressed())
+        
+        
+        
         direction = [key_pressed[pygame.K_d] - key_pressed[pygame.K_a],
                      key_pressed[pygame.K_s] - key_pressed[pygame.K_w]]
                     
+        
+        #wall
+        
+        wall.update(player.speed, [direction[0], 0])
+        if pygame.sprite.spritecollide(player, wall, False) != []:
+            wall.update(player.speed, [-direction[0], 0])
+            direction[0] =0
+            
+        wall.update(player.speed, [0, direction[1]])
+        if pygame.sprite.spritecollide(player, wall, False) != []:
+            wall.update(player.speed, [0, -direction[1]])
+            direction[1] =0
+        
         #floor
         
         for sprite in floor:
             new_x = None
             new_y = None
-            if sprite.rect.x < -1920:
-                sprite.rect.x += 3840
-            if sprite.rect.x > 1920:
-                sprite.rect.x -= 3840
-            if sprite.rect.y < -1080:
-                sprite.rect.y += 2160
-            if sprite.rect.y > 1080:
-                sprite.rect.y -= 2160
+            if sprite.rect.x < -SCREEN_WIDTH:
+                sprite.rect.x += SCREEN_WIDTH *2
+            if sprite.rect.x > SCREEN_WIDTH:
+                sprite.rect.x -= SCREEN_WIDTH *2
+            if sprite.rect.y < -SCREEN_HEIGHT:
+                sprite.rect.y += SCREEN_HEIGHT *2
+            if sprite.rect.y > SCREEN_HEIGHT:
+                sprite.rect.y -= SCREEN_HEIGHT *2
             
         floor.update(player.speed, direction)
         
@@ -140,7 +169,11 @@ while True:
                 player.speedup_cd = time.time()
                 player.speedup = 8
         
+        
+        
         player.update(direction)
+        
+        
         #print(direction)
         
         #enemy
@@ -184,6 +217,8 @@ while True:
         att_text.update('att:' + str(att))
         
         
+        
+        
         for current_time in list(dps.keys()):
             if time.time() - current_time > 1:
                 dps.pop(current_time)
@@ -200,10 +235,10 @@ while True:
         #if dps != {} : print(dps)
         
         for entity in bullet:
-            if  entity.rect.x > displayInfo.current_w or\
-                entity.rect.x < 0 or\
-                entity.rect.y > displayInfo.current_h or\
-                entity.rect.y < 0:
+            if  entity.rect.x > displayInfo.current_w *2 or\
+                entity.rect.x < -displayInfo.current_w or\
+                entity.rect.y > displayInfo.current_h *2 or\
+                entity.rect.y < -displayInfo.current_h:
                     entity.kill()
                     bullet.remove(entity)
                     del entity
@@ -231,5 +266,6 @@ while True:
         
         
         
-        clock.tick(30)
+        clock.tick(fps)
         pygame.display.flip()
+            
