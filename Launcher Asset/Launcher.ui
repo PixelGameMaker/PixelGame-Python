@@ -25,10 +25,11 @@
   <property name="font">
    <font>
     <family>Unifont</family>
+    <pointsize>12</pointsize>
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Howard Good</string>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -73,25 +74,6 @@
    </property>
    <property name="pixmap">
     <pixmap>../../../../Pictures/31251762_p0.jpg</pixmap>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Graphics_Button">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>422</y>
-     <width>141</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>13</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Graphics
-Option</string>
    </property>
   </widget>
  </widget>
