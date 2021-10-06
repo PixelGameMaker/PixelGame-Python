@@ -91,7 +91,11 @@ def update_img(entity, direction):
 
 
 def update_bullet_image_direction(image, direction):
+    if direction[0] == 0:
+        direction[0] += 0.00000001
+        
     angle = 180-math.degrees(math.atan(direction[1] /direction[0]))
+     
     image = pygame.transform.rotate(image, angle)
     return image
     

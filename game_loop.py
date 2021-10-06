@@ -30,7 +30,7 @@ pygame.display.set_caption(TITLE)
 clock = pygame.time.Clock()
 font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
 music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
-fps = 60
+fps = 120
 
 
     
@@ -243,6 +243,12 @@ while True:
                     bullet.remove(entity)
                     del entity
                     continue
+            
+            if pygame.sprite.spritecollide(entity, wall, False) != []:
+                entity.kill()
+                bullet.remove(entity)
+                del entity
+                continue
             
             collided_enemy = pygame.sprite.spritecollide(entity, enemy, False)
             if collided_enemy != []:
