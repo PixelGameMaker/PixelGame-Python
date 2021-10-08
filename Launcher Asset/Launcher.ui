@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Howard Good</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../Pictures/icons/explorer_ICO_MYCOMPUTER.ico</normaloff>../../../../Pictures/icons/explorer_ICO_MYCOMPUTER.ico</iconset>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
@@ -75,6 +79,140 @@
    <property name="pixmap">
     <pixmap>../../../../Pictures/31251762_p0.jpg</pixmap>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="Graphics_Settings">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>380</y>
+     <width>481</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <strikeout>false</strikeout>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="title">
+    <string>Graphics Settings</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <widget class="QLabel" name="label_Resolution">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Resolution</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_Resolution">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>20</y>
+      <width>281</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_Windowed">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>20</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Windowed</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FPS">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>FPS</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_FPS">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>50</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>15</number>
+    </property>
+    <property name="maximum">
+     <number>200</number>
+    </property>
+   </widget>
+   <widget class="QDialogButtonBox" name="buttonBox">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>60</y>
+      <width>156</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="standardButtons">
+     <set>QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
