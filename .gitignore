@@ -114,3 +114,4 @@ dmypy.json
 .pyre/
 
 .vscode/
+.qt_for_python/

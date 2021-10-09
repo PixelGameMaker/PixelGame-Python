@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>720</width>
-    <height>480</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>720</width>
-    <height>480</height>
+    <height>500</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>720</width>
-    <height>480</height>
+    <height>500</height>
    </size>
   </property>
   <property name="font">
@@ -45,9 +45,9 @@
    <property name="geometry">
     <rect>
      <x>510</x>
-     <y>380</y>
+     <y>390</y>
      <width>201</width>
-     <height>91</height>
+     <height>101</height>
     </rect>
    </property>
    <property name="font">
@@ -89,7 +89,7 @@
      <x>10</x>
      <y>380</y>
      <width>481</width>
-     <height>91</height>
+     <height>111</height>
     </rect>
    </property>
    <property name="font">
@@ -204,13 +204,52 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>60</y>
+      <y>80</y>
       <width>156</width>
       <height>23</height>
      </rect>
     </property>
     <property name="standardButtons">
      <set>QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>47</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Music</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_On">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>80</y>
+      <width>83</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>On</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Off">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>80</y>
+      <width>83</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Off</string>
     </property>
    </widget>
   </widget>
