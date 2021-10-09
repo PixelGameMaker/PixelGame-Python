@@ -83,7 +83,7 @@ wallGenerater('room', groups, (0, 0))
 
 att=0
 dps={}
-#music.playMusic()
+music.playMusic()
 
 
 while True:
