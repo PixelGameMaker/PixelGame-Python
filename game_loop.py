@@ -83,7 +83,7 @@ wallGenerater('room', groups, (0, 0))
 
 att=0
 dps={}
-music.playMusic()
+#music.playMusic()
 
 
 while True:
@@ -117,9 +117,9 @@ while True:
                     
                 if events.key == pygame.K_m:
                     if music.getBusy():
-                        music.pauseMusic()
-                    else:
                         music.playMusic()
+                    else:
+                        music.pauseMusic()
                     
                 if events.key == pygame.K_ESCAPE:
                     pygame.quit()
