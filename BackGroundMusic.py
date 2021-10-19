@@ -13,13 +13,16 @@ class BackGroundMusic:
         pygame.mixer.music.load(path)
         pygame.mixer.music.play(repeat)
         pygame.mixer.music.pause()
+        self.isPause = True
     
     def playMusic(self):
         pygame.mixer.music.unpause()
+        self.isPause = False
     
     def pauseMusic(self):
         pygame.mixer.music.pause()
+        self.isPause = True
     
     def getBusy(self):
         
-        return pygame.mixer.music.get_busy()
+        return self.isPause
