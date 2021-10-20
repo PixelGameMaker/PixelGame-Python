@@ -33,12 +33,12 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../Pictures/icons/explorer_ICO_MYCOMPUTER.ico</normaloff>../../../../Pictures/icons/explorer_ICO_MYCOMPUTER.ico</iconset>
+    <normaloff>Logo.png</normaloff>Logo.png</iconset>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <widget class="QPushButton" name="Play_Button">
+  <widget class="QPushButton" name="Button_Play">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -139,7 +139,7 @@
      <string>Resolution</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_Resolution">
+   <widget class="QComboBox" name="Combo_Resolution">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -149,7 +149,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_Windowed">
+   <widget class="QCheckBox" name="Check_Windowed">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -200,7 +200,7 @@
      <number>200</number>
     </property>
    </widget>
-   <widget class="QDialogButtonBox" name="buttonBox">
+   <widget class="QDialogButtonBox" name="Button_Graphics">
     <property name="geometry">
      <rect>
       <x>310</x>
@@ -226,7 +226,7 @@
      <string>Music</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_On">
+   <widget class="QRadioButton" name="Radio_On">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -239,7 +239,7 @@
      <string>On</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_Off">
+   <widget class="QRadioButton" name="Radio_Off">
     <property name="geometry">
      <rect>
       <x>130</x>

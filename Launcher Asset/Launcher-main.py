@@ -1,7 +1,7 @@
 import sys
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
-from Launcher_Music import Ui_Main_Window
+from Launcher_icon import Ui_Main_Window
 
 class MainWindow(QMainWindow):
     def __init__(self):
