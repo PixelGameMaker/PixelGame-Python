@@ -48,16 +48,26 @@ class Floor(pygame.sprite.Sprite):
         self.rect.y += direction[1]
         
 
-wall = {'room' :['1111111111111111',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1000000000000001',
-                 '1111111111111111'],
+wall = {'room' :['111111111111111111111111111111111111111111111111',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '100000000000000000000000000000000000000000000001',
+                 '111111111111111111111111111111111111111111111111'],
         'aisle':['1111111111111111',
                  '0000000000000000',
                  '0000000000000000',
@@ -86,10 +96,39 @@ def wallGenerater(dtype, groups, pos):
         for y in range(len(wall[dtype][x])):
             #print(x, y)
             if wall[dtype][x][y] == '1':
-                pos_x = (x - len(wall[dtype]) /2) *(displayInfo.current_w /32)
-                pos_y = (y - len(wall[dtype]) /2) *(displayInfo.current_h /27)
+                pos_x = (x - len(wall[dtype]) /2) *(displayInfo.current_w /32) + pos[0]
+                pos_y = (y - len(wall[dtype]) /2) *(displayInfo.current_h /10.8) + pos[1]
                 summon_wall = Wall((pos_x, pos_y))
                 for group in groups:
                     group.add(summon_wall)
+
+def wallBysize(groups, size, pos):
+    pos_x = pos[0]
+    pos_y = pos[1]
+    for x in range(size[0]-1):
+        summon_wall = Wall((pos_x, pos_y))
+        for group in groups:
+                    group.add(summon_wall)
+        pos_x += (displayInfo.current_w /32)
+    
+    for y in range(size[1]-1):
+        pos_y += (displayInfo.current_w /48)
+        pos_x = pos[0]
+        summon_wall = Wall((pos_x, pos_y))
+        for group in groups:
+            group.add(summon_wall)
+            
+        pos_x += (size[0]-2) * displayInfo.current_w /32
+        summon_wall = Wall((pos_x, pos_y))
+        for group in groups:
+            group.add(summon_wall)
+    
+    pos_x = pos[0]
+    for x in range(size[0]-2):
+        pos_x += (displayInfo.current_w /32)
+        summon_wall = Wall((pos_x, pos_y))
+        for group in groups:
+                    group.add(summon_wall)
+    
     
     

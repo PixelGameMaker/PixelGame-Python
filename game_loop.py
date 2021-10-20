@@ -7,7 +7,7 @@ Created on Mon Jul 19 16:01:18 2021
 
 from Character import character_surf_initialize, get_update_direction
 from Character import Player, Bullet, Enemy, Weapon, Text
-from Background import background_surf_init, Floor, wallGenerater
+from Background import background_surf_init, Floor, wallBysize
 from BackGroundMusic import BackGroundMusic
 
 import pygame.locals
@@ -33,7 +33,7 @@ music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
 fps = 120
 
 
-    
+
 character_surf_initialize()
 background_surf_init()
     
@@ -79,7 +79,8 @@ all_sprite.add(player_hp_text)
 all_sprite.add(player_weapon_text)
 
 groups = (all_sprite, wall)
-wallGenerater('room', groups, (0, 0))
+wallBysize(groups, (96, 68), (-1920, -1080))
+#wallGenerater('room', groups, (1000, 0))
 
 att=0
 dps={}
