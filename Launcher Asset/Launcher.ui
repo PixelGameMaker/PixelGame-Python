@@ -94,6 +94,7 @@
    </property>
    <property name="font">
     <font>
+     <family>Unifont</family>
      <pointsize>10</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -131,15 +132,20 @@
     </property>
     <property name="font">
      <font>
+      <family>Unifont</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
+      <italic>false</italic>
       <bold>false</bold>
+      <strikeout>false</strikeout>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
      <string>Resolution</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="Combo_Resolution">
+   <widget class="QComboBox" name="Resolution_Settings">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -149,7 +155,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="Check_Windowed">
+   <widget class="QCheckBox" name="Windowed_Settings">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -184,7 +190,7 @@
      <string>FPS</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_FPS">
+   <widget class="QSpinBox" name="FPS_Settings">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -213,7 +219,7 @@
      <set>QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_Music">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -226,7 +232,7 @@
      <string>Music</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="Radio_On">
+   <widget class="QRadioButton" name="Music_On">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -239,7 +245,7 @@
      <string>On</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="Radio_Off">
+   <widget class="QRadioButton" name="Music_Off">
     <property name="geometry">
      <rect>
       <x>130</x>
