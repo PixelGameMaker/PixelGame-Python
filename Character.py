@@ -154,6 +154,7 @@ class Player(pygame.sprite.Sprite):
         
         self.walking = False
         self.speedup = 0
+        self.knockback = [0, 0]
         
         self.walking_cd = time.time()
         self.speedup_cd = time.time()
@@ -182,10 +183,21 @@ class Player(pygame.sprite.Sprite):
             self.speedup -= 1
         
     
-    def hit(self, damage):
-        self.health -= damage
+    def hit(self, detail, bullet_rect):
+        self.health -= detail['damage']
+        
+        knockback = [0, 0]
+        knockback[0] += (bullet_rect.centerx - self.rect.centerx)
+        knockback[1] += (bullet_rect.centery - self.rect.centery)
+        knockback = get_update_direction(knockback)
+        
+        self.knockback[0] += knockback[0] * detail['knockback']
+        self.knockback[1] += knockback[1] * detail['knockback']
+        #print(self.knockback)
+        
         if self.health <= 0:
             self.kill()
+            del self
             
     def cost_mp(self, mp):
         if self.mp > mp:
@@ -218,6 +230,11 @@ class Enemy(pygame.sprite.Sprite):
         self.health = detail['health']
         self.knockback = [0, 0]
         self.speed = detail['speed']
+        self.attack_range = detail['att_range']
+        self.stay_range = detail['stay_range']
+        self.attack_cd = detail['cd']
+        self.bullet_cd = time.time()
+        self.target = None
         
         self.walking_cd = time.time()
     
@@ -226,9 +243,13 @@ class Enemy(pygame.sprite.Sprite):
         #print(direction)
         
         direction = get_update_direction(direction)
+        
+        speed = self.speed
+        if (self.pos[0] - player_rect.x) **2 + (self.pos[1] - player_rect.y) **2 <= self.stay_range **2:
+            speed = - self.speed *0.5
 
-        self.pos[0] += direction[0] *self.speed - player_direction[0] *player_speed - self.knockback[0]
-        self.pos[1] += direction[1] *self.speed - player_direction[1] *player_speed - self.knockback[1]
+        self.pos[0] += direction[0] *speed - player_direction[0] *player_speed - self.knockback[0]
+        self.pos[1] += direction[1] *speed - player_direction[1] *player_speed - self.knockback[1]
         
         for i in range(len(self.knockback)):
             if abs(self.knockback[i]) < 0.5:
@@ -240,8 +261,15 @@ class Enemy(pygame.sprite.Sprite):
         
         
         update_img(self, direction)
+        
         self.rect.x = self.pos[0]
         self.rect.y = self.pos[1]
+        
+        if (self.pos[0] - player_rect.x) **2 + (self.pos[1] - player_rect.y) **2 <= self.attack_range **2:
+            self.target = player_rect
+        else:
+            self.target = None
+        
         #print(player_direction)
         
     def hit(self, detail, bullet_rect):
@@ -276,6 +304,7 @@ class Bullet(pygame.sprite.Sprite):
         self.kind = 'normal_bullet'
         self.knockback = 5
         self.range = 1
+        self.target = 'enemy'
         
         for key, value in detail.items():
             setattr(self, key, value)
@@ -291,6 +320,7 @@ class Bullet(pygame.sprite.Sprite):
         self.pos = [player.rect.centerx, player.rect.centery]
         self.rect.centerx = self.pos[0]
         self.rect.centery = self.pos[1]
+        
         
         
         

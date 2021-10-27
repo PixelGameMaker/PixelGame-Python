@@ -108,7 +108,7 @@ def wallBysize(groups, size, pos):
     for x in range(size[0]-1):
         summon_wall = Wall((pos_x, pos_y))
         for group in groups:
-                    group.add(summon_wall)
+            group.add(summon_wall)
         pos_x += (displayInfo.current_w /32)
     
     for y in range(size[1]-1):
