@@ -18,7 +18,7 @@ def CheckWorkDir():
         quit()
 
     if CurrentDir.find("pixelrpg-python") == -1:
-        print("[WARN] You are not in PixelRPG-Python.")
+        print("[WARN] You are not in PixelRPG-Python Folder.")
         #print("Your current working directory is:", CurrentDir)
         
 from Ui_Launcher import Ui_Main_Window
