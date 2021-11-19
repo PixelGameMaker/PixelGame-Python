@@ -116,3 +116,4 @@ dmypy.json
 .vscode/
 .qt_for_python/
 Launcher Asset/Dir.txt
+config.json

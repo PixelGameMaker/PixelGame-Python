@@ -3,6 +3,7 @@ import json
 import os
 from os.path import expanduser
 from PySide2 import QtWidgets, QtCore, QtGui
+import pyautogui
 
 def CheckWorkDir():
     HomeDir = expanduser("~")
@@ -30,11 +31,14 @@ if not os.path.isfile("config.json"):
     print("[WARN] config.json not found.")
     print("[WARN] Creating new config.json.")
     #read screen biggest resolution
+    width, height= pyautogui.size()
+    screensize = (f"{width} x {height}")
+    print(f"[INFO] Your screen size is {screensize}")
     '''
     screen = QtWidgets.QDesktopWidget().screenGeometry()
-    with open("config.json", "w") as f:
-        json.dump({"Width": screen.width(), "Height": screen.height(), "Music": "On", "Windowed" : "True"}, f)
     '''
+    with open("config.json", "w") as f:
+        json.dump({"Fullscreen Resolution": "{screensize}", "Music": "On", "Windowed" : "True"}, f)
 #read json file
 with open("config.json") as json_file:
     config = json.load(json_file)
