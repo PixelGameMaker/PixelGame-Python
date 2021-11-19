@@ -25,12 +25,30 @@ from Ui_Launcher import Ui_Main_Window
 
 CheckWorkDir()
 
+#check if config.json exsists
+if not os.path.isfile("config.json"):
+    print("[WARN] config.json not found.")
+    print("[WARN] Creating new config.json.")
+    #read screen biggest resolution
+    '''
+    screen = QtWidgets.QDesktopWidget().screenGeometry()
+    with open("config.json", "w") as f:
+        json.dump({"Width": screen.width(), "Height": screen.height(), "Music": "On", "Windowed" : "True"}, f)
+    '''
+#read json file
+with open("config.json") as json_file:
+    config = json.load(json_file)
+
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_Main_Window()
         self.ui.setupUi(self)
-        
+        #add combo box text from config.json
+        '''
+        self.ui.Resolution_Settings.addItem(config["Width"] + "x" + config["Height"])
+        '''
 
 
 if __name__ == '__main__':
