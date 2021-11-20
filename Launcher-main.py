@@ -52,7 +52,7 @@ if not os.path.isfile("config.json"):
     '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f, indent=4)
+        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
         #add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
@@ -89,7 +89,7 @@ except:
     '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f, indent=4)
+        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
@@ -103,6 +103,7 @@ finally:
     print(f"[INFO] The resolution in config is {config['resolution']}")
     print(f"[INFO] The music in config is {config['music']}")
     print(f"[INFO] The windowed in config is {config['windowed']}")
+    print(f"[INFO] The fps in config is {config['fps']}")
     print('[INFO] Starting launcher window')
 
 #JSON CHECK END
@@ -144,6 +145,17 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.label_Resolution.setText("解析度：")
             self.ui.Button_Play.setText("開始遊戲")
             self.ui.Graphics_Settings.setTitle("顯示設定")
+        if config["windowed"] == "on":
+            self.ui.Windowed_Settings.setChecked(True)
+        else:
+            self.ui.Windowed_Settings.setChecked(False)
+        if config["music"] == "on":
+            self.ui.Music_On.setChecked(True)
+            self.ui.Music_Off.setChecked(False)
+        else:
+            self.ui.Music_On.setChecked(False)
+            self.ui.Music_Off.setChecked(True)
+        self.ui.FPS_Settings.setValue(int(config["fps"]))
 
 
 
