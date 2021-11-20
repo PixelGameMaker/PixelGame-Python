@@ -82,7 +82,7 @@ except:
     '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
-        json.dump({"resolution": screensize, "music": "on", "windowed": "on"}, f)
+        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f)
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
