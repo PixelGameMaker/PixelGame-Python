@@ -4,7 +4,8 @@ import os
 from os.path import expanduser
 from PySide2 import QtWidgets, QtCore, QtGui
 import pyautogui
-#import numpy as np
+
+#WORKING DIR CHECK START
 
 def CheckWorkDir():
     HomeDir = expanduser("~")
@@ -26,6 +27,10 @@ def CheckWorkDir():
 from Ui_Launcher import Ui_Main_Window
 
 CheckWorkDir()
+
+#WORKING DIR CHECK END
+
+#JSON CHECK START
 
 #check if config.json exsists
 if not os.path.isfile("config.json"):
@@ -93,6 +98,27 @@ finally:
     print(f"[INFO] The windowed in config is {config['windowed']}")
     print('[INFO] Starting launcher window')
 
+#JSON CHECK END
+
+#SYSTEM LANGUAGE CHECK START
+
+def check_lang():
+    #check if system language is chinese
+    if sys.platform == "win32":
+        import ctypes
+        langid = ctypes.windll.kernel32.GetUserDefaultUILanguage()
+        lang = langid & 0xFF
+        if lang == 0x04:
+            print("[INFO] System language is Chinese")
+            return True
+        else:
+            print("[INFO] System language is not Chinese, set to English")
+            return False
+    else:
+        print("[INFO] Something went wrong, set to English")
+        return False
+    
+#SYSTEM LANGUAGE CHECK END
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -101,6 +127,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         #add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
+
+        #localization
+        if check_lang():
+            self.ui.label_Music.setText("音樂：")
+            self.ui.Windowed_Settings.setText("視窗化")
+            self.ui.label_Resolution.setText("解析度：")
+            self.ui.Button_Play.setText("開始遊戲")
+            self.ui.Graphics_Settings.setTitle("顯示設定")
+
 
 
 if __name__ == '__main__':

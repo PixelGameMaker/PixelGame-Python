@@ -53,7 +53,7 @@
    <property name="font">
     <font>
      <family>Unifont</family>
-     <pointsize>40</pointsize>
+     <pointsize>35</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
