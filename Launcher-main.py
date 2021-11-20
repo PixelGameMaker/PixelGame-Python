@@ -41,6 +41,13 @@ if not os.path.isfile("config.json"):
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
         json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f)
+        #add resolution 2k and 4k if screensize over 1920 x 1080
+        if width > 1920 and height > 1080:
+            with open("config.json", "r") as f:
+                data = json.load(f)
+                #data["resolution"].append("1920 x 1080")
+                data["resolution"].append("2560 x 1440")
+                json.dump(data, f)
 
 #try json file is readable
 try:
@@ -71,6 +78,12 @@ except:
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
         json.dump({"resolution": screensize, "music": "on", "windowed": "on"}, f)
+        if width > 1920 and height > 1080:
+            with open("config.json", "r") as f:
+                data = json.load(f)
+                #data["resolution"].append("1920 x 1080")
+                data["resolution"].append("2560 x 1440")
+                json.dump(data, f)
 finally:
     #convert resolution list to string and remove json characters and seprate each value to new line
     #config["resolution"] = str(config["resolution"]).replace("[", "").replace("]", "").replace("'", "").replace(",", "\n")
