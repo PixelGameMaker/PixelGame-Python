@@ -4,6 +4,9 @@ import os
 import time
 from os.path import expanduser
 from PySide2 import QtWidgets, QtCore, QtGui
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 import pyautogui
 
 #WORKING DIR CHECK START
@@ -120,6 +123,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.label_Resolution.setText("解析度：")
             self.ui.Button_Play.setText("開始遊戲")
             self.ui.Graphics_Settings.setTitle("顯示設定")
+            self.ui.Music_On.setText("開啟")
+            self.ui.Music_Off.setText("關閉")
         if config["windowed"] == "on":
             self.ui.Windowed_Settings.setChecked(True)
         else:
@@ -131,8 +136,34 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Music_On.setChecked(False)
             self.ui.Music_Off.setChecked(True)
         self.ui.FPS_Settings.setValue(int(config["fps"]))
+        #play button click
+        self.ui.Button_Play.clicked.connect(self.Play)
+    def Play(self):
+        print("[INFO] Starting game and saving settings data")
+        self.showMinimized()
+        #get resolution from combo box
+        prefferresolution = self.ui.Resolution_Settings.currentText()
+        #get windowed from check box
+        windowed = self.ui.Windowed_Settings.isChecked()
+        #get music from check box
+        music = self.ui.Music_On.isChecked()
+        #get fps from spin box
+        fps = self.ui.FPS_Settings.value()
+        #write to config.json
+        with open("config.json", "w") as f:
+            #add dict
+            data = {"resolution":config['resolution'], "prefferresolution": prefferresolution, "music": music, "windowed": windowed, "fps": fps}
+            json.dump(data, f, indent=4)
+        #start game
+        exec(open("main.py").read())
+        #minimize launcher
 
+        
 
+'''
+with open("config.json", "a") as f:
+    json.dump({"preferresolution": preferres}, f, indent=4)
+'''
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
