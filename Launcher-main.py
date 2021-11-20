@@ -11,11 +11,8 @@ import pyautogui
 def CheckWorkDir():
     HomeDir = expanduser("~")
     HomeDir = HomeDir.lower()
-    #HomeDir = HomeDir.replace("\\","\\\\")
-    #print(HomeDir)
     CurrentDir = os.getcwd()
     CurrentDir = CurrentDir.lower()
-    #print(CurrentDir)
     if CurrentDir in ["c:\\windows\\system32", HomeDir]:
         print("Error, Please change Work Dir.")
         os.system("pause")
@@ -29,7 +26,6 @@ def CheckWorkDir():
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C dected. Exiting...")
             quit()
-        #print("Your current working directory is:", CurrentDir)
         
 from Ui_Launcher import Ui_Main_Window
 
@@ -39,7 +35,6 @@ CheckWorkDir()
 
 #JSON CHECK START
 
-#check if config.json exsists
 if not os.path.isfile("config.json"):
     print("[WARN] config.json not found.")
     print("[WARN] Creating new config.json.")
@@ -47,9 +42,6 @@ if not os.path.isfile("config.json"):
     width, height= pyautogui.size()
     screensize = (f"{width} x {height}")
     print(f"[INFO] Your screen size is {screensize}")
-    '''
-    screen = QtWidgets.QDesktopWidget().screenGeometry()
-    '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
         json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
@@ -65,17 +57,6 @@ if not os.path.isfile("config.json"):
 try:
     with open("config.json", "r") as f:
         config = json.load(f)
-        '''
-        try:
-            if config["screensize"] == screensize:
-                pass
-        except:
-            print("[WARN] config.json corrupt.")
-            with open("config.json", "w") as f:
-                json.dump({"resolution": screensize, "music": "on", "windowed": "on"}, f)
-        '''
-
-        #print(f"[INFO] Your screen size is {config["resolution"]})
 
 except:
     print("[WARN] config.json corrupt.")
@@ -84,9 +65,6 @@ except:
     width, height= pyautogui.size()
     screensize = (f"{width} x {height}")
     print(f"[INFO] Your screen size is {screensize}")
-    '''
-    screen = QtWidgets.QDesktopWidget().screenGeometry()
-    '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
         json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
@@ -97,9 +75,6 @@ except:
                 data["resolution"].append("2560 x 1440")
                 json.dump(data, f)
 finally:
-    #convert resolution list to string and remove json characters and seprate each value to new line
-    #config["resolution"] = str(config["resolution"]).replace("[", "").replace("]", "").replace("'", "").replace(",", "\n")
-    #resolution = np.array(config["resolution"].split("\n"))
     print(f"[INFO] The resolution in config is {config['resolution']}")
     print(f"[INFO] The music in config is {config['music']}")
     print(f"[INFO] The windowed in config is {config['windowed']}")
