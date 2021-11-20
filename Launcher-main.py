@@ -4,7 +4,7 @@ import os
 from os.path import expanduser
 from PySide2 import QtWidgets, QtCore, QtGui
 import pyautogui
-import numpy as np
+#import numpy as np
 
 def CheckWorkDir():
     HomeDir = expanduser("~")
