@@ -1,6 +1,7 @@
 import sys
 import json
 import os
+import time
 from os.path import expanduser
 from PySide2 import QtWidgets, QtCore, QtGui
 import pyautogui
@@ -22,6 +23,12 @@ def CheckWorkDir():
 
     if CurrentDir.find("pixelrpg-python") == -1:
         print("[WARN] You are not in PixelRPG-Python Folder.")
+        print("Continue? (To exit, press Ctrl+C)")
+        try:
+            time.sleep(5)
+        except KeyboardInterrupt:
+            print("[WARN] Ctrl+C dected. Exiting...")
+            quit()
         #print("Your current working directory is:", CurrentDir)
         
 from Ui_Launcher import Ui_Main_Window
@@ -45,7 +52,7 @@ if not os.path.isfile("config.json"):
     '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f)
+        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f, indent=4)
         #add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
@@ -82,7 +89,7 @@ except:
     '''
     with open("config.json", "w") as f:
         #add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f)
+        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on"}, f, indent=4)
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
@@ -114,9 +121,11 @@ def check_lang():
         else:
             print("[INFO] System language is not Chinese, set to English")
             return False
+    '''
     else:
-        print("[INFO] Something went wrong, set to English")
+        print("[INFO] Something went wrong, set to English (Are you using Linux?)")
         return False
+    '''
     
 #SYSTEM LANGUAGE CHECK END
 
