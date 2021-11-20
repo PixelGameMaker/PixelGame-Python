@@ -71,7 +71,7 @@ except:
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
-                #data["resolution"].append("1920 x 1080")
+                data["resolution"].append("1920 x 1080")
                 data["resolution"].append("2560 x 1440")
                 json.dump(data, f)
 finally:
