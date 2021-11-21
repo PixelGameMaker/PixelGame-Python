@@ -126,6 +126,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if config["prefferresolution"] in config["prefferresolution"]:
             self.ui.Resolution_Settings.setCurrentText(config["prefferresolution"])
             print(f"[INFO] Preffer resolution is {config['prefferresolution']}")
+            
         
 
         # localization
@@ -137,16 +138,27 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Graphics_Settings.setTitle("顯示設定")
             self.ui.Music_On.setText("開啟")
             self.ui.Music_Off.setText("關閉")
+            
+            
         if config["windowed"] == "True":
             self.ui.Windowed_Settings.setChecked(True)
         else:
             self.ui.Windowed_Settings.setChecked(False)
+            
+            
         if config["music"] == "True":
+            #print(f"{config['music']}bbb")
+            #add radio button group
+            # https://stackoverflow.com/questions/1731620/is-there-a-way-to-have-all-radion-buttons-be-unchecked
             self.ui.Music_On.setChecked(True)
-            #self.ui.Music_Off.setChecked(False)
+            self.ui.Music_Off.setChecked(False)
+            
+            #self.ui.Music_Off.show()
         else:
-            #self.ui.Music_On.setChecked(False)
+            #print(f"{config['music']}aaa")
+            self.ui.Music_On.setChecked(False)
             self.ui.Music_Off.setChecked(True)
+        
         self.ui.FPS_Settings.setValue(int(config["fps"]))
         # play button click
         self.ui.Button_Play.clicked.connect(self.Play)
