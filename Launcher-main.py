@@ -51,7 +51,7 @@ if not os.path.isfile("config.json"):
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
         json.dump({"resolution": [screensize, "1280 x 720"],
-                  "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
+                  "music": "true", "windowed": "true", "fps": "60"}, f, indent=4)
         # add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
@@ -75,7 +75,7 @@ except:
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
         json.dump({"resolution": [screensize, "1280 x 720"],
-                  "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
+                  "music": "true", "windowed": "true", "fps": "60"}, f, indent=4)
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
@@ -122,6 +122,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
+        # set combo box text from config.json if prefferresolution exist
+        if config["prefferresolution"] in config["prefferresolution"]:
+            self.ui.Resolution_Settings.setCurrentText(config["prefferresolution"])
+            print(f"[INFO] Preffer resolution is {config['prefferresolution']}")
+        
 
         # localization
         if check_lang():
@@ -132,15 +137,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Graphics_Settings.setTitle("顯示設定")
             self.ui.Music_On.setText("開啟")
             self.ui.Music_Off.setText("關閉")
-        if config["windowed"] == "on":
+        if config["windowed"] == "True":
             self.ui.Windowed_Settings.setChecked(True)
         else:
             self.ui.Windowed_Settings.setChecked(False)
-        if config["music"] == "on":
+        if config["music"] == "True":
             self.ui.Music_On.setChecked(True)
-            self.ui.Music_Off.setChecked(False)
+            #self.ui.Music_Off.setChecked(False)
         else:
-            self.ui.Music_On.setChecked(False)
+            #self.ui.Music_On.setChecked(False)
             self.ui.Music_Off.setChecked(True)
         self.ui.FPS_Settings.setValue(int(config["fps"]))
         # play button click
@@ -163,8 +168,11 @@ class MainWindow(QtWidgets.QMainWindow):
             data = {"resolution": config['resolution'], "prefferresolution": prefferresolution,
                     "music": music, "windowed": windowed, "fps": fps}
             json.dump(data, f, indent=4)
-        print(f"[INFO] Starting up the game with the resolution is {data['prefferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
+        print(
+            f"[INFO] Starting up the game with the resolution is {data['prefferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
+        os.system("clear")
+        #print(f"[INFO] Current work dir is {os.getcwd()}")
         exec(open("main.py").read())
 
 
