@@ -1,15 +1,19 @@
-import sys
 import json
 import os
+import sys
 import time
 from os.path import expanduser
-from PySide2 import QtWidgets, QtCore, QtGui
+
+import pyautogui
+from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-import pyautogui
 
-#WORKING DIR CHECK START
+from Ui_Launcher import Ui_Main_Window
+
+# WORKING DIR CHECK START
+
 
 def CheckWorkDir():
     HomeDir = expanduser("~")
@@ -29,34 +33,34 @@ def CheckWorkDir():
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C dected. Exiting...")
             quit()
-        
-from Ui_Launcher import Ui_Main_Window
+
 
 CheckWorkDir()
 
-#WORKING DIR CHECK END
+# WORKING DIR CHECK END
 
-#JSON CHECK START
+# JSON CHECK START
 
 if not os.path.isfile("config.json"):
     print("[WARN] config.json not found.")
     print("[WARN] Creating new config.json.")
-    #read screen biggest resolution
-    width, height= pyautogui.size()
+    # read screen biggest resolution
+    width, height = pyautogui.size()
     screensize = (f"{width} x {height}")
     print(f"[INFO] Your screen size is {screensize}")
     with open("config.json", "w") as f:
-        #add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
-        #add resolution 2k and 4k if screensize over 1920 x 1080
+        # add resolution, music, windowed to json
+        json.dump({"resolution": [screensize, "1280 x 720"],
+                  "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
+        # add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
-                #data["resolution"].append("1920 x 1080")
+                data["resolution"].append("1920 x 1080")
                 data["resolution"].append("2560 x 1440")
                 json.dump(data, f)
 
-#try json file is readable
+# try json file is readable
 try:
     with open("config.json", "r") as f:
         config = json.load(f)
@@ -64,13 +68,14 @@ try:
 except:
     print("[WARN] config.json corrupt.")
     print("[WARN] retry creating new config.json.")
-    #read screen biggest resolution
-    width, height= pyautogui.size()
+    # read screen biggest resolution
+    width, height = pyautogui.size()
     screensize = (f"{width} x {height}")
     print(f"[INFO] Your screen size is {screensize}")
     with open("config.json", "w") as f:
-        #add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
+        # add resolution, music, windowed to json
+        json.dump({"resolution": [screensize, "1280 x 720"],
+                  "music": "on", "windowed": "on", "fps": "15"}, f, indent=4)
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
                 data = json.load(f)
@@ -84,12 +89,13 @@ finally:
     print(f"[INFO] The fps in config is {config['fps']}")
     print('[INFO] Starting launcher window')
 
-#JSON CHECK END
+# JSON CHECK END
 
-#SYSTEM LANGUAGE CHECK START
+# SYSTEM LANGUAGE CHECK START
+
 
 def check_lang():
-    #check if system language is chinese
+    # check if system language is chinese
     if sys.platform == "win32":
         import ctypes
         langid = ctypes.windll.kernel32.GetUserDefaultUILanguage()
@@ -105,18 +111,19 @@ def check_lang():
         print("[INFO] Something went wrong, set to English (Are you using Linux?)")
         return False
     '''
-    
-#SYSTEM LANGUAGE CHECK END
+
+# SYSTEM LANGUAGE CHECK END
+
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_Main_Window()
         self.ui.setupUi(self)
-        #add combo box text from config.json
+        # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
 
-        #localization
+        # localization
         if check_lang():
             self.ui.label_Music.setText("音樂：")
             self.ui.Windowed_Settings.setText("視窗化")
@@ -136,34 +143,29 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Music_On.setChecked(False)
             self.ui.Music_Off.setChecked(True)
         self.ui.FPS_Settings.setValue(int(config["fps"]))
-        #play button click
+        # play button click
         self.ui.Button_Play.clicked.connect(self.Play)
+
     def Play(self):
         print("[INFO] Starting game and saving settings data")
         self.showMinimized()
-        #get resolution from combo box
+        # get resolution from combo box
         prefferresolution = self.ui.Resolution_Settings.currentText()
-        #get windowed from check box
+        # get windowed from check box
         windowed = self.ui.Windowed_Settings.isChecked()
-        #get music from check box
+        # get music from check box
         music = self.ui.Music_On.isChecked()
-        #get fps from spin box
+        # get fps from spin box
         fps = self.ui.FPS_Settings.value()
-        #write to config.json
+        # write to config.json
         with open("config.json", "w") as f:
-            #add dict
-            data = {"resolution":config['resolution'], "prefferresolution": prefferresolution, "music": music, "windowed": windowed, "fps": fps}
+            # add dict
+            data = {"resolution": config['resolution'], "prefferresolution": prefferresolution,
+                    "music": music, "windowed": windowed, "fps": fps}
             json.dump(data, f, indent=4)
-        #start game
+        # start game
         exec(open("main.py").read())
-        #minimize launcher
 
-        
-
-'''
-with open("config.json", "a") as f:
-    json.dump({"preferresolution": preferres}, f, indent=4)
-'''
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
