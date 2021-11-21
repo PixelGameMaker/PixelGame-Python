@@ -163,6 +163,7 @@ class MainWindow(QtWidgets.QMainWindow):
             data = {"resolution": config['resolution'], "prefferresolution": prefferresolution,
                     "music": music, "windowed": windowed, "fps": fps}
             json.dump(data, f, indent=4)
+        print(f"[INFO] Starting up the game with the resolution is {data['prefferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
         exec(open("main.py").read())
 
