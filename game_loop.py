@@ -46,7 +46,7 @@ class gameEnv():
         self.clock = pygame.time.Clock()
         self.font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
         self.music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
-        self.fps = 120
+        self.fps = int(data['fps'])
         
         character_surf_initialize()
         background_surf_init()
@@ -79,12 +79,15 @@ class gameEnv():
         self.dps_text = Text(self.font, 'dps:', (5, 20))
         self.enemy_left_text = Text(self.font, 'Enemy Left:', (5, 35))
         self.resorution_text = Text(self.font, 'resorution:', (5, 50))
+        self.fps_text = Text(self.font, 'fps:', (5, 65))
         
         self.situation_text.add(self.att_text)
         self.situation_text.add(self.dps_text)
         self.situation_text.add(self.enemy_left_text)
         self.situation_text.add(self.resorution_text)
         self.resorution_text.update('resorution:' + str(SCREEN_WIDTH) + 'x'+ str(SCREEN_HEIGHT))
+        self.situation_text.add(self.fps_text)
+        self.fps_text.update('fps:'+str(self.fps))
         
         #player_situation 
         self.player_text = Text(self.font, 'player:', (SCREEN_WIDTH -120, 5))
@@ -144,18 +147,9 @@ class gameEnv():
                             self.music.pauseMusic()
                             
                     if events.key == pygame.K_ESCAPE:
-<<<<<<< HEAD
                         #pygame.quit()
                         pygame.quit()
                         del pygame.locals
-=======
-
-                        #pygame.quit()
-
-                        pygame.quit()
-                        del pygame.locals
-
->>>>>>> 59211bb45ad8bd220b9d4425b304da7bde5883b0
                         return False
                         
             key_pressed = list(pygame.key.get_pressed())
