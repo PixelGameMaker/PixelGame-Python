@@ -77,7 +77,13 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../Pictures/31251762_p0.jpg</pixmap>
+    <pixmap>Launcher Asset/launcher bg.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QGroupBox" name="Graphics_Settings">
