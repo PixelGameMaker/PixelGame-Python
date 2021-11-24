@@ -184,7 +184,7 @@ class MainWindow(QtWidgets.QMainWindow):
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
         #os.system("clear")
-        import pygame.locals
+        import pygame
         #print(f"[INFO] Current work dir is {os.getcwd()}")
         exec(open("main.py").read())
 
