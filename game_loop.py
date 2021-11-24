@@ -144,9 +144,18 @@ class gameEnv():
                             self.music.pauseMusic()
                             
                     if events.key == pygame.K_ESCAPE:
+<<<<<<< HEAD
                         #pygame.quit()
                         pygame.quit()
                         del pygame.locals
+=======
+
+                        #pygame.quit()
+
+                        pygame.quit()
+                        del pygame.locals
+
+>>>>>>> 59211bb45ad8bd220b9d4425b304da7bde5883b0
                         return False
                         
             key_pressed = list(pygame.key.get_pressed())

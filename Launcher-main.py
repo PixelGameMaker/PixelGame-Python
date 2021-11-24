@@ -189,6 +189,11 @@ class MainWindow(QtWidgets.QMainWindow):
         from Character import Player, Bullet, Enemy, Weapon, Text
         from Background import background_surf_init, Floor, wallBysize
         from BackGroundMusic import BackGroundMusic
+<<<<<<< HEAD
+=======
+        import pygame.locals
+
+>>>>>>> 59211bb45ad8bd220b9d4425b304da7bde5883b0
         #print(f"[INFO] Current work dir is {os.getcwd()}")
         import pygame.locals
         exec(open("main.py").read())
