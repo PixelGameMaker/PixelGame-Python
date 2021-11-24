@@ -144,6 +144,7 @@ class gameEnv():
                             
                     if events.key == pygame.K_ESCAPE:
                         pygame.quit()
+                        del pygame.locals
                         return False
                         
             key_pressed = list(pygame.key.get_pressed())
