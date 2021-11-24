@@ -102,9 +102,11 @@ def check_lang():
         lang = langid & 0xFF
         if lang == 0x04:
             print("[INFO] System language is Chinese")
+            del ctypes
             return True
         else:
             print("[INFO] System language is not Chinese, set to English")
+            del ctypes
             return False
     '''
     else:
@@ -147,15 +149,11 @@ class MainWindow(QtWidgets.QMainWindow):
             
             
         if config["music"] == "True":
-            #print(f"{config['music']}bbb")
             #add radio button group
             # https://stackoverflow.com/questions/1731620/is-there-a-way-to-have-all-radion-buttons-be-unchecked
             self.ui.Music_On.setChecked(True)
             self.ui.Music_Off.setChecked(False)
-            
-            #self.ui.Music_Off.show()
         else:
-            #print(f"{config['music']}aaa")
             self.ui.Music_On.setChecked(False)
             self.ui.Music_Off.setChecked(True)
         
@@ -184,7 +182,6 @@ class MainWindow(QtWidgets.QMainWindow):
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
         #os.system("clear")
-        #print(f"[INFO] Current work dir is {os.getcwd()}")
         import pygame.locals
         exec(open("main.py").read())
 
