@@ -122,10 +122,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
-        # set combo box text from config.json if prefferresolution exist
-        if config["prefferresolution"] in config["prefferresolution"]:
-            self.ui.Resolution_Settings.setCurrentText(config["prefferresolution"])
-            print(f"[INFO] Preffer resolution is {config['prefferresolution']}")
+        # set combo box text from config.json if preferresolution exist
+        if config["preferresolution"] in config["preferresolution"]:
+            self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
+            print(f"[INFO] Preffer resolution is {config['preferresolution']}")
             
         
 
@@ -167,7 +167,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print("[INFO] Starting game and saving settings data")
         self.showMinimized()
         # get resolution from combo box
-        prefferresolution = self.ui.Resolution_Settings.currentText()
+        preferresolution = self.ui.Resolution_Settings.currentText()
         # get windowed from check box
         windowed = self.ui.Windowed_Settings.isChecked()
         # get music from check box
@@ -177,11 +177,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # write to config.json
         with open("config.json", "w") as f:
             # add dict
-            data = {"resolution": config['resolution'], "prefferresolution": prefferresolution,
+            data = {"resolution": config['resolution'], "preferresolution": preferresolution,
                     "music": music, "windowed": windowed, "fps": fps}
             json.dump(data, f, indent=4)
         print(
-            f"[INFO] Starting up the game with the resolution is {data['prefferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
+            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
         os.system("clear")
         import pygame

@@ -41,7 +41,7 @@ class Ui_Main_Window(object):
         self.Background = QLabel(Main_Window)
         self.Background.setObjectName(u"Background")
         self.Background.setGeometry(QRect(10, 11, 701, 351))
-        self.Background.setPixmap(QPixmap(u"../../../Pictures/31251762_p0.jpg"))
+        self.Background.setPixmap(QPixmap(u"Launcher Asset/launcher bg.jpg"))
         self.Graphics_Settings = QGroupBox(Main_Window)
         self.Graphics_Settings.setObjectName(u"Graphics_Settings")
         self.Graphics_Settings.setEnabled(True)
