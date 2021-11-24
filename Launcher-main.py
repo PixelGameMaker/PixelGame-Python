@@ -184,7 +184,15 @@ class MainWindow(QtWidgets.QMainWindow):
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
         #os.system("clear")
+<<<<<<< HEAD
         import pygame
+        from Character import character_surf_initialize, get_update_direction
+        from Character import Player, Bullet, Enemy, Weapon, Text
+        from Background import background_surf_init, Floor, wallBysize
+        from BackGroundMusic import BackGroundMusic
+=======
+        import pygame.locals
+>>>>>>> 13ab553efc8cafc4f5056f155f2c75ef2e1e1f1d
         #print(f"[INFO] Current work dir is {os.getcwd()}")
         exec(open("main.py").read())
 

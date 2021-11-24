@@ -2,7 +2,7 @@
 """
 Created on Mon Jul 19 16:01:18 2021
 
-@author: howard
+@author: 
 """
 
 from Character import character_surf_initialize, get_update_direction
@@ -27,7 +27,7 @@ SCREEN_WIDTH = screensize[0:screensize.index('x')-1]
 SCREEN_WIDTH = int(SCREEN_WIDTH)
 SCREEN_HEIGHT = screensize[screensize.index('x')+2:]
 SCREEN_HEIGHT = int(SCREEN_HEIGHT)
-TITLE = 'charater'
+TITLE = 'lol RPG'
 
 
 
@@ -35,11 +35,12 @@ TITLE = 'charater'
 class gameEnv():
     def __init__(self, config):
         
-        if data['windowed']=='false':
-            self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
-            pygame.display.set_caption(TITLE)
-        elif data['windowed']=='true':
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
+        if data['windowed']=='true':
             self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.RESIZABLE)
+            pygame.display.set_caption(TITLE)
+        else:
+            self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
             pygame.display.set_caption(TITLE)
         
         self.clock = pygame.time.Clock()
@@ -143,7 +144,12 @@ class gameEnv():
                             self.music.pauseMusic()
                             
                     if events.key == pygame.K_ESCAPE:
+<<<<<<< HEAD
+                        #pygame.quit()
+=======
                         pygame.quit()
+                        del pygame.locals
+>>>>>>> 13ab553efc8cafc4f5056f155f2c75ef2e1e1f1d
                         return False
                         
             key_pressed = list(pygame.key.get_pressed())

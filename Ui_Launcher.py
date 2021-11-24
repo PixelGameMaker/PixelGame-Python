@@ -101,7 +101,7 @@ class Ui_Main_Window(object):
     # setupUi
 
     def retranslateUi(self, Main_Window):
-        Main_Window.setWindowTitle(QCoreApplication.translate("Main_Window", u"Howard Good", None))
+        Main_Window.setWindowTitle(QCoreApplication.translate("Main_Window", u"Launcher", None))
         self.Button_Play.setText(QCoreApplication.translate("Main_Window", u"Play", None))
         self.Background.setText("")
         self.Graphics_Settings.setTitle(QCoreApplication.translate("Main_Window", u"Graphics Settings", None))
