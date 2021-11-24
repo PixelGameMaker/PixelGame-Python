@@ -13,24 +13,34 @@ from BackGroundMusic import BackGroundMusic
 import pygame.locals
 import time
 import random
+import json
+
+with open('config.json') as f:
+    data = json.load(f)
 
 pygame.init()
 
 displayInfo = pygame.display.Info()
 
-SCREEN_WIDTH = displayInfo.current_w
-SCREEN_HEIGHT = displayInfo.current_h
+screensize = data['preferresolution']
+SCREEN_WIDTH = screensize[0:screensize.index('x')-1]
+SCREEN_WIDTH = int(SCREEN_WIDTH)
+SCREEN_HEIGHT = screensize[screensize.index('x')+2:]
+SCREEN_HEIGHT = int(SCREEN_HEIGHT)
 TITLE = 'charater'
-    
+
 
 
 
 class gameEnv():
     def __init__(self, config):
         
-        
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
-        pygame.display.set_caption(TITLE)
+        if data['windowed']=='false':
+            self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
+            pygame.display.set_caption(TITLE)
+        elif data['windowed']=='true':
+            self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.RESIZABLE)
+            pygame.display.set_caption(TITLE)
         
         self.clock = pygame.time.Clock()
         self.font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
@@ -67,10 +77,13 @@ class gameEnv():
         self.att_text = Text(self.font, 'att:', (5, 5))
         self.dps_text = Text(self.font, 'dps:', (5, 20))
         self.enemy_left_text = Text(self.font, 'Enemy Left:', (5, 35))
+        self.resorution_text = Text(self.font, 'resorution:', (5, 50))
         
         self.situation_text.add(self.att_text)
         self.situation_text.add(self.dps_text)
         self.situation_text.add(self.enemy_left_text)
+        self.situation_text.add(self.resorution_text)
+        self.resorution_text.update('resorution:' + str(SCREEN_WIDTH) + 'x'+ str(SCREEN_HEIGHT))
         
         #player_situation 
         self.player_text = Text(self.font, 'player:', (SCREEN_WIDTH -120, 5))
@@ -130,6 +143,7 @@ class gameEnv():
                             self.music.pauseMusic()
                             
                     if events.key == pygame.K_ESCAPE:
+                        pygame.quit()
                         return False
                         
             key_pressed = list(pygame.key.get_pressed())
