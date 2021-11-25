@@ -21,7 +21,7 @@ def character_surf_initialize():
     enemy_surf = {}
     bullet_surf = {}
     
-    player_images = {'standing' : 'assets/image/player/standing.png',
+    player_images = {'standing' : 'assets/image/player/standf.png',
                      'walking_1': 'assets/image/player/walking_1.png',
                      'walking_2': 'assets/image/player/walking_2.png'
                      }
@@ -34,9 +34,9 @@ def character_surf_initialize():
                      'arrow'         : 'assets/image/bullet/arrow.png'}
     
     size = (int(displayInfo.current_h / 15),
-            int(displayInfo.current_h / 15))
+            int(displayInfo.current_h / 10))
     for name, path in player_images.items():
-        surf = pygame.image.load(path).convert()
+        surf = pygame.image.load(path).convert_alpha ()
         surf = pygame.transform.smoothscale(surf, size)
         surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         player_surf[name] = surf

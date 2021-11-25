@@ -149,7 +149,6 @@ class gameEnv():
                             self.music.pauseMusic()
                             
                     if events.key == pygame.K_ESCAPE:
-                        #pygame.quit()
                         pygame.quit()
                         del pygame.locals
                         return False
