@@ -29,7 +29,10 @@ def CheckWorkDir():
         print("[WARN] You are not in PixelRPG-Python Folder.")
         print("Continue? (To exit, press Ctrl+C)")
         try:
-            time.sleep(5)
+            # countdown for 5 seconds
+            for i in range(5):
+                print(str(5 - i) + "...")
+                time.sleep(1)
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C dected. Exiting...")
             quit()
@@ -50,7 +53,7 @@ if not os.path.isfile("config.json"):
     print(f"[INFO] Your screen size is {screensize}")
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"],
+        json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
                   "music": "true", "windowed": "true", "fps": "60"}, f, indent=4)
         # add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
@@ -74,7 +77,7 @@ except:
     print(f"[INFO] Your screen size is {screensize}")
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"],
+        json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
                   "music": "true", "windowed": "true", "fps": "60"}, f, indent=4)
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
@@ -126,10 +129,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
         if config["preferresolution"] in config["preferresolution"]:
-            self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
+            self.ui.Resolution_Settings.setCurrentText(
+                config["preferresolution"])
             print(f"[INFO] Preffer resolution is {config['preferresolution']}")
-            
-        
 
         # localization
         if check_lang():
@@ -140,23 +142,21 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Graphics_Settings.setTitle("顯示設定")
             self.ui.Music_On.setText("開啟")
             self.ui.Music_Off.setText("關閉")
-            
-            
+
         if config["windowed"] == "True":
             self.ui.Windowed_Settings.setChecked(True)
         else:
             self.ui.Windowed_Settings.setChecked(False)
-            
-            
+
         if config["music"] == "True":
-            #add radio button group
+            # add radio button group
             # https://stackoverflow.com/questions/1731620/is-there-a-way-to-have-all-radion-buttons-be-unchecked
             self.ui.Music_On.setChecked(True)
             self.ui.Music_Off.setChecked(False)
         else:
             self.ui.Music_On.setChecked(False)
             self.ui.Music_Off.setChecked(True)
-        
+
         self.ui.FPS_Settings.setValue(int(config["fps"]))
         # play button click
         self.ui.Button_Play.clicked.connect(self.Play)
@@ -181,7 +181,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
-        #os.system("clear")
+        # os.system("clear")
         import pygame.locals
         exec(open("main.py").read())
 
