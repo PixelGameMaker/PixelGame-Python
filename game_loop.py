@@ -35,14 +35,16 @@ TITLE = 'lol RPG'
 class gameEnv():
     def __init__(self, config):
         
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
-        if data['windowed']=='true':
+        #self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
+        if data['windowed']==True:
             self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.RESIZABLE)
             pygame.display.set_caption(TITLE)
         else:
             self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
             pygame.display.set_caption(TITLE)
         
+        #print(data['windowed'])
+
         self.clock = pygame.time.Clock()
         self.font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
         self.music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
