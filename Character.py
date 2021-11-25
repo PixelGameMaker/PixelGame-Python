@@ -14,7 +14,12 @@ import math
 pygame.init()
 
 def character_surf_initialize():
+    with open('config.json')as f:
+        data=json.load(f)
     displayInfo = pygame.display.Info()
+    screensize = data['preferresolution']
+    SCREEN_WIDTH = screensize[0:screensize.index('x')-1]
+    SCREEN_WIDTH = int(SCREEN_WIDTH)   
     
     global player_surf, enemy_surf, bullet_surf
     player_surf = {}
@@ -33,8 +38,8 @@ def character_surf_initialize():
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
                      'arrow'         : 'assets/image/bullet/arrow.png'}
     
-    size = (int(displayInfo.current_h / 15),
-            int(displayInfo.current_h / 10))
+    size = (int(SCREEN_WIDTH / 21),
+            int(SCREEN_WIDTH / 14))
     for name, path in player_images.items():
         surf = pygame.image.load(path).convert_alpha ()
         surf = pygame.transform.smoothscale(surf, size)
