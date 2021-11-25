@@ -42,6 +42,8 @@ class Ui_Main_Window(object):
         self.Background.setObjectName(u"Background")
         self.Background.setGeometry(QRect(10, 11, 701, 351))
         self.Background.setPixmap(QPixmap(u"Launcher Asset/launcher bg.jpg"))
+        self.Background.setScaledContents(True)
+        self.Background.setAlignment(Qt.AlignCenter)
         self.Graphics_Settings = QGroupBox(Main_Window)
         self.Graphics_Settings.setObjectName(u"Graphics_Settings")
         self.Graphics_Settings.setEnabled(True)
@@ -101,7 +103,7 @@ class Ui_Main_Window(object):
     # setupUi
 
     def retranslateUi(self, Main_Window):
-        Main_Window.setWindowTitle(QCoreApplication.translate("Main_Window", u"Launcher", None))
+        Main_Window.setWindowTitle(QCoreApplication.translate("Main_Window", u"Howard Good", None))
         self.Button_Play.setText(QCoreApplication.translate("Main_Window", u"Play", None))
         self.Background.setText("")
         self.Graphics_Settings.setTitle(QCoreApplication.translate("Main_Window", u"Graphics Settings", None))
