@@ -38,8 +38,8 @@ def character_surf_initialize():
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
                      'arrow'         : 'assets/image/bullet/arrow.png'}
     
-    size = (int(SCREEN_WIDTH / 21),
-            int(SCREEN_WIDTH / 14))
+    size = (int(SCREEN_WIDTH / 33),
+            int(SCREEN_WIDTH / 22))
     for name, path in player_images.items():
         surf = pygame.image.load(path).convert_alpha ()
         surf = pygame.transform.smoothscale(surf, size)
