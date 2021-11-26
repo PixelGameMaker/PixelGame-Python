@@ -61,7 +61,7 @@ class Ui_Main_Window(object):
         self.Graphics_Settings.setAcceptDrops(False)
         self.Graphics_Settings.setFlat(False)
         self.Graphics_Settings.setCheckable(False)
-        self.Graphics_Settings.setChecked(False)
+        #self.Graphics_Settings.setChecked(False)
         self.label_Resolution = QLabel(self.Graphics_Settings)
         self.label_Resolution.setObjectName(u"label_Resolution")
         self.label_Resolution.setGeometry(QRect(20, 20, 81, 21))
