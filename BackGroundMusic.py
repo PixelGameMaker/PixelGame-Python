@@ -7,9 +7,11 @@ Created on Fri Aug  6 21:23:21 2021
 
 import pygame
 pygame.init()
+pygame.mixer.init()
 
 class BackGroundMusic:
     def __init__(self, path, repeat):
+        pygame.mixer.init()
         pygame.mixer.music.load(path)
         pygame.mixer.music.play(repeat)
         pygame.mixer.music.pause()
