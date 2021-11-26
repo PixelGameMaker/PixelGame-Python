@@ -181,7 +181,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # start game
         # os.system("clear")
         import pygame.locals
-        exec(open("main.py").read())
+        try:
+            exec(open("main.py").read())
+        except FileNotFoundError:
+            print("[ERROR] main.py not found. Are you release?")
+            os.system("start main.exe")
 
 
 if __name__ == '__main__':
