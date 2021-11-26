@@ -5,10 +5,8 @@ import time
 from os.path import expanduser
 
 import pyautogui
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+
+from PySide2 import QtWidgets
 
 from Ui_Launcher import Ui_Main_Window
 
@@ -143,12 +141,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Music_On.setText("開啟")
             self.ui.Music_Off.setText("關閉")
 
-        if config["windowed"] == "True":
+        if config["windowed"] == True:
             self.ui.Windowed_Settings.setChecked(True)
         else:
             self.ui.Windowed_Settings.setChecked(False)
 
-        if config["music"] == "True":
+        if config["music"] == True:
             # add radio button group
             # https://stackoverflow.com/questions/1731620/is-there-a-way-to-have-all-radion-buttons-be-unchecked
             self.ui.Music_On.setChecked(True)

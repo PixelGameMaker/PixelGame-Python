@@ -73,7 +73,7 @@ class Ui_Main_Window(object):
         self.Windowed_Settings.setObjectName(u"Windowed_Settings")
         self.Windowed_Settings.setGeometry(QRect(390, 20, 91, 21))
         self.Windowed_Settings.setCheckable(True)
-        self.Windowed_Settings.setChecked(False)
+        #self.Windowed_Settings.setChecked(False)
         self.label_FPS = QLabel(self.Graphics_Settings)
         self.label_FPS.setObjectName(u"label_FPS")
         self.label_FPS.setGeometry(QRect(20, 50, 81, 21))
