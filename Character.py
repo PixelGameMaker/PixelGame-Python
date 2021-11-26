@@ -315,8 +315,8 @@ class Bullet(pygame.sprite.Sprite):
         for key, value in detail.items():
             setattr(self, key, value)
         
-        self.size = (int(displayInfo.current_h /8),
-                     int(displayInfo.current_h /8))
+        self.size = (int(displayInfo.current_h /10),
+                     int(displayInfo.current_h /10))
             
         self.surf = bullet_surf[self.kind].copy()
         self.surf = update_bullet_image_direction(self.surf, self.direction)
