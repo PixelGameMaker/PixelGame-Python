@@ -115,6 +115,12 @@ class gameEnv():
     
     def mainloop(self):
         
+        #switch music mute by launcher
+        if data['music']==True:
+            self.music.playMusic()
+        else:
+            self.music.pauseMusic()
+
         while True:
             for events in pygame.event.get():
                 if events.type == pygame.QUIT:
@@ -326,9 +332,6 @@ class gameEnv():
                     
                     del entity
                         
-                        
-        
-            
             self.screen.fill((255, 255, 255))
             for entity in self.all_sprite:
                 self.screen.blit(entity.surf, entity.rect)
