@@ -72,27 +72,28 @@ def character_surf_initialize():
         bullet_surf[name] = surf
 
 def update_img(entity, direction):
-    if (time.time() - entity.walking_cd) > 0.25:
-        #print('updating')
-        entity.walking_cd = time.time()
-        if direction != [0, 0]:
-            if entity.images['now'] == 'walking_1':
-                #print('change to walking_2')
-                entity.images['now'] = 'walking_2'
-                if direction[0] > 0:
-                    entity.surf = entity.surf_dict['walking_2']
-                else:
-                    entity.surf = entity.surf_dict['walking_2_reverse']
-            else:
-                entity.images['now'] = 'walking_1'
-                #print('change to walking_1')
-                if direction[0] > 0:
-                    entity.surf = entity.surf_dict['walking_1']
-                else:
-                    entity.surf = entity.surf_dict['walking_1_reverse']
+    if time.time() - entity.walking_cd <= 0.25:
+        return
+    #print('updating')
+    entity.walking_cd = time.time()
+    if direction == [0, 0]:
+        entity.surf = entity.surf_dict['standing']
+        entity.images['now'] = 'standing'
+
+    elif entity.images['now'] == 'walking_1':
+        #print('change to walking_2')
+        entity.images['now'] = 'walking_2'
+        if direction[0] > 0:
+            entity.surf = entity.surf_dict['walking_2']
         else:
-            entity.surf = entity.surf_dict['standing']
-            entity.images['now'] = 'standing'
+            entity.surf = entity.surf_dict['walking_2_reverse']
+    else:
+        entity.images['now'] = 'walking_1'
+        #print('change to walking_1')
+        if direction[0] > 0:
+            entity.surf = entity.surf_dict['walking_1']
+        else:
+            entity.surf = entity.surf_dict['walking_1_reverse']
 
 
 def update_bullet_image_direction(image, direction):
