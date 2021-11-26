@@ -20,6 +20,7 @@ with open('config.json') as f:
 
 pygame.init()
 
+
 displayInfo = pygame.display.Info()
 
 screensize = data['preferresolution']
@@ -46,6 +47,7 @@ class gameEnv():
         #print(data['windowed'])
 
         self.clock = pygame.time.Clock()
+        pygame.font.init()
         self.font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
         self.music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
         self.fps = int(data['fps'])
