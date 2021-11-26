@@ -27,8 +27,8 @@ def character_surf_initialize():
     bullet_surf = {}
     
     player_images = {'standing' : 'assets/image/player/standf.png',
-                     'walking_1': 'assets/image/player/walking_1.png',
-                     'walking_2': 'assets/image/player/walking_2.png'
+                     'walking_1': 'assets/image/player/walkingf_1.png',
+                     'walking_2': 'assets/image/player/walkingf_2.png'
                      }
     enemy_images  = {'standing' : 'assets/image/enemy/standing.png',
                      'walking_1': 'assets/image/enemy/walking_1.png',
@@ -46,8 +46,8 @@ def character_surf_initialize():
         surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         player_surf[name] = surf
         if 'walking' in name:
-            surf = pygame.image.load(path).convert()
-            surf = pygame.transform.flip(surf, 1, 0)
+            surf = pygame.image.load(path).convert_alpha ()
+            #surf = pygame.transform.flip(surf, 1, 0)
             surf = pygame.transform.smoothscale(surf, size)
             surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
             player_surf[name+'_reverse'] = surf
