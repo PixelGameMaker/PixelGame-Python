@@ -122,6 +122,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Resolution_Settings.setCurrentText(
                 config["preferresolution"])
         '''
+        self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
         print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
         # localization
