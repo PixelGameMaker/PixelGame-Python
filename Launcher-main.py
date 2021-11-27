@@ -140,46 +140,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
         print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
-        # launcher_localization
-        
-        def set_hant():
-            self.ui.label_Music.setText("音樂：")
-            self.ui.Windowed_Settings.setText("視窗化")
-            self.ui.label_Resolution.setText("解析度：")
-            self.ui.Button_Play.setText("開始遊戲")
-            self.ui.Graphics_Settings.setTitle("顯示設定")
-            self.ui.Music_On.setText("開啟")
-            self.ui.Music_Off.setText("關閉")
+        # localization
 
-        def set_hans():
-            self.ui.label_Music.setText("音乐：")
-            self.ui.Windowed_Settings.setText("窗口化")
-            self.ui.label_Resolution.setText("分辨率：")
-            self.ui.Button_Play.setText("开始游戏")
-            self.ui.Graphics_Settings.setTitle("显示设置")
-            self.ui.Music_On.setText("开启")
-            self.ui.Music_Off.setText("关闭")
-            
-        def set_ja():
-            self.ui.label_Music.setText("音楽：")
-            self.ui.Windowed_Settings.setText("ウィンドウ")
-            self.ui.label_Resolution.setText("解像度：")
-            self.ui.Button_Play.setText("ゲームを開始する")
-            self.ui.Graphics_Settings.setTitle("グラフィック設定")
-            self.ui.Music_On.setText("オン")
-            self.ui.Music_Off.setText("オフ")
-        
-        
         if return_lang == "zh-hant":
-            '''
-            from launcher_localization import Translate
-            Translate(set_hant())
-            '''
-            set_hant()
+            from launcher_localization import set_hant
+            set_hant(self)
         elif return_lang == "zh-hans":
-            set_hans()
+            from launcher_localization import set_hans
+            set_hans(self)
         elif return_lang == "ja":
-            set_ja()
+            from launcher_localization import set_ja
+            set_ja(self)
+
+        # setting up environment
 
         if config["windowed"] == True:
             # Always remember to change Ui_Launcher file while re-compiling
