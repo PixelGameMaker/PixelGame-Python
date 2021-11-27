@@ -42,10 +42,7 @@ CheckWorkDir()
 
 # JSON CHECK START
 
-if not os.path.isfile("config.json"):
-    print("[WARN] config.json not found.")
-    print("[WARN] Creating new config.json.")
-    # read screen biggest resolution
+def json_dump():
     width, height = pyautogui.size()
     screensize = (f"{width} x {height}")
     print(f"[INFO] Your screen size is {screensize}")
@@ -61,6 +58,12 @@ if not os.path.isfile("config.json"):
                 data["resolution"].append("2560 x 1440")
                 json.dump(data, f)
 
+if not os.path.isfile("config.json"):
+    print("[WARN] config.json not found.")
+    print("[WARN] Creating new config.json.")
+    # read screen biggest resolution
+    json_dump()
+
 # try json file is readable
 try:
     with open("config.json", "r") as f:
@@ -70,19 +73,7 @@ except:
     print("[WARN] config.json corrupt.")
     print("[WARN] retry creating new config.json.")
     # read screen biggest resolution
-    width, height = pyautogui.size()
-    screensize = (f"{width} x {height}")
-    print(f"[INFO] Your screen size is {screensize}")
-    with open("config.json", "w") as f:
-        # add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
-                  "music": "true", "windowed": "true", "fps": "60"}, f, indent=4)
-        if width > 1920 and height > 1080:
-            with open("config.json", "r") as f:
-                data = json.load(f)
-                data["resolution"].append("1920 x 1080")
-                data["resolution"].append("2560 x 1440")
-                json.dump(data, f)
+    json_dump()
 finally:
     print(f"[INFO] The resolution in config is {config['resolution']}")
     print(f"[INFO] The music in config is {config['music']}")
@@ -104,7 +95,7 @@ def check_lang():
         if lang == 0x04:
             print("[INFO] System language is Chinese")
             del ctypes
-            return True
+            return "zh-TW"
         else:
             print("[INFO] System language is not Chinese, set to English")
             del ctypes
@@ -126,13 +117,15 @@ class MainWindow(QtWidgets.QMainWindow):
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
+        '''
         if config["preferresolution"] in config["preferresolution"]:
             self.ui.Resolution_Settings.setCurrentText(
                 config["preferresolution"])
-            print(f"[INFO] Preffer resolution is {config['preferresolution']}")
+        '''
+        print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
         # localization
-        if check_lang():
+        if check_lang() == "zh-TW":
             self.ui.label_Music.setText("音樂：")
             self.ui.Windowed_Settings.setText("視窗化")
             self.ui.label_Resolution.setText("解析度：")
@@ -147,8 +140,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Windowed_Settings.setChecked(False)
 
         if config["music"] == True:
-            # add radio button group
-            # https://stackoverflow.com/questions/1731620/is-there-a-way-to-have-all-radion-buttons-be-unchecked
+            # Always remember to change Ui_Launcher file while re-compiling
             self.ui.Music_On.setChecked(True)
             self.ui.Music_Off.setChecked(False)
         else:
