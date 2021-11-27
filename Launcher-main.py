@@ -42,6 +42,7 @@ CheckWorkDir()
 
 # JSON CHECK START
 
+
 def json_dump():
     width, height = pyautogui.size()
     screensize = (f"{width} x {height}")
@@ -57,6 +58,7 @@ def json_dump():
                 data["resolution"].append("1920 x 1080")
                 data["resolution"].append("2560 x 1440")
                 json.dump(data, f)
+
 
 if not os.path.isfile("config.json"):
     print("[WARN] config.json not found.")
@@ -95,6 +97,7 @@ finally:
 
 def check_lang():
     # check if system language is chinese
+    '''
     if sys.platform == "win32":
         import ctypes
         langid = ctypes.windll.kernel32.GetUserDefaultUILanguage()
@@ -107,12 +110,34 @@ def check_lang():
             print("[INFO] System language is not Chinese, set to English")
             del ctypes
             return False
+    #else:
+    #    print("[INFO] Something went wrong, set to English (Are you using Linux?)")
+    #    return False
     '''
-    else:
-        print("[INFO] Something went wrong, set to English (Are you using Linux?)")
-        return False
-    '''
-
+    # use module locale to check system language
+    try:
+        with open("config.json", "r") as f:
+            lang_config = json.load(f)
+            lang = lang_config["lang"]
+            print(f"[INFO] Language in config is {lang}")
+            print("[INFO] Skipping system language detection")
+            return lang
+    except:
+        import locale
+        syslang = locale.getdefaultlocale()[0].lower()
+        if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
+            print("[INFO] System language is Chinese Traditional")
+            del locale
+            return "zh-hant"
+        elif syslang in ["zh_cn", "zh_sg", "zh-my", "zh_hans"]:
+            print("[INFO] System language is Chinese Simplified")
+            del locale
+            return "zh-hans"
+        else:
+            print("[INFO] System language current is not support, set to English")
+            del locale
+            return "en"
+return_lang = check_lang()
 # SYSTEM LANGUAGE CHECK END
 
 
@@ -133,7 +158,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
         # localization
-        if check_lang() == "zh-TW":
+        def set_hant():
             self.ui.label_Music.setText("音樂：")
             self.ui.Windowed_Settings.setText("視窗化")
             self.ui.label_Resolution.setText("解析度：")
@@ -141,6 +166,20 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Graphics_Settings.setTitle("顯示設定")
             self.ui.Music_On.setText("開啟")
             self.ui.Music_Off.setText("關閉")
+
+        def set_hans():
+            self.ui.label_Music.setText("音乐：")
+            self.ui.Windowed_Settings.setText("窗口化")
+            self.ui.label_Resolution.setText("分辨率：")
+            self.ui.Button_Play.setText("开始游戏")
+            self.ui.Graphics_Settings.setTitle("显示设置")
+            self.ui.Music_On.setText("开启")
+            self.ui.Music_Off.setText("关闭")
+
+        if return_lang == "zh-hant":
+            set_hant()
+        elif return_lang == "zh-hans":
+            set_hans()
 
         if config["windowed"] == True:
             # Always remember to change Ui_Launcher file while re-compiling
