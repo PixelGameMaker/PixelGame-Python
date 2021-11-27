@@ -68,6 +68,11 @@ if not os.path.isfile("config.json"):
 try:
     with open("config.json", "r") as f:
         config = json.load(f)
+        resolution = config["resolution"]
+        preferresolution = config["preferresolution"]
+        music = config["music"]
+        windowed = config["windowed"]
+        fps = config["fps"]
 
 except:
     print("[WARN] config.json corrupt.")
@@ -75,6 +80,8 @@ except:
     # read screen biggest resolution
     json_dump()
 finally:
+    with open("config.json", "r") as f:
+        config = json.load(f)
     print(f"[INFO] The resolution in config is {config['resolution']}")
     print(f"[INFO] The music in config is {config['music']}")
     print(f"[INFO] The windowed in config is {config['windowed']}")
