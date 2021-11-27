@@ -115,6 +115,10 @@ def check_lang():
             print("[INFO] System language is Chinese Simplified")
             del locale
             return "zh-hans"
+        elif syslang in ["ja_jp", "ja"]:
+            print("[INFO] System language is Japanese")
+            del locale
+            return "ja"
         else:
             print("[INFO] System language current is not support, set to English")
             del locale
@@ -154,11 +158,22 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Graphics_Settings.setTitle("显示设置")
             self.ui.Music_On.setText("开启")
             self.ui.Music_Off.setText("关闭")
+            
+        def set_ja():
+            self.ui.label_Music.setText("音楽：")
+            self.ui.Windowed_Settings.setText("ウィンドウ")
+            self.ui.label_Resolution.setText("解像度：")
+            self.ui.Button_Play.setText("ゲームを開始する")
+            self.ui.Graphics_Settings.setTitle("グラフィック設定")
+            self.ui.Music_On.setText("オン")
+            self.ui.Music_Off.setText("オフ")
 
         if return_lang == "zh-hant":
             set_hant()
         elif return_lang == "zh-hans":
             set_hans()
+        elif return_lang == "ja":
+            set_ja()
 
         if config["windowed"] == True:
             # Always remember to change Ui_Launcher file while re-compiling
