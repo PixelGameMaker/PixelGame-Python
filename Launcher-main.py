@@ -135,6 +135,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Music_Off.setText("關閉")
 
         if config["windowed"] == True:
+            # Always remember to change Ui_Launcher file while re-compiling
             self.ui.Windowed_Settings.setChecked(True)
         else:
             self.ui.Windowed_Settings.setChecked(False)
