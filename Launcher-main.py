@@ -183,6 +183,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 subprocess.call(["main.exe"])
             except FileNotFoundError:
                 print("[ERROR] No game file found. Please retry download.")
+        finally:
+            self.showNormal()
 
 
 if __name__ == '__main__':
