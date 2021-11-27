@@ -1,4 +1,7 @@
+libxml2 >=2.9.10,<2.10.0a0, libxslt >=1.1.33,<2.0a0, python >=3.6,<3.7.0a0, python_abi 3.6.* *_cp36m, qt >=5.12.9,<5.13.0a0, vc >=14.1,<15.0a0, vs2015_runtime >=14.16.27012
+pyside2==5.13.2
+
+pyautogui == 0.9.53
+pymsgbox, pyscreeze, python >=3.6,<3.7.0a0, python_abi 3.6.* *_cp36m, pytweening
+
 pygame==1.9.4
-PyAutoGUI==0.9.53
-traitlets==4.3.3
-nose==1.3.7
