@@ -180,12 +180,16 @@ class MainWindow(QtWidgets.QMainWindow):
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game
         # os.system("clear")
-        import pygame.locals
+        #import pygame.locals
         try:
             exec(open("main.py").read())
         except FileNotFoundError:
             print("[ERROR] main.py not found. Are you release?")
-            os.system("start main.exe")
+            try:
+                import subprocess
+                subprocess.call(["main.exe"])
+            except FileNotFoundError:
+                print("[ERROR] No game file found. Please retry download.")
 
 
 if __name__ == '__main__':
