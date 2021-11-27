@@ -50,7 +50,7 @@ def json_dump():
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
         json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
-                  "music": "true", "windowed": "true", "fps": "60"}, f, indent=4)
+                  "music": True, "windowed": False, "fps": 60}, f, indent=4)
         # add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
             with open("config.json", "r") as f:
@@ -129,6 +129,23 @@ return_lang = check_lang()
 # SYSTEM LANGUAGE CHECK END
 
 
+def json_save(self):
+    # get resolution from combo box
+    preferresolution = self.ui.Resolution_Settings.currentText()
+    # get windowed from check box
+    windowed = self.ui.Windowed_Settings.isChecked()
+    # get music from check box
+    music = self.ui.Music_On.isChecked()
+    # get fps from spin box
+    fps = self.ui.FPS_Settings.value()
+    # write to config.json
+    with open("config.json", "w") as f:
+        # add dict
+        data = {"resolution": config['resolution'], "preferresolution": preferresolution,
+                "music": music, "windowed": windowed, "fps": fps}
+        json.dump(data, f, indent=4)
+
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -171,10 +188,33 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.FPS_Settings.setValue(int(config["fps"]))
         # play button click
         self.ui.Button_Play.clicked.connect(self.Play)
+        # save button click
+        self.ui.Button_Save.clicked.connect(self.json_save)
+        self.ui.Button_Reset.clicked.connect(self.json_reset)
 
-    def Play(self):
-        print("[INFO] Starting game and saving settings data")
-        self.showMinimized()
+    def json_reset(self):
+        '''
+        with open("config.json", "r") as f:
+            oldConfig = json.load(f)
+        '''
+        json_dump()
+        print("[INFO] Reset config.json")
+        with open("config.json", "r") as f:
+            config = json.load(f)
+        self.ui.Windowed_Settings.setChecked(False)
+        self.ui.Music_On.setChecked(True)
+        self.ui.Music_Off.setChecked(False)
+        width, height = pyautogui.size()
+        screensize = (f"{width} x {height}")
+        #self.ui.Resolution_Settings.addItems("Reseting...")
+        #self.ui.Resolution_Settings.removeItems(oldConfig["resolution"])
+        #self.ui.Resolution_Settings.setItems("Reseting...")
+        self.ui.Resolution_Settings.addItems(config["resolution"])
+        self.ui.Resolution_Settings.setCurrentText(screensize)
+        #self.ui.Resolution_Settings.removeItems("Reseting...")
+        self.ui.FPS_Settings.setValue(60)
+
+    def json_save(self):
         # get resolution from combo box
         preferresolution = self.ui.Resolution_Settings.currentText()
         # get windowed from check box
@@ -189,6 +229,14 @@ class MainWindow(QtWidgets.QMainWindow):
             data = {"resolution": config['resolution'], "preferresolution": preferresolution,
                     "music": music, "windowed": windowed, "fps": fps}
             json.dump(data, f, indent=4)
+        print("[INFO] Save config.json")
+
+    def Play(self):
+        print("[INFO] Starting game and saving settings data")
+        self.showMinimized()
+        json_save(self)
+        with open("config.json", "r") as f:
+            data = json.load(f)
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
         # start game

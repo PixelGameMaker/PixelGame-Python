@@ -212,19 +212,6 @@
      <number>200</number>
     </property>
    </widget>
-   <widget class="QDialogButtonBox" name="Button_Graphics">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>80</y>
-      <width>156</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="standardButtons">
-     <set>QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_Music">
     <property name="geometry">
      <rect>
@@ -262,6 +249,32 @@
     </property>
     <property name="text">
      <string>Off</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Button_Reset">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>80</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Button_Save">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>80</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save</string>
     </property>
    </widget>
   </widget>

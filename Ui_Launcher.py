@@ -83,10 +83,6 @@ class Ui_Main_Window(object):
         self.FPS_Settings.setGeometry(QRect(50, 50, 51, 22))
         self.FPS_Settings.setMinimum(15)
         self.FPS_Settings.setMaximum(200)
-        self.Button_Graphics = QDialogButtonBox(self.Graphics_Settings)
-        self.Button_Graphics.setObjectName(u"Button_Graphics")
-        self.Button_Graphics.setGeometry(QRect(310, 80, 156, 23))
-        self.Button_Graphics.setStandardButtons(QDialogButtonBox.Reset|QDialogButtonBox.Save)
         self.label_Music = QLabel(self.Graphics_Settings)
         self.label_Music.setObjectName(u"label_Music")
         self.label_Music.setGeometry(QRect(20, 80, 47, 21))
@@ -96,6 +92,12 @@ class Ui_Main_Window(object):
         self.Music_Off = QRadioButton(self.Graphics_Settings)
         self.Music_Off.setObjectName(u"Music_Off")
         self.Music_Off.setGeometry(QRect(130, 80, 83, 21))
+        self.Button_Reset = QPushButton(self.Graphics_Settings)
+        self.Button_Reset.setObjectName(u"Button_Reset")
+        self.Button_Reset.setGeometry(QRect(310, 80, 75, 23))
+        self.Button_Save = QPushButton(self.Graphics_Settings)
+        self.Button_Save.setObjectName(u"Button_Save")
+        self.Button_Save.setGeometry(QRect(390, 80, 75, 23))
 
         self.retranslateUi(Main_Window)
 
@@ -113,5 +115,7 @@ class Ui_Main_Window(object):
         self.label_Music.setText(QCoreApplication.translate("Main_Window", u"Music", None))
         self.Music_On.setText(QCoreApplication.translate("Main_Window", u"On", None))
         self.Music_Off.setText(QCoreApplication.translate("Main_Window", u"Off", None))
+        self.Button_Reset.setText(QCoreApplication.translate("Main_Window", u"Reset", None))
+        self.Button_Save.setText(QCoreApplication.translate("Main_Window", u"Save", None))
     # retranslateUi
 

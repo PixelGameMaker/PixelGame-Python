@@ -6,6 +6,8 @@ def set_hant(self):
     self.ui.Graphics_Settings.setTitle("顯示設定")
     self.ui.Music_On.setText("開啟")
     self.ui.Music_Off.setText("關閉")
+    self.Button_Reset.setText("重設")
+    self.Button_Save.setText("儲存")
 
 def set_hans(self):
     self.ui.label_Music.setText("音乐：")
@@ -15,6 +17,8 @@ def set_hans(self):
     self.ui.Graphics_Settings.setTitle("显示设置")
     self.ui.Music_On.setText("开启")
     self.ui.Music_Off.setText("关闭")
+    self.Button_Reset.setText("重置")
+    self.Button_Save.setText("保存")
     
 def set_ja(self):
     self.ui.label_Music.setText("音楽：")
@@ -24,3 +28,5 @@ def set_ja(self):
     self.ui.Graphics_Settings.setTitle("グラフィック設定")
     self.ui.Music_On.setText("オン")
     self.ui.Music_Off.setText("オフ")
+    self.ui.Button_Reset.setText("リセット")
+    self.ui.Button_Save.setText("セーブ")
