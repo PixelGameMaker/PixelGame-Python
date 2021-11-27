@@ -94,6 +94,7 @@ finally:
 
 # SYSTEM LANGUAGE CHECK START
 
+
 def check_lang():
     # use module locale to check system language
     try:
@@ -118,6 +119,8 @@ def check_lang():
             print("[INFO] System language current is not support, set to English")
             del locale
             return "en"
+
+
 return_lang = check_lang()
 # SYSTEM LANGUAGE CHECK END
 
