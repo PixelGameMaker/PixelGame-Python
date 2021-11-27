@@ -140,7 +140,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
         print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
-        # localization
+        # launcher_localization
+        
         def set_hant():
             self.ui.label_Music.setText("音樂：")
             self.ui.Windowed_Settings.setText("視窗化")
@@ -167,8 +168,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Graphics_Settings.setTitle("グラフィック設定")
             self.ui.Music_On.setText("オン")
             self.ui.Music_Off.setText("オフ")
-
+        
+        
         if return_lang == "zh-hant":
+            '''
+            from launcher_localization import Translate
+            Translate(set_hant())
+            '''
             set_hant()
         elif return_lang == "zh-hans":
             set_hans()
