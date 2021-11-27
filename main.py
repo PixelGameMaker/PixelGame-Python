@@ -21,7 +21,7 @@ while True:
     isPass = game.mainloop()
     
     if not isPass :
-        print('Loss')
+        print('Loss\n')
         import pygame
         pygame.quit()
         break
