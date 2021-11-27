@@ -94,26 +94,7 @@ finally:
 
 # SYSTEM LANGUAGE CHECK START
 
-
 def check_lang():
-    # check if system language is chinese
-    '''
-    if sys.platform == "win32":
-        import ctypes
-        langid = ctypes.windll.kernel32.GetUserDefaultUILanguage()
-        lang = langid & 0xFF
-        if lang == 0x04:
-            print("[INFO] System language is Chinese")
-            del ctypes
-            return "zh-TW"
-        else:
-            print("[INFO] System language is not Chinese, set to English")
-            del ctypes
-            return False
-    #else:
-    #    print("[INFO] Something went wrong, set to English (Are you using Linux?)")
-    #    return False
-    '''
     # use module locale to check system language
     try:
         with open("config.json", "r") as f:
@@ -149,11 +130,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
-        '''
-        if config["preferresolution"] in config["preferresolution"]:
-            self.ui.Resolution_Settings.setCurrentText(
-                config["preferresolution"])
-        '''
         self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
         print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
