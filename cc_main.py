@@ -129,6 +129,9 @@ class MainWindow_cc(QtWidgets.QWidget):
                 subprocess.call(["main.exe"])
             except FileNotFoundError:
                 print("[ERROR] No game file found. Please retry download.")
+                import webbrowser
+                webbrowser.open('https://www.github.com/cytsai1008/PixelRPG-Python',new=0, autoraise=True)
+                del webbrowser
         finally:
             self.showNormal()
         

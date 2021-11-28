@@ -238,16 +238,15 @@ class MainWindow(QtWidgets.QMainWindow):
             open("cc_main.py", "r")
             Run_cc(self, "python",'cc_main.py')
         except:
-            import subprocess
             print("[ERROR] cc_main.py not found. Hope there is no bugs in the release version")
             try:
-                #subprocess.call('cc_main.exe')
                 open("cc_main.exe", "r")
                 Run_cc2(self, 'cc_main.exe')
             except:
                 print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
                 import webbrowser
                 webbrowser.open('https://www.github.com/cytsai1008/PixelRPG-Python',new=0, autoraise=True)
+                del webbrowser
 
 
 if __name__ == '__main__':
