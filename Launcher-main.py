@@ -197,10 +197,6 @@ class MainWindow(QtWidgets.QMainWindow):
         
 
     def json_reset(self):
-        '''
-        with open("config.json", "r") as f:
-            oldConfig = json.load(f)
-        '''
         json_dump()
         print("[INFO] Reset config.json")
         with open("config.json", "r") as f:
@@ -243,34 +239,28 @@ class MainWindow(QtWidgets.QMainWindow):
             data = json.load(f)
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
-        def Run_cc_py(self,ProcName):
+        def Run_cc(self,method,ProcName):
             self.p = QProcess()
-            self.p.start("python",[ProcName])
+            self.p.start(method,[ProcName])
             print("[INFO] Play Button clicked, please select character to play")
-            #self.p.finished().connect(Show_Normal)
-    
-        '''
+        def Run_cc2(self,ProcName):
+            self.p = QProcess()
+            self.p.start(ProcName)
         try:
-            Run_cc_py(self,'cc_main.py')
-            self.showMinimized()
-            time.sleep(3)
+            open("cc_main.py", "r")
+            Run_cc(self, "python",'cc_main.py')
         except:
-            print("[ERROR] cc_main.py not found. What's happening here?")
+            import subprocess
+            print("[ERROR] cc_main.py not found. Hope there is no bugs in the release version")
             try:
-                import subprocess
-                subprocess.call('cc_main.exe')
+                #subprocess.call('cc_main.exe')
+                open("cc_main.exe", "r")
+                Run_cc2(self, 'cc_main.exe')
             except:
                 print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
-        
-        finally:
-            #self.showNormal()
-            print("[INFO] Play Button clicked, please select character to play")
-        '''
-        Run_cc_py(self,'cc_main.py')
-        '''
-        def Show_Normal(self):
-            self.showNormal()
-        '''
+                import webbrowser
+                webbrowser.open('https://www.github.com/cytsai1008/PixelRPG-Python',new=0, autoraise=True)
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
