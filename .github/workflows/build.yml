@@ -1,0 +1,34 @@
+name: PyInstaller
+
+on: 
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+    - uses: s-weigand/setup-conda@v1 
+      with: 
+        python-version: 3.6
+    - run: conda --version
+    - run: which python
+    - run: conda install -c conda-forge PySide2 pyautogui pyinstaller --yes
+    - run: conda install -c delichon pygame --yes
+    - run: pyinstaller -F Launcher-main.py
+    - run: pyinstaller -F cc_main.py
+    - run: pyinstaller -F main.py
+    - uses: actions/upload-artifact@v2
+      with:
+        name: upload files
+        path: |
+          ./dist
+          ./assets
+          "./Launcher Asset"
