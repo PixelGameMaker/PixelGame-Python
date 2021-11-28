@@ -5,8 +5,8 @@ Created on Tue Oct 26 21:09:02 2021
 @author: howar
 """
 
-import json
 import game_loop
+import json
 
 with open('choose.json','r')as f:
     choose=json.load(f)
@@ -14,12 +14,17 @@ with open('choose.json','r')as f:
 
 game = game_loop.gameEnv(config)
 
+fo = open('assets/enemy.json', 'r')
+data = json.load(fo)
+fo.close()
+del fo
+
 lvl = 0
 
 while True:
     lvl += 1
     
-    game.gameSettings(lvl)
+    game.gameSettings(lvl, data)
     
     isPass = game.mainloop()
     
@@ -28,5 +33,8 @@ while True:
         import pygame
         pygame.quit()
         break
+    
+    else:
+        print('pass')
 
 

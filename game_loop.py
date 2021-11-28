@@ -45,7 +45,7 @@ class gameEnv():
             pygame.display.set_caption(TITLE)
         
         #print(data['windowed'])
-
+        
         self.clock = pygame.time.Clock()
         pygame.font.init()
         self.font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
@@ -120,7 +120,7 @@ class gameEnv():
             self.music.playMusic()
         else:
             self.music.pauseMusic()
-
+        
         while True:
             for events in pygame.event.get():
                 if events.type == pygame.QUIT:
@@ -302,14 +302,13 @@ class gameEnv():
                     group.add(self.player)
                     collided_enemy = pygame.sprite.spritecollide(entity, group, False)
                 
-                if  entity.rect.x > displayInfo.current_w *2 or\
-                    entity.rect.x < -displayInfo.current_w or\
-                    entity.rect.y > displayInfo.current_h *2 or\
-                    entity.rect.y < -displayInfo.current_h:
-                        entity.kill()
-                        self.bullet.remove(entity)
-                        del entity
-                        continue
+                if  ((entity.rect.x -960) **2 + (entity.rect.y -540) **2) > self.weapon.detail['range'] **2:
+                    print('yes')
+                    print(entity.rect.x, entity.rect.y)
+                    entity.kill()
+                    self.bullet.remove(entity)
+                    del entity
+                    continue
                 
                 elif pygame.sprite.spritecollide(entity, self.wall, False) != []:
                     entity.kill()
@@ -329,9 +328,17 @@ class gameEnv():
                             self.dps[time.time()] = detail['damage']
                         entity.kill()
                         #bullet.remove(entity)
+                        print(collided.health)
+                        if collided.health <= 0:
+                            collided.kill()
+                            self.enemy.remove(collided)
+                            
+                            del collided
+                            print('del')
                     
                     del entity
-                        
+            
+            
             self.screen.fill((255, 255, 255))
             for entity in self.all_sprite:
                 self.screen.blit(entity.surf, entity.rect)
@@ -348,15 +355,16 @@ class gameEnv():
             self.clock.tick(self.fps)
             pygame.display.flip()
             
-    def gameSettings(self, lvl):
+    def gameSettings(self, lvl, data):
         for i in range(lvl *1):
+            index = random.choice(list(data.keys()))
             detail = {'x':random.randint(-displayInfo.current_w, displayInfo.current_w *2),
                       'y':random.randint(-displayInfo.current_h, displayInfo.current_h *2),
-                      'health' : lvl *100,
-                      'speed':lvl *1.5,
+                      'health' : lvl *data[index]['health'],
+                      'speed':lvl *data[index]['speed'],
                       'cd': 1 /lvl,
                       'stay_range': 300,
-                      'att_range': 500}
+                      'att_range': data[index]['att_range']}
             summon_enemy = Enemy(detail)
             self.enemy.add(summon_enemy)
             self.all_sprite.add(summon_enemy)

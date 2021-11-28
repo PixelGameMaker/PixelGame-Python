@@ -14,7 +14,7 @@ import math
 pygame.init()
 
 def character_surf_initialize():
-    with open('config.json')as f:
+    with open('config.json') as f:
         data=json.load(f)
     displayInfo = pygame.display.Info()
     screensize = data['preferresolution']
@@ -41,12 +41,12 @@ def character_surf_initialize():
     size = (int(SCREEN_WIDTH / 33),
             int(SCREEN_WIDTH / 22))
     for name, path in player_images.items():
-        surf = pygame.image.load(path).convert_alpha ()
+        surf = pygame.image.load(path).convert_alpha()
         surf = pygame.transform.smoothscale(surf, size)
         surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         player_surf[name] = surf
         if 'walking' in name:
-            surf = pygame.image.load(path).convert_alpha ()
+            surf = pygame.image.load(path).convert_alpha()
             #surf = pygame.transform.flip(surf, 1, 0)
             surf = pygame.transform.smoothscale(surf, size)
             surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
@@ -315,8 +315,8 @@ class Bullet(pygame.sprite.Sprite):
         for key, value in detail.items():
             setattr(self, key, value)
         
-        self.size = (int(displayInfo.current_h /10),
-                     int(displayInfo.current_h /10))
+        self.size = (int(displayInfo.current_h * self.size *10),
+                     int(displayInfo.current_h * self.size *10))
             
         self.surf = bullet_surf[self.kind].copy()
         self.surf = update_bullet_image_direction(self.surf, self.direction)
