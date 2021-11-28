@@ -3,7 +3,6 @@ import os
 import sys
 import time
 from os.path import expanduser
-import psutil
 
 import pyautogui
 
@@ -243,7 +242,6 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             import subprocess
             subprocess.call(["cc_main.exe"])
-            # wont work, just want force skip
         except FileNotFoundError:
             print("[ERROR] cc_main.exe not found. What's happening here?")
         finally:
