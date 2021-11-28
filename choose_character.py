@@ -109,7 +109,7 @@ class Ui_Form(object):
         self.Assassin.setGeometry(QRect(363, 210, 347, 20))
         self.Assassin.setObjectName("Assassin")
         self.now_choose = QLabel(Form)
-        self.now_choose.setGeometry(QRect(10, 415, 311, 51))
+        self.now_choose.setGeometry(QRect(10, 415, 450, 51))
         font = QFont()
         font.setPointSize(19)
         self.now_choose.setFont(font)

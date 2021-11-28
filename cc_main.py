@@ -62,21 +62,6 @@ def check_lang():
 
 return_lang = check_lang()
 
-
-with open('choose.json','r')as f:
-    config=json.load(f)
-nowchoose='Archer'
-displaync=config['choose']
-if displaync == 'Archer':
-    displaync = ' 弓箭手 '
-elif displaync == 'Knight':
-    displaync = ' 騎士 '
-elif displaync == 'Magician':
-    displaync = ' 魔法師 '
-elif displaync == 'Assassin':
-    displaync = ' 刺客 '
-
-
 class MainWindow_cc(QtWidgets.QWidget):
     def __init__(self):
         super(MainWindow_cc, self).__init__()
@@ -88,10 +73,20 @@ class MainWindow_cc(QtWidgets.QWidget):
         self.ui.cc4.clicked.connect(self.chooseAssassin)
         self.ui.play.clicked.connect(self.play)
 
-        self.Archer="您將以 弓箭手 進行遊戲"
-        self.Knight="您將以 騎士 進行遊戲"
-        self.Magician="您將以 魔法師 進行遊戲"
-        self.Assassin="您將以 刺客 進行遊戲"
+        self.Archer="You will play 'Archer' in game."
+        self.Knight="You will play 'Knight' in game."
+        self.Magician="You will play 'Magician' in game."
+        self.Assassin="You will play 'Assassin' in game."
+
+        if return_lang == "zh-hant":
+            from cc_main_localization import set_hant
+            set_hant(self)
+        elif return_lang == "zh-hans":
+            from cc_main_localization import set_hans
+            set_hans(self)
+        elif return_lang == "ja":
+            from cc_main_localization import set_ja
+            set_ja(self)
 
         with open('choose.json','r')as f:
             config=json.load(f)
@@ -104,16 +99,6 @@ class MainWindow_cc(QtWidgets.QWidget):
             self.ui.now_choose.setText(self.Magician)
         elif self.a == 'Assassin':
             self.ui.now_choose.setText(self.Assassin)
-
-        if return_lang == "zh-hant":
-            from cc_main_localization import set_hant
-            set_hant(self)
-        elif return_lang == "zh-hans":
-            from cc_main_localization import set_hans
-            set_hans(self)
-        elif return_lang == "ja":
-            from cc_main_localization import set_ja
-            set_ja(self)
         
     def chooseArcher(self):
         self._extracted_from_chooseAssassin_2('Archer', self.Archer)
