@@ -23,7 +23,6 @@ def set_hans(self):
     self.ui.Knight.setText("骑士")
     self.ui.Magician.setText("法师")
     self.ui.Assassin.setText("刺客")
-    self.ui.now_choose.setText("您将以"+displaync+"進行游戏")
     self.Archer="您将以 弓箭手 進行游戏"
     self.Knight="您将以 骑士 進行游戏"
     self.Magician="您将以 法师 進行游戏"
@@ -39,7 +38,6 @@ def set_ja(self):
     self.ui.Knight.setText("ナイト")
     self.ui.Magician.setText("魔法使い")
     self.ui.Assassin.setText("アサシン")
-    self.ui.now_choose.setText("您將以"+displaync+"進行遊戲")
     self.Archer="あなたは弓矢手を選んでいます"
     self.Knight="あなたはナイトを選んでいます"
     self.Magician="あなたは魔法使いを選んでいます"

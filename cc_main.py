@@ -8,11 +8,7 @@ from PySide2.QtWidgets import *
 
 from choose_character import Ui_Form
 
-def json_dump():
-    with open('choose.json','w')as f:
-        data={"choose": nowchoose}
-        json.dump(data,f,indent=4)
-        
+
 def json_reset():
     with open("choose.json","w") as f:
         data={"choose": "Archer"}
