@@ -160,17 +160,8 @@ class MainWindow(QtWidgets.QMainWindow):
         print(f"[INFO] Preffer resolution is {config['preferresolution']}")
 
         # localization
-
-        if return_lang == "zh-hant":
-            from launcher_localization import set_hant
-            set_hant(self)
-        elif return_lang == "zh-hans":
-            from launcher_localization import set_hans
-            set_hans(self)
-        elif return_lang == "ja":
-            from launcher_localization import set_ja
-            set_ja(self)
-
+        from launcher_localization import lang_module
+        lang_module(self, return_lang)
         # setting up environment
 
         if config["windowed"] == True:

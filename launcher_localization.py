@@ -30,3 +30,11 @@ def set_ja(self):
     self.ui.Music_Off.setText("オフ")
     self.ui.Button_Reset.setText("リセット")
     self.ui.Button_Save.setText("セーブ")
+
+def lang_module(self, lang):
+    if lang == 'zh-hant':
+        set_hant(self)
+    elif lang == 'zh-hans':
+        set_hans(self)
+    elif lang == 'ja':
+        set_ja(self)
