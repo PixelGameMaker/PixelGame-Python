@@ -1,7 +1,7 @@
 import json
 import os
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtWidgets
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
@@ -31,6 +31,38 @@ except:
     print("[WARN] Creating new choose.json.")
     json_reset()
 
+def check_lang():
+    # use module locale to check system language
+    try:
+        with open("config.json", "r") as f:
+            lang_config = json.load(f)
+            lang = lang_config["lang"]
+            print(f"[INFO] Language in config is {lang}")
+            print("[INFO] Skipping system language detection")
+            return lang
+    except:
+        import locale
+        syslang = locale.getdefaultlocale()[0].lower()
+        if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
+            print("[INFO] System language is Chinese Traditional")
+            del locale
+            return "zh-hant"
+        elif syslang in ["zh_cn", "zh_sg", "zh-my", "zh_hans"]:
+            print("[INFO] System language is Chinese Simplified")
+            del locale
+            return "zh-hans"
+        elif syslang in ["ja_jp", "ja"]:
+            print("[INFO] System language is Japanese")
+            del locale
+            return "ja"
+        else:
+            print("[INFO] System language current is not support, set to English")
+            del locale
+            return "en"
+
+return_lang = check_lang()
+
+
 with open('choose.json','r')as f:
     config=json.load(f)
 nowchoose='Archer'
@@ -50,24 +82,50 @@ class MainWindow_cc(QtWidgets.QWidget):
         super(MainWindow_cc, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        self.ui.now_choose.setText("您將以"+displaync+"進行遊戲")
         self.ui.cc1.clicked.connect(self.chooseArcher)
         self.ui.cc2.clicked.connect(self.chooseKnight)
         self.ui.cc3.clicked.connect(self.chooseMagician)
         self.ui.cc4.clicked.connect(self.chooseAssassin)
         self.ui.play.clicked.connect(self.play)
 
+        self.Archer="您將以 弓箭手 進行遊戲"
+        self.Knight="您將以 騎士 進行遊戲"
+        self.Magician="您將以 魔法師 進行遊戲"
+        self.Assassin="您將以 刺客 進行遊戲"
+
+        with open('choose.json','r')as f:
+            config=json.load(f)
+        self.a= config['choose']
+        if self.a == 'Archer':
+            self.ui.now_choose.setText(self.Archer)
+        elif self.a == 'Knight':
+            self.ui.now_choose.setText(self.Knight)
+        elif self.a == 'Magician':
+            self.ui.now_choose.setText(self.Magician)
+        elif self.a == 'Assassin':
+            self.ui.now_choose.setText(self.Assassin)
+
+        if return_lang == "zh-hant":
+            from cc_main_localization import set_hant
+            set_hant(self)
+        elif return_lang == "zh-hans":
+            from cc_main_localization import set_hans
+            set_hans(self)
+        elif return_lang == "ja":
+            from cc_main_localization import set_ja
+            set_ja(self)
+        
     def chooseArcher(self):
-        self._extracted_from_chooseAssassin_2('Archer', "您將以 弓箭手 進行遊戲")
+        self._extracted_from_chooseAssassin_2('Archer', self.Archer)
 
     def chooseKnight(self):
-        self._extracted_from_chooseAssassin_2('Knight', "您將以 騎士 進行遊戲")
+        self._extracted_from_chooseAssassin_2('Knight', self.Knight)
 
     def chooseMagician(self):
-        self._extracted_from_chooseAssassin_2('Magician', "您將以 魔法師 進行遊戲")
+        self._extracted_from_chooseAssassin_2('Magician', self.Magician)
 
     def chooseAssassin(self):
-        self._extracted_from_chooseAssassin_2('Assassin', "您將以 刺客 進行遊戲")
+        self._extracted_from_chooseAssassin_2('Assassin', self.Assassin)
 
     # TODO Rename this here and in `chooseArcher`, `chooseKnight`, `chooseMagician` and `chooseAssassin`
     def _extracted_from_chooseAssassin_2(self, arg0, arg1):
