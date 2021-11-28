@@ -206,12 +206,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Music_Off.setChecked(False)
         width, height = pyautogui.size()
         screensize = (f"{width} x {height}")
-        #self.ui.Resolution_Settings.addItems("Reseting...")
-        #self.ui.Resolution_Settings.setCurrentText("Reseting...")
         self.ui.Resolution_Settings.clear()
         self.ui.Resolution_Settings.addItems(config["resolution"])
         self.ui.Resolution_Settings.setCurrentText(screensize)
-        #self.ui.Resolution_Settings.removeItems("Reseting...")
         self.ui.FPS_Settings.setValue(60)
 
     def json_save(self):
