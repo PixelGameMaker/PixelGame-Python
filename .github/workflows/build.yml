@@ -1,6 +1,8 @@
 name: PyInstaller
 
-on: [push]
+on: 
+  release:
+    types: [published]
 
 jobs:
   build:
