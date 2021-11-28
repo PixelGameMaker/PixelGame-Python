@@ -36,7 +36,9 @@ def character_surf_initialize():
                      }
     bullet_images = {'normal_bullet' : 'assets/image/bullet/normal_bullet.png',
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
-                     'arrow'         : 'assets/image/bullet/arrow.png'}
+                     'arrow'         : 'assets/image/bullet/arrow.png',
+                     'wave'          : 'assets/image/bullet/wave.png',
+                     'magic_particle': 'assets/image/bullet/magic_partical.png'}
     
     size = (int(SCREEN_WIDTH / 33),
             int(SCREEN_WIDTH / 22))
@@ -315,8 +317,8 @@ class Bullet(pygame.sprite.Sprite):
         for key, value in detail.items():
             setattr(self, key, value)
         
-        self.size = (int(displayInfo.current_h * self.size *10),
-                     int(displayInfo.current_h * self.size *10))
+        self.size = (int(displayInfo.current_h * self.size *2.5),
+                     int(displayInfo.current_h * self.size *2.5))
             
         self.surf = bullet_surf[self.kind].copy()
         self.surf = update_bullet_image_direction(self.surf, self.direction)
