@@ -78,7 +78,20 @@ class MainWindow_cc(QtWidgets.QWidget):
         self.ui.now_choose.setText(arg1)
 
     def play(self):
-        pass
+        # start game
+        try:
+            print('start game now')
+            exec(open("main.py").read())
+        except FileNotFoundError:
+            print("[ERROR] main.py not found. Are you release?")
+            try:
+                import subprocess
+                subprocess.call(["main.exe"])
+            except FileNotFoundError:
+                print("[ERROR] No game file found. Please retry download.")
+        finally:
+            self.showNormal()
+        
 
 if __name__ == "__main__":
     import sys
