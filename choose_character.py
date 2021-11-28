@@ -120,20 +120,20 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "選擇角色"))
+        Form.setWindowTitle(_translate("Form", "Choose character"))
         #self.c1.setText(_translate("Form", "TextLabel"))
         #self.c2.setText(_translate("Form", "TextLabel"))
-        self.cc1.setText(_translate("Form", "選這個"))
-        self.cc2.setText(_translate("Form", "選這個"))
-        self.play.setText(_translate("Form", "開始遊戲"))
+        self.cc1.setText(_translate("Form", "Choose this"))
+        self.cc2.setText(_translate("Form", "Choose this"))
+        self.play.setText(_translate("Form", "Play"))
         #self.c3.setText(_translate("Form", "TextLabel"))
         #self.c4.setText(_translate("Form", "TextLabel"))
-        self.cc3.setText(_translate("Form", "選這個"))
-        self.cc4.setText(_translate("Form", "選這個"))
-        self.Archer.setText(_translate("Form", "弓箭手"))
-        self.Knight.setText(_translate("Form", "騎士"))
-        self.Magician.setText(_translate("Form", "魔法師"))
-        self.Assassin.setText(_translate("Form", "刺客"))
+        self.cc3.setText(_translate("Form", "Choose this"))
+        self.cc4.setText(_translate("Form", "Choose this"))
+        self.Archer.setText(_translate("Form", "Archere"))
+        self.Knight.setText(_translate("Form", "Knight"))
+        self.Magician.setText(_translate("Form", "Magician"))
+        self.Assassin.setText(_translate("Form", "Assassin"))
         #self.now_choose.setText(_translate("Form", "TextLabel"))
 
 if __name__ == "__main__":
