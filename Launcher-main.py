@@ -6,7 +6,9 @@ from os.path import expanduser
 
 import pyautogui
 
-from PySide2 import QtWidgets
+from PySide2 import QtWidgets, QtCore
+from PySide2.QtCore import QProcess
+
 
 from Ui_Launcher import Ui_Main_Window
 
@@ -192,6 +194,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Button_Save.clicked.connect(self.json_save)
         self.ui.Button_Reset.clicked.connect(self.json_reset)
 
+        
+
     def json_reset(self):
         '''
         with open("config.json", "r") as f:
@@ -239,13 +243,34 @@ class MainWindow(QtWidgets.QMainWindow):
             data = json.load(f)
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
+        def Run_cc_py(self,ProcName):
+            self.p = QProcess()
+            self.p.start("python",[ProcName])
+            print("[INFO] Play Button clicked, please select character to play")
+            #self.p.finished().connect(Show_Normal)
+    
+        '''
         try:
-            import subprocess
-            subprocess.call(["cc_main.exe"])
-        except FileNotFoundError:
-            print("[ERROR] cc_main.exe not found. What's happening here?")
+            Run_cc_py(self,'cc_main.py')
+            self.showMinimized()
+            time.sleep(3)
+        except:
+            print("[ERROR] cc_main.py not found. What's happening here?")
+            try:
+                import subprocess
+                subprocess.call('cc_main.exe')
+            except:
+                print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
+        
         finally:
-            print("[INFO] Game closed, but I'm a idiot so I don't know how to wake up the window")
+            #self.showNormal()
+            print("[INFO] Play Button clicked, please select character to play")
+        '''
+        Run_cc_py(self,'cc_main.py')
+        '''
+        def Show_Normal(self):
+            self.showNormal()
+        '''
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
