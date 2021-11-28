@@ -239,21 +239,13 @@ class MainWindow(QtWidgets.QMainWindow):
             data = json.load(f)
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
-        # start game
-        # os.system("clear")
-        #import pygame.locals
         try:
-            exec(open("main.py").read())
+            import subprocess
+            subprocess.call(["cc_main.exe"])
         except FileNotFoundError:
-            print("[ERROR] main.py not found. Are you release?")
-            try:
-                import subprocess
-                subprocess.call(["main.exe"])
-            except FileNotFoundError:
-                print("[ERROR] No game file found. Please retry download.")
+            print("[ERROR] cc_main.exe not found. What's happening here?")
         finally:
-            self.showNormal()
-
+            print("[INFO] Game closed, but I'm a idiot so I don't know how to wake up the window")
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
