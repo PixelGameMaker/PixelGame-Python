@@ -21,7 +21,7 @@
         "kind": "arrow",
         "frequency": 0.7,
         "knockback": 10.0,
-        "range": 2
+        "range": 1200
     },
     "dagger": {
         "damage": 50,
