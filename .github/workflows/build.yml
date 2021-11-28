@@ -20,7 +20,8 @@ jobs:
     - run: which python
     - run: conda install -c conda-forge PySide2 pyautogui pyinstaller --yes
     - run: conda install -c delichon pygame --yes
-    - run: mkdir builds && cd builds
+    - run: mkdir builds
+    - run: cd builds
     - run: pyinstaller -F ../Launcher-main.py
     - run: pyinstaller -F ../cc_main.py
     - run: pyinstaller -F ../main.py
