@@ -47,7 +47,7 @@ def check_lang():
             print("[INFO] System language is Chinese Traditional")
             del locale
             return "zh-hant"
-        elif syslang in ["zh_cn", "zh_sg", "zh-my", "zh_hans"]:
+        elif syslang in ["zh_cn", "zh_sg", "zh_my", "zh_hans"]:
             print("[INFO] System language is Chinese Simplified")
             del locale
             return "zh-hans"
