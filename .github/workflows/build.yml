@@ -31,4 +31,4 @@ jobs:
         path: |
           ./dist
           ./assets
-          "./Launcher Asset"
+          ./Launcher Asset
