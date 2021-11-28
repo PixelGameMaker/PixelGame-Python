@@ -120,7 +120,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Choose character"))
+        Form.setWindowTitle(_translate("Form", "Class Select"))
         #self.c1.setText(_translate("Form", "TextLabel"))
         #self.c2.setText(_translate("Form", "TextLabel"))
         self.cc1.setText(_translate("Form", "Choose this"))
