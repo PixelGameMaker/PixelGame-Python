@@ -117,6 +117,7 @@ class MainWindow_cc(QtWidgets.QWidget):
         self.ui.now_choose.setText(arg1)
 
     def play(self):
+        self.showMinimized()
         # start game
         try:
             print('start game now')
