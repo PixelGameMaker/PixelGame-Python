@@ -1,0 +1,14 @@
+{
+    "Archer": {
+        "health": 100,
+        "speed": 3,
+        "att_range": 500,
+        "weapon": "bow"
+    },
+    "Knight": {
+        "health": 200,
+        "speed": 7,
+        "att_range": 100,
+        "weapon": "sword"
+    }
+}
