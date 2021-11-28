@@ -93,11 +93,21 @@ class MainWindow_cc(QtWidgets.QWidget):
         self.Magician="您將以 魔法師 進行遊戲"
         self.Assassin="您將以 刺客 進行遊戲"
 
+        with open('choose.json','r')as f:
+            config=json.load(f)
+        self.a= config['choose']
+        if self.a == 'Archer':
+            self.ui.now_choose.setText(self.Archer)
+        elif self.a == 'Knight':
+            self.ui.now_choose.setText(self.Knight)
+        elif self.a == 'Magician':
+            self.ui.now_choose.setText(self.Magician)
+        elif self.a == 'Assassin':
+            self.ui.now_choose.setText(self.Assassin)
 
         if return_lang == "zh-hant":
             from cc_main_localization import set_hant
             set_hant(self)
-            self.ui.now_choose.setText("您將以"+displaync+"進行遊戲")
         elif return_lang == "zh-hans":
             from cc_main_localization import set_hans
             set_hans(self)
