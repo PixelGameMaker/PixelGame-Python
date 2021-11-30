@@ -53,9 +53,8 @@ def json_dump():
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
         if width > 1920 and height > 1080:
-            with open("config.json", "w") as f:
-                json.dump({"resolution": [screensize, "1920 x 1080", "1280 x 720"],
-                          "preferresolution": screensize, "music": True, "windowed": False, "fps": 60}, f, indent=4)
+            json.dump({"resolution": [screensize, "1920 x 1080", "1280 x 720"],
+                       "preferresolution": screensize, "music": True, "windowed": False, "fps": 60}, f, indent=4)
         else:
             json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
                       "music": True, "windowed": False, "fps": 60}, f, indent=4)
