@@ -56,7 +56,7 @@ class Ui_Form(object):
         self.play = QPushButton(Form)
         self.play.setGeometry(QRect(490, 400, 221, 91))
         font = QFont()
-        font.setPointSize(35)
+        font.setPointSize(25)
         self.play.setFont(font)
         self.play.setObjectName("play")
         self.gridLayoutWidget_2 = QWidget(Form)

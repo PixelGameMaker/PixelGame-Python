@@ -142,9 +142,16 @@ def json_save(self):
     # get fps from spin box
     fps = self.ui.FPS_Settings.value()
     # write to config.json
+    with open("config.json", "r") as f:
+        a = json.load(f)
     with open("config.json", "w") as f:
         # add dict
-        data = {"resolution": config['resolution'], "preferresolution": preferresolution,
+        try:
+            json_lang = a['lang']
+            data = {"resolution": a['resolution'], "preferresolution": preferresolution,
+                "music": music, "windowed": windowed, "fps": fps, "lang": json_lang}
+        except:    
+            data = {"resolution": a['resolution'], "preferresolution": preferresolution,
                 "music": music, "windowed": windowed, "fps": fps}
         json.dump(data, f, indent=4)
 
@@ -154,7 +161,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_Main_Window()
         self.ui.setupUi(self)
-        # setup font (Test)
+        # setup font
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])

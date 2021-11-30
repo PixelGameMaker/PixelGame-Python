@@ -34,7 +34,7 @@ class Ui_Main_Window(object):
         self.Button_Play.setGeometry(QRect(510, 390, 201, 101))
         font1 = QFont()
         font1.setFamily(u"Unifont")
-        font1.setPointSize(35)
+        font1.setPointSize(25)
         font1.setKerning(True)
         self.Button_Play.setFont(font1)
         self.Button_Play.setCheckable(False)

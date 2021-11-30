@@ -3,7 +3,7 @@ import os
 
 from PySide2 import QtWidgets
 from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtGui import QFontDatabase
 from PySide2.QtWidgets import *
 
 from choose_character import Ui_Form
@@ -63,6 +63,7 @@ class MainWindow_cc(QtWidgets.QWidget):
         super(MainWindow_cc, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         self.ui.cc1.clicked.connect(self.chooseArcher)
         self.ui.cc2.clicked.connect(self.chooseKnight)
         self.ui.cc3.clicked.connect(self.chooseMagician)

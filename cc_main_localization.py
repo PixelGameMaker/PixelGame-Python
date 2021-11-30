@@ -29,16 +29,16 @@ def set_hans(self):
     self.Assassin="您将以 刺客 進行游戏"
     
 def set_ja(self):
-    self.ui.cc1.setText("これを選ぶ")
-    self.ui.cc2.setText("これを選ぶ")
-    self.ui.play.setText("ゲームを開始")
-    self.ui.cc3.setText("これを選ぶ")
-    self.ui.cc4.setText("これを選ぶ")
-    self.ui.Archer.setText("弓矢手")
+    self.ui.cc1.setText("アーチャを選ぶ")
+    self.ui.cc2.setText("ナイトを選ぶ")
+    self.ui.play.setText("ゲームを\n開始します")
+    self.ui.cc3.setText("マジシャンを選ぶ")
+    self.ui.cc4.setText("アサシンを選ぶ")
+    self.ui.Archer.setText("アーチャ")
     self.ui.Knight.setText("ナイト")
-    self.ui.Magician.setText("魔法使い")
+    self.ui.Magician.setText("マジシャン")
     self.ui.Assassin.setText("アサシン")
-    self.Archer="あなたは弓矢手を選んでいます"
+    self.Archer="あなたはアーチャを選んでいます"
     self.Knight="あなたはナイトを選んでいます"
-    self.Magician="あなたは魔法使いを選んでいます"
+    self.Magician="あなたはマジシャンを選んでいます"
     self.Assassin="あなたはアサシンを選んでいます"
