@@ -50,7 +50,8 @@ class gameEnv():
         pygame.font.init()
         self.font  = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
         self.music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
-        self.fps = int(data['fps'])
+        #self.fps = int(data['fps'])
+        self.fps = 60
         
         character_surf_initialize()
         background_surf_init()
