@@ -52,15 +52,14 @@ def json_dump():
     print(f"[INFO] Your screen size is {screensize}")
     with open("config.json", "w") as f:
         # add resolution, music, windowed to json
-        json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
-                  "music": True, "windowed": False, "fps": 60}, f, indent=4)
-        # add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
-            with open("config.json", "r+") as f:
-                data = json.load(f)
-                data["resolution"].append("1920 x 1080")
-                data["resolution"].append("2560 x 1440")
-                json.dump(data, f)
+            with open("config.json", "w") as f:
+                json.dump({"resolution": [screensize, "1920 x 1080", "1280 x 720"],
+                          "preferresolution": screensize, "music": True, "windowed": False, "fps": 60}, f, indent=4)
+        else:
+            json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
+                      "music": True, "windowed": False, "fps": 60}, f, indent=4)
+        # add resolution 2k and 4k if screensize over 1920 x 1080
 
 
 if not os.path.isfile("config.json"):
@@ -149,10 +148,10 @@ def json_save(self):
         try:
             json_lang = a['lang']
             data = {"resolution": a['resolution'], "preferresolution": preferresolution,
-                "music": music, "windowed": windowed, "fps": fps, "lang": json_lang}
-        except:    
+                    "music": music, "windowed": windowed, "fps": fps, "lang": json_lang}
+        except:
             data = {"resolution": a['resolution'], "preferresolution": preferresolution,
-                "music": music, "windowed": windowed, "fps": fps}
+                    "music": music, "windowed": windowed, "fps": fps}
         json.dump(data, f, indent=4)
 
 
@@ -195,8 +194,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Button_Save.clicked.connect(self.json_save)
         self.ui.Button_Reset.clicked.connect(self.json_reset)
 
-        
-
     def json_reset(self):
         json_dump()
         print("[INFO] Reset config.json")
@@ -237,25 +234,30 @@ class MainWindow(QtWidgets.QMainWindow):
             data = json.load(f)
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
-        def Run_cc(self,method,ProcName):
+
+        def Run_cc(self, method, ProcName):
             self.p = QProcess()
-            self.p.start(method,[ProcName])
+            self.p.start(method, [ProcName])
             print("[INFO] Play Button clicked, please select character to play")
-        def Run_cc2(self,ProcName):
+
+        def Run_cc2(self, ProcName):
             self.p = QProcess()
             self.p.start(ProcName)
         try:
             open("cc_main.py", "r")
-            Run_cc(self, "python",'cc_main.py')
+            Run_cc(self, "python", 'cc_main.py')
         except:
-            print("[ERROR] cc_main.py not found. Hope there is no bugs in the release version")
+            print(
+                "[ERROR] cc_main.py not found. Hope there is no bugs in the release version")
             try:
                 open("cc_main.exe", "r")
                 Run_cc2(self, 'cc_main.exe')
             except:
-                print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
+                print(
+                    "[ERROR] cc_main.exe not found. I suggest you re-download game file")
                 import webbrowser
-                webbrowser.open('https://www.github.com/cytsai1008/PixelRPG-Python',new=0, autoraise=True)
+                webbrowser.open(
+                    'https://www.github.com/cytsai1008/PixelRPG-Python', new=0, autoraise=True)
                 del webbrowser
 
 
