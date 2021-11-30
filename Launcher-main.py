@@ -8,6 +8,7 @@ import pyautogui
 
 from PySide2 import QtWidgets, QtCore
 from PySide2.QtCore import QProcess
+from PySide2.QtGui import QFontDatabase
 
 
 from Ui_Launcher import Ui_Main_Window
@@ -153,6 +154,8 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_Main_Window()
         self.ui.setupUi(self)
+        # setup font (Test)
+        QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
