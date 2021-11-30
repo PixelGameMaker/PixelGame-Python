@@ -56,7 +56,7 @@ def json_dump():
                   "music": True, "windowed": False, "fps": 60}, f, indent=4)
         # add resolution 2k and 4k if screensize over 1920 x 1080
         if width > 1920 and height > 1080:
-            with open("config.json", "r") as f:
+            with open("config.json", "r+") as f:
                 data = json.load(f)
                 data["resolution"].append("1920 x 1080")
                 data["resolution"].append("2560 x 1440")
