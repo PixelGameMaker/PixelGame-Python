@@ -2,9 +2,7 @@ import json
 import os
 
 from PySide2 import QtWidgets
-from PySide2.QtCore import *
 from PySide2.QtGui import QFontDatabase
-from PySide2.QtWidgets import *
 
 from choose_character import Ui_Form
 

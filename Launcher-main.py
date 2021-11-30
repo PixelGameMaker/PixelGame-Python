@@ -6,7 +6,7 @@ from os.path import expanduser
 
 import pyautogui
 
-from PySide2 import QtWidgets, QtCore
+from PySide2 import QtWidgets
 from PySide2.QtCore import QProcess
 from PySide2.QtGui import QFontDatabase
 
