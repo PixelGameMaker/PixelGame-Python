@@ -355,6 +355,7 @@ class gameEnv():
             
             self.clock.tick(self.fps)
             pygame.display.flip()
+            pygame.event.pump()
             
     def gameSettings(self, lvl, data):
         for i in range(lvl *1):
