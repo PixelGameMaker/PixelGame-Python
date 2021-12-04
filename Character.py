@@ -20,21 +20,41 @@ def character_surf_initialize():
     screensize = data['preferresolution']
     SCREEN_WIDTH = screensize[0:screensize.index('x')-1]
     SCREEN_WIDTH = int(SCREEN_WIDTH)   
+
+    with open('choose.json') as c:
+        config = json.load(c)
+    choose_chara=config['choose']
     
     global player_surf, enemy_surf, bullet_surf
     player_surf = {}
     enemy_surf = {}
     bullet_surf = {}
     
-    player_images = {'standing' : 'assets/image/player/standf.png',
-                     'walking_1': 'assets/image/player/walkingf_1.png',
-                     'walking_2': 'assets/image/player/walkingf_2.png'
-                     }
+    if str(choose_chara) == 'Archer':
+        player_images = {'standing' : 'assets/image/player/Archer/standf.png',
+                         'walking_1': 'assets/image/player/Archer/walkingf_1.png',
+                         'walking_2': 'assets/image/player/Archer/walkingf_2.png'
+                        }
+    elif str(choose_chara) == 'Knight':
+        player_images = {'standing' : 'assets/image/player/Knight/standf.png',
+                         'walking_1': 'assets/image/player/Knight/walkingf_1.png',
+                         'walking_2': 'assets/image/player/Knight/walkingf_2.png'
+                        }
+    elif str(choose_chara) == 'Magician':
+        player_images = {'standing' : 'assets/image/player/Archer/standf.png',
+                         'walking_1': 'assets/image/player/Archer/walkingf_1.png',
+                         'walking_2': 'assets/image/player/Archer/walkingf_2.png'
+                        }
+    elif str(choose_chara) == 'Assassin':
+        player_images = {'standing' : 'assets/image/player/Archer/standf.png',
+                         'walking_1': 'assets/image/player/Archer/walkingf_1.png',
+                         'walking_2': 'assets/image/player/Archer/walkingf_2.png'
+                        }
     enemy_images  = {'standing' : 'assets/image/enemy/standing.png',
                      'walking_1': 'assets/image/enemy/walking_1.png',
                      'walking_2': 'assets/image/enemy/walking_2.png'
                      }
-    bullet_images = {'normal_bullet' : 'assets/image/bullet/normal_bullet.png',
+    bullet_images = {'normal_bullet' : 'assets/image/bullet/normal_bullet.png', 
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
                      'arrow'         : 'assets/image/bullet/arrow.png',
                      'wave'          : 'assets/image/bullet/wave.png',
