@@ -14,14 +14,14 @@ import math
 pygame.init()
 
 def character_surf_initialize():
-    with open('config.json') as f:
+    with open('Json/config.json') as f:
         data=json.load(f)
     displayInfo = pygame.display.Info()
     screensize = data['preferresolution']
     SCREEN_WIDTH = screensize[0:screensize.index('x')-1]
     SCREEN_WIDTH = int(SCREEN_WIDTH)   
 
-    with open('choose.json') as c:
+    with open('Json/choose.json') as c:
         config = json.load(c)
     choose_chara=config['choose']
     

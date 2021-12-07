@@ -50,7 +50,7 @@ def json_dump():
     width, height = pyautogui.size()
     screensize = (f"{width} x {height}")
     print(f"[INFO] Your screen size is {screensize}")
-    with open("config.json", "w") as f:
+    with open("Json/config.json", "w") as f:
         # add resolution, music, windowed to json
         if width > 1920 and height > 1080:
             json.dump({"resolution": [screensize, "1920 x 1080", "1280 x 720"],
@@ -61,7 +61,7 @@ def json_dump():
         # add resolution 2k and 4k if screensize over 1920 x 1080
 
 
-if not os.path.isfile("config.json"):
+if not os.path.isfile("Json/config.json"):
     print("[WARN] config.json not found.")
     print("[WARN] Creating new config.json.")
     # read screen biggest resolution
@@ -69,7 +69,7 @@ if not os.path.isfile("config.json"):
 
 # try json file is readable
 try:
-    with open("config.json", "r") as f:
+    with open("Json/config.json", "r") as f:
         config = json.load(f)
         resolution = config["resolution"]
         preferresolution = config["preferresolution"]
@@ -83,7 +83,7 @@ except:
     # read screen biggest resolution
     json_dump()
 finally:
-    with open("config.json", "r") as f:
+    with open("Json/config.json", "r") as f:
         config = json.load(f)
     print(f"[INFO] The resolution in config is {config['resolution']}")
     print(f"[INFO] The music in config is {config['music']}")
@@ -99,7 +99,7 @@ finally:
 def check_lang():
     # use module locale to check system language
     try:
-        with open("config.json", "r") as f:
+        with open("Json/config.json", "r") as f:
             lang_config = json.load(f)
             lang = lang_config["lang"]
             print(f"[INFO] Language in config is {lang}")
@@ -140,9 +140,9 @@ def json_save(self):
     # get fps from spin box
     fps = self.ui.FPS_Settings.value()
     # write to config.json
-    with open("config.json", "r") as f:
+    with open("Json/config.json", "r") as f:
         a = json.load(f)
-    with open("config.json", "w") as f:
+    with open("Json/config.json", "w") as f:
         # add dict
         try:
             json_lang = a['lang']
@@ -196,7 +196,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def json_reset(self):
         json_dump()
         print("[INFO] Reset config.json")
-        with open("config.json", "r") as f:
+        with open("Json/config.json", "r") as f:
             config = json.load(f)
         self.ui.Windowed_Settings.setChecked(False)
         self.ui.Music_On.setChecked(True)
@@ -218,7 +218,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # get fps from spin box
         fps = self.ui.FPS_Settings.value()
         # write to config.json
-        with open("config.json", "w") as f:
+        with open("Json/config.json", "w") as f:
             # add dict
             data = {"resolution": config['resolution'], "preferresolution": preferresolution,
                     "music": music, "windowed": windowed, "fps": fps}
@@ -229,7 +229,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print("[INFO] Starting game and saving settings data")
         self.showMinimized()
         json_save(self)
-        with open("config.json", "r") as f:
+        with open("Json/config.json", "r") as f:
             data = json.load(f)
         print(
             f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
