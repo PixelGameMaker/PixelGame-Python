@@ -8,7 +8,7 @@ Created on Tue Oct 26 21:09:02 2021
 import game_loop
 import json
 
-with open('choose.json','r')as f:
+with open('Json/choose.json','r')as f:
     choose=json.load(f)
     config = {'profession': str(choose['choose'])}
 

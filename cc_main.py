@@ -8,17 +8,17 @@ from choose_character import Ui_Form
 
 
 def json_reset():
-    with open("choose.json","w") as f:
+    with open("Json/choose.json","w") as f:
         data={"choose": "Archer"}
         json.dump(data,f,indent=4)
 
-if not os.path.isfile("choose.json"):
+if not os.path.isfile("Json/choose.json"):
     print("[WARN] choose.json not found.")
     print("[WARN] Creating new choose.json.")
     json_reset()
         
 try:
-    with open("choose.json","r") as f:
+    with open("Json/choose.json","r") as f:
         data=json.load(f)
 except:
     print("[WARN] choose.json is broken.")
@@ -28,7 +28,7 @@ except:
 def check_lang():
     # use module locale to check system language
     try:
-        with open("config.json", "r") as f:
+        with open("Json/choose.json", "r") as f:
             lang_config = json.load(f)
             lang = lang_config["lang"]
             print(f"[INFO] Language in config is {lang}")
@@ -83,7 +83,7 @@ class MainWindow_cc(QtWidgets.QWidget):
             from cc_main_localization import set_ja
             set_ja(self)
 
-        with open('choose.json','r')as f:
+        with open('Json/choose.json','r')as f:
             config=json.load(f)
         self.a= config['choose']
         if self.a == 'Archer':
@@ -110,7 +110,7 @@ class MainWindow_cc(QtWidgets.QWidget):
     # TODO Rename this here and in `chooseArcher`, `chooseKnight`, `chooseMagician` and `chooseAssassin`
     def _extracted_from_chooseAssassin_2(self, arg0, arg1):
         nowchoose = arg0
-        with open('choose.json', 'w') as f:
+        with open('Json/choose.json', 'w') as f:
             data = {'choose': nowchoose}
             json.dump(data, f, indent=4)
         self.ui.now_choose.setText(arg1)

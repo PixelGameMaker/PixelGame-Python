@@ -15,7 +15,7 @@ import time
 import random
 import json
 
-with open('config.json') as f:
+with open('Json/config.json') as f:
     data = json.load(f)
 
 pygame.init()
