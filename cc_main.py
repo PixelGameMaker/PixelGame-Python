@@ -96,19 +96,19 @@ class MainWindow_cc(QtWidgets.QWidget):
             self.ui.now_choose.setText(self.Assassin)
         
     def chooseArcher(self):
-        self._extracted_from_chooseAssassin_2('Archer', self.Archer)
+        self.chooseCharacter('Archer', self.Archer)
 
     def chooseKnight(self):
-        self._extracted_from_chooseAssassin_2('Knight', self.Knight)
+        self.chooseCharacter('Knight', self.Knight)
 
     def chooseMagician(self):
-        self._extracted_from_chooseAssassin_2('Magician', self.Magician)
+        self.chooseCharacter('Magician', self.Magician)
 
     def chooseAssassin(self):
-        self._extracted_from_chooseAssassin_2('Assassin', self.Assassin)
+        self.chooseCharacter('Assassin', self.Assassin)
 
     # TODO Rename this here and in `chooseArcher`, `chooseKnight`, `chooseMagician` and `chooseAssassin`
-    def _extracted_from_chooseAssassin_2(self, arg0, arg1):
+    def chooseCharacter(self, arg0, arg1):
         nowchoose = arg0
         with open('Json/choose.json', 'w') as f:
             data = {'choose': nowchoose}
