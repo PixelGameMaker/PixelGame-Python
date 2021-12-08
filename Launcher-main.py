@@ -236,6 +236,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         def Run_cc(self, method, ProcName):
             self.p = QProcess()
+            self.p.setProcessChannelMode(QProcess.ForwardedChannels)
             self.p.start(method, [ProcName])
             print("[INFO] Play Button clicked, please select character to play")
 
