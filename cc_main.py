@@ -107,7 +107,6 @@ class MainWindow_cc(QtWidgets.QWidget):
     def chooseAssassin(self):
         self.chooseCharacter('Assassin', self.Assassin)
 
-    # TODO Rename this here and in `chooseArcher`, `chooseKnight`, `chooseMagician` and `chooseAssassin`
     def chooseCharacter(self, arg0, arg1):
         nowchoose = arg0
         with open('Json/choose.json', 'w') as f:
