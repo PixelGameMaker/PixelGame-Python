@@ -242,6 +242,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         def Run_cc2(self, ProcName):
             self.p = QProcess()
+            self.p.setProcessChannelMode(QProcess.ForwardedChannels)
             self.p.start(ProcName)
         try:
             open("cc_main.py", "r")
