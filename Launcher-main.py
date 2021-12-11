@@ -3,6 +3,7 @@ import os
 import sys
 import time
 from os.path import expanduser
+import logging
 
 import pyautogui
 
@@ -40,6 +41,12 @@ def CheckWorkDir():
 
 
 CheckWorkDir()
+
+# create Log folder if not exsist
+if not os.path.exists("Log"):
+    os.makedirs("Log")
+
+# TODO: rewirte print to logging
 
 # WORKING DIR CHECK END
 
