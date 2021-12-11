@@ -55,16 +55,34 @@ if not os.path.exists("Log"):
 
 def json_dump():
     width, height = pyautogui.size()
-    screensize = (f"{width} x {height}")
+    screensize = f"{width} x {height}"
     print(f"[INFO] Your screen size is {screensize}")
     with open("Json/config.json", "w") as f:
         # add resolution, music, windowed to json
         if width > 1920 and height > 1080:
-            json.dump({"resolution": [screensize, "1920 x 1080", "1280 x 720"],
-                       "preferresolution": screensize, "music": True, "windowed": False, "fps": 60}, f, indent=4)
+            json.dump(
+                {
+                    "resolution": [screensize, "1920 x 1080", "1280 x 720"],
+                    "preferresolution": screensize,
+                    "music": True,
+                    "windowed": False,
+                    "fps": 60,
+                },
+                f,
+                indent=4,
+            )
         else:
-            json.dump({"resolution": [screensize, "1280 x 720"], "preferresolution": screensize,
-                      "music": True, "windowed": False, "fps": 60}, f, indent=4)
+            json.dump(
+                {
+                    "resolution": [screensize, "1280 x 720"],
+                    "preferresolution": screensize,
+                    "music": True,
+                    "windowed": False,
+                    "fps": 60,
+                },
+                f,
+                indent=4,
+            )
         # add resolution 2k and 4k if screensize over 1920 x 1080
 
 
@@ -96,7 +114,7 @@ finally:
     print(f"[INFO] The music in config is {config['music']}")
     print(f"[INFO] The windowed in config is {config['windowed']}")
     print(f"[INFO] The fps in config is {config['fps']}")
-    print('[INFO] Starting launcher window')
+    print("[INFO] Starting launcher window")
 
 # JSON CHECK END
 
@@ -114,6 +132,7 @@ def check_lang():
             return lang
     except:
         import locale
+
         syslang = locale.getdefaultlocale()[0].lower()
         if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
             print("[INFO] System language is Chinese Traditional")
@@ -152,12 +171,23 @@ def json_save(self):
     with open("Json/config.json", "w") as f:
         # add dict
         try:
-            json_lang = a['lang']
-            data = {"resolution": a['resolution'], "preferresolution": preferresolution,
-                    "music": music, "windowed": windowed, "fps": fps, "lang": json_lang}
+            json_lang = a["lang"]
+            data = {
+                "resolution": a["resolution"],
+                "preferresolution": preferresolution,
+                "music": music,
+                "windowed": windowed,
+                "fps": fps,
+                "lang": json_lang,
+            }
         except:
-            data = {"resolution": a['resolution'], "preferresolution": preferresolution,
-                    "music": music, "windowed": windowed, "fps": fps}
+            data = {
+                "resolution": a["resolution"],
+                "preferresolution": preferresolution,
+                "music": music,
+                "windowed": windowed,
+                "fps": fps,
+            }
         json.dump(data, f, indent=4)
 
 
@@ -176,6 +206,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # localization
         from launcher_localization import lang_module
+
         lang_module(self, return_lang)
         # setting up environment
 
@@ -209,7 +240,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Music_On.setChecked(True)
         self.ui.Music_Off.setChecked(False)
         width, height = pyautogui.size()
-        screensize = (f"{width} x {height}")
+        screensize = f"{width} x {height}"
         self.ui.Resolution_Settings.clear()
         self.ui.Resolution_Settings.addItems(config["resolution"])
         self.ui.Resolution_Settings.setCurrentText(screensize)
@@ -227,8 +258,13 @@ class MainWindow(QtWidgets.QMainWindow):
         # write to config.json
         with open("Json/config.json", "w") as f:
             # add dict
-            data = {"resolution": config['resolution'], "preferresolution": preferresolution,
-                    "music": music, "windowed": windowed, "fps": fps}
+            data = {
+                "resolution": config["resolution"],
+                "preferresolution": preferresolution,
+                "music": music,
+                "windowed": windowed,
+                "fps": fps,
+            }
             json.dump(data, f, indent=4)
         print("[INFO] Save config.json")
 
@@ -239,7 +275,8 @@ class MainWindow(QtWidgets.QMainWindow):
         with open("Json/config.json", "r") as f:
             data = json.load(f)
         print(
-            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n")
+            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n"
+        )
 
         def Run_cc(self, method, ProcName):
             self.p = QProcess()
@@ -251,25 +288,32 @@ class MainWindow(QtWidgets.QMainWindow):
             self.p = QProcess()
             self.p.setProcessChannelMode(QProcess.ForwardedChannels)
             self.p.start(ProcName)
+
         try:
             open("cc_main.py", "r")
-            Run_cc(self, "python", 'cc_main.py')
+            Run_cc(self, "python", "cc_main.py")
         except:
             print(
-                "[ERROR] cc_main.py not found. Hope there is no bugs in the release version")
+                "[ERROR] cc_main.py not found. Hope there is no bugs in the release version"
+            )
             try:
                 open("cc_main.exe", "r")
-                Run_cc2(self, 'cc_main.exe')
+                Run_cc2(self, "cc_main.exe")
             except:
                 print(
-                    "[ERROR] cc_main.exe not found. I suggest you re-download game file")
+                    "[ERROR] cc_main.exe not found. I suggest you re-download game file"
+                )
                 import webbrowser
+
                 webbrowser.open(
-                    'https://www.github.com/cytsai1008/PixelRPG-Python', new=0, autoraise=True)
+                    "https://www.github.com/cytsai1008/PixelRPG-Python",
+                    new=0,
+                    autoraise=True,
+                )
                 del webbrowser
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MainWindow()
     window.show()
