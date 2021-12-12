@@ -365,7 +365,7 @@ class gameEnv():
                       'health' : lvl *data[index]['health'],
                       'speed':lvl *data[index]['speed'],
                       'cd': 1 /lvl,
-                      'stay_range': 300,
+                      'stay_range': data[index]['stay_range'],
                       'att_range': data[index]['att_range']}
             summon_enemy = Enemy(detail)
             self.enemy.add(summon_enemy)
