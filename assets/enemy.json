@@ -3,12 +3,14 @@
         "health": 100,
         "speed": 3,
         "att_range": 500,
-        "weapon": "bow"
+        "weapon": "bow",
+        "stay_range": 300
     },
     "Knight": {
         "health": 200,
         "speed": 7,
-        "att_range": 100,
-        "weapon": "sword"
+        "att_range": 300,
+        "weapon": "sword",
+        "stay_range": 200
     }
 }

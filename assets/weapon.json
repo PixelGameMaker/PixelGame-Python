@@ -9,7 +9,7 @@
         "kind": "magic_partical",
         "frequency": 10.0,
         "knockback": 0,
-        "range": 0.75
+        "range": 1440
     },
     "bow": {
         "damage": 50,
@@ -33,7 +33,7 @@
         "kind": "wave",
         "frequency": 3,
         "knockback": 1.0,
-        "range": 0.05
+        "range": 100
     },
     "sword": {
         "damage": 20,
@@ -41,10 +41,10 @@
         "accuracy": 1,
         "strike": 0,
         "cost": 3,
-        "size": 0.1,
+        "size": 0.05,
         "kind": "wave",
         "frequency": 1.5,
         "knockback": 3.0,
-        "range": 0.2
+        "range": 400
     }
 }
