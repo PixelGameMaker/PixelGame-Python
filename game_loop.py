@@ -38,7 +38,7 @@ class gameEnv():
         
         #self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
         if data['windowed']==True:
-            self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.RESIZABLE)
+            self.screen = pygame.display.set_mode([SCREEN_WIDTH,SCREEN_HEIGHT])
             pygame.display.set_caption(TITLE)
         else:
             self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
