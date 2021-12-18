@@ -216,6 +216,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         lang_module(self, return_lang)
         # setting up environment
+        '''
+        from launcher_style import UiStyle
+        UiStyle(self)
+        '''
 
         if config["windowed"] == True:
             # Always remember to change Ui_Launcher file while re-compiling
@@ -232,6 +236,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.Music_Off.setChecked(True)
 
         self.ui.FPS_Settings.setValue(int(config["fps"]))
+        self.ui.FPS_Settings.setReadOnly(True)
+        self.ui.FPS_Settings.setEnabled(False)
+        self.ui.label_FPS.setEnabled(False)
         # play button click
         self.ui.Button_Play.clicked.connect(self.Play)
         # save button click
