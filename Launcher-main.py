@@ -42,6 +42,7 @@ def CheckWorkDir():
 
 
 CheckWorkDir()
+del expanduser
 
 # create Log folder if not exsist
 if not os.path.exists("Log"):
