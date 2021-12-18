@@ -38,6 +38,7 @@ def CheckWorkDir():
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C dected. Exiting...")
             quit()
+    del CurrentDir, HomeDir
 
 
 CheckWorkDir()
@@ -101,6 +102,7 @@ try:
         music = config["music"]
         windowed = config["windowed"]
         fps = config["fps"]
+    del config
 
 except:
     print("[WARN] config.json corrupt.")
@@ -129,6 +131,7 @@ def check_lang():
             lang = lang_config["lang"]
             print(f"[INFO] Language in config is {lang}")
             print("[INFO] Skipping system language detection")
+            del lang_config
             return lang
     except:
         import locale
@@ -136,20 +139,22 @@ def check_lang():
         syslang = locale.getdefaultlocale()[0].lower()
         if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
             print("[INFO] System language is Chinese Traditional")
-            del locale
             return "zh-hant"
         elif syslang in ["zh_cn", "zh_sg", "zh-my", "zh_hans"]:
             print("[INFO] System language is Chinese Simplified")
-            del locale
             return "zh-hans"
         elif syslang in ["ja_jp", "ja"]:
             print("[INFO] System language is Japanese")
-            del locale
             return "ja"
         else:
             print("[INFO] System language current is not support, set to English")
-            del locale
             return "en"
+    finally:
+        try:
+            del lang
+        except:
+            del locale
+            del syslang
 
 
 return_lang = check_lang()
@@ -189,6 +194,7 @@ def json_save(self):
                 "fps": fps,
             }
         json.dump(data, f, indent=4)
+    del a, data
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -267,6 +273,7 @@ class MainWindow(QtWidgets.QMainWindow):
             }
             json.dump(data, f, indent=4)
         print("[INFO] Save config.json")
+        del preferresolution, windowed, music, fps, data
 
     def Play(self):
         print("[INFO] Starting game and saving settings data")
