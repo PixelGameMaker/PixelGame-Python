@@ -216,10 +216,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         lang_module(self, return_lang)
         # setting up environment
-        '''
-        from launcher_style import UiStyle
-        UiStyle(self)
-        '''
 
         if config["windowed"] == True:
             # Always remember to change Ui_Launcher file while re-compiling
