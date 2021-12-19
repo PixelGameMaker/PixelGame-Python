@@ -22,10 +22,10 @@ def CheckWorkDir():
     HomeDir = HomeDir.lower()
     CurrentDir = os.getcwd()
     CurrentDir = CurrentDir.lower()
-    if CurrentDir in ["c:\\windows\\system32", HomeDir]:
+    if CurrentDir in ["windows\\system32", HomeDir]:
         print("Error, Please change Work Dir.")
         os.system("pause")
-        quit()
+        sys.exit()
 
     if CurrentDir.find("pixelrpg-python") == -1:
         print("[WARN] You are not in PixelRPG-Python Folder.")
@@ -37,7 +37,7 @@ def CheckWorkDir():
                 time.sleep(1)
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C dected. Exiting...")
-            quit()
+            sys.exit()
     del CurrentDir, HomeDir
 
 
