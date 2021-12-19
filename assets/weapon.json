@@ -33,7 +33,7 @@
         "kind": "wave",
         "frequency": 3,
         "knockback": 1.0,
-        "range": 100
+        "range": 300
     },
     "sword": {
         "damage": 20,
@@ -45,6 +45,6 @@
         "kind": "wave",
         "frequency": 1.5,
         "knockback": 3.0,
-        "range": 400
+        "range": 500
     }
 }
