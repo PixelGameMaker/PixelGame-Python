@@ -5,7 +5,12 @@ channels:
   - defaults
 dependencies:
   - altgraph=0.17.2=pyhd8ed1ab_0
+  - black=21.12b0=pyhd8ed1ab_0
   - ca-certificates=2021.10.8=h5b45459_0
+  - click=8.0.1=py36ha15d459_0
+  - colorama=0.4.4=pyh9f0ad1d_0
+  - cython=0.29.24=py36he2d232f_0
+  - dataclasses=0.8=pyh787bdff_2
   - freetype=2.10.4=h546665d_1
   - future=0.18.2=py36ha15d459_3
   - icu=68.2=h0e60522_0
@@ -24,29 +29,37 @@ dependencies:
   - libzlib=1.2.11=h8ffe710_1013
   - lz4-c=1.9.3=h8ffe710_1
   - macholib=1.14=pyh9f0ad1d_1
+  - memory_profiler=0.58.0=py_0
+  - mypy_extensions=0.4.3=py36ha15d459_3
   - olefile=0.46=pyh9f0ad1d_1
   - openjpeg=2.4.0=hb211442_1
   - openssl=1.1.1l=h8ffe710_0
+  - pathspec=0.9.0=pyhd8ed1ab_0
   - pefile=2021.9.3=pyhd8ed1ab_0
   - pillow=8.3.2=py36h10c25d6_0
   - pip=21.3.1=pyhd8ed1ab_0
+  - platformdirs=2.3.0=pyhd8ed1ab_0
+  - psutil=5.8.0=py36h68aa20f_1
   - pyautogui=0.9.53=py36ha15d459_0
   - pygame=1.9.4=py36_0
   - pyinstaller=4.5.1=py36hc69ef3d_0
-  - pyinstaller-hooks-contrib=2021.3=pyhd8ed1ab_0
+  - pyinstaller-hooks-contrib=2021.4=pyhd8ed1ab_0
   - pymsgbox=1.0.9=pyh9f0ad1d_0
   - pyscreeze=0.1.27=pyhd8ed1ab_0
   - pyside2=5.13.2=py36h4827aa2_4
-  - python=3.6.13=h39d44d4_2_cpython
+  - python=3.6.15=h39d44d4_0_cpython
   - python_abi=3.6=2_cp36m
   - pytweening=1.0.3=py_0
   - pywin32=301=py36h68aa20f_0
   - pywin32-ctypes=0.2.0=py36ha15d459_1003
   - qt=5.12.9=h5909a2a_4
+  - regex=2021.9.30=py36h68aa20f_0
   - setuptools=58.0.4=py36ha15d459_2
-  - sqlite=3.36.0=h8ffe710_2
+  - sqlite=3.37.0=h8ffe710_0
   - tk=8.6.11=h8ffe710_1
-  - typing_extensions=4.0.0=pyha770c72_0
+  - tomli=1.2.2=pyhd8ed1ab_0
+  - typed-ast=1.4.3=py36h68aa20f_0
+  - typing_extensions=4.0.1=pyha770c72_0
   - ucrt=10.0.20348.0=h57928b3_0
   - vc=14.2=hb210afc_5
   - vs2015_runtime=14.29.30037=h902a5da_5
@@ -55,3 +68,11 @@ dependencies:
   - zipp=3.6.0=pyhd8ed1ab_0
   - zlib=1.2.11=h8ffe710_1013
   - zstd=1.5.0=h6255e5f_0
+  - pip:
+    - coverage==4.5.4
+    - flake8==3.9.2
+    - mccabe==0.6.1
+    - pycodestyle==2.7.0
+    - pyflakes==2.3.1
+    - pypandoc==1.3.3
+    - unittest-xml-reporting==3.0.4
