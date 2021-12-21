@@ -33,11 +33,11 @@ TITLE = 'lol RPG'
 
 
 
-class gameEnv():
+class gameEnv:
     def __init__(self, config):
         
         #self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
-        if data['windowed']==True:
+        if data['windowed']:
             self.screen = pygame.display.set_mode([SCREEN_WIDTH,SCREEN_HEIGHT])
             pygame.display.set_caption(TITLE)
         else:
@@ -117,7 +117,8 @@ class gameEnv():
     def mainloop(self):
         
         #switch music mute by launcher
-        if data['music']==True:
+        global collided_enemy
+        if data['music']:
             self.music.playMusic()
         else:
             self.music.pauseMusic()
@@ -173,12 +174,12 @@ class gameEnv():
             #wall
             
             self.wall.update(self.player.speed, [direction[0], 0])
-            if pygame.sprite.spritecollide(self.player, self.wall, False) != []:
+            if pygame.sprite.spritecollide(self.player, self.wall, False):
                 self.wall.update(self.player.speed, [-direction[0], 0])
                 direction[0] =0
                 
             self.wall.update(self.player.speed, [0, direction[1]])
-            if pygame.sprite.spritecollide(self.player, self.wall, False) != []:
+            if pygame.sprite.spritecollide(self.player, self.wall, False):
                 self.wall.update(self.player.speed, [0, -direction[1]])
                 direction[1] =0
                 
@@ -271,7 +272,7 @@ class gameEnv():
             
             
             #text
-            self.att = (self.weapon.detail['damage'] * (self.weapon.detail['accuracy'] * (1- self.weapon.detail['strike'])) +\
+            self.att = (self.weapon.detail['damage'] * (self.weapon.detail['accuracy'] * (1- self.weapon.detail['strike'])) +
                         self.weapon.detail['damage'] *  self.weapon.detail['accuracy'] * self.weapon.detail['strike'] * 2 ) *\
                         self.weapon.detail['frequency']
             self.att_text.update('att:' + str(self.att))
@@ -311,7 +312,7 @@ class gameEnv():
                     del entity
                     continue
                 
-                elif pygame.sprite.spritecollide(entity, self.wall, False) != []:
+                elif pygame.sprite.spritecollide(entity, self.wall, False):
                     entity.kill()
                     self.bullet.remove(entity)
                     del entity

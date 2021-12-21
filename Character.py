@@ -25,7 +25,7 @@ def character_surf_initialize():
         config = json.load(c)
     choose_chara=config['choose']
     
-    global player_surf, enemy_surf, bullet_surf
+    global player_surf, enemy_surf, bullet_surf, player_images
     player_surf = {}
     enemy_surf = {}
     bullet_surf = {}

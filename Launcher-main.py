@@ -43,6 +43,7 @@ def CheckWorkDir():
 
 CheckWorkDir()
 del expanduser
+del CheckWorkDir
 
 # create Log folder if not exists
 if not os.path.exists("Log"):
@@ -161,6 +162,7 @@ def check_lang():
 
 
 return_lang = check_lang()
+del check_lang
 
 
 # SYSTEM LANGUAGE CHECK END
@@ -221,13 +223,13 @@ class MainWindow(QtWidgets.QMainWindow):
         lang_module(self, return_lang)
         # setting up environment
 
-        if config["windowed"] == True:
+        if config["windowed"]:
             # Always remember to change Ui_Launcher file while re-compiling
             self.ui.Windowed_Settings.setChecked(True)
         else:
             self.ui.Windowed_Settings.setChecked(False)
 
-        if config["music"] == True:
+        if config["music"]:
             # Always remember to change Ui_Launcher file while re-compiling
             self.ui.Music_On.setChecked(True)
             self.ui.Music_Off.setChecked(False)
@@ -329,7 +331,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = QtWidgets.QApplication()
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
