@@ -11,8 +11,8 @@ from PySide2 import QtWidgets
 from PySide2.QtCore import QProcess
 from PySide2.QtGui import QFontDatabase
 
-
 from Ui_Launcher import Ui_Main_Window
+
 
 # WORKING DIR CHECK START
 
@@ -36,7 +36,7 @@ def CheckWorkDir():
                 print(str(5 - i) + "...")
                 time.sleep(1)
         except KeyboardInterrupt:
-            print("[WARN] Ctrl+C dected. Exiting...")
+            print("[WARN] Ctrl+C detected. Exiting...")
             sys.exit()
     del CurrentDir, HomeDir
 
@@ -44,11 +44,12 @@ def CheckWorkDir():
 CheckWorkDir()
 del expanduser
 
-# create Log folder if not exsist
+# create Log folder if not exists
 if not os.path.exists("Log"):
     os.makedirs("Log")
 
-# TODO: rewirte print to logging
+
+# TODO: rewrite print to logging
 
 # WORKING DIR CHECK END
 
@@ -119,6 +120,7 @@ finally:
     print(f"[INFO] The fps in config is {config['fps']}")
     print("[INFO] Starting launcher window")
 
+
 # JSON CHECK END
 
 # SYSTEM LANGUAGE CHECK START
@@ -159,6 +161,8 @@ def check_lang():
 
 
 return_lang = check_lang()
+
+
 # SYSTEM LANGUAGE CHECK END
 
 
@@ -209,7 +213,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
         self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
-        print(f"[INFO] Preffer resolution is {config['preferresolution']}")
+        print(f"[INFO] Prefer resolution is {config['preferresolution']}")
 
         # localization
         from launcher_localization import lang_module
@@ -286,7 +290,7 @@ class MainWindow(QtWidgets.QMainWindow):
         with open("Json/config.json", "r") as f:
             data = json.load(f)
         print(
-            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowded {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n"
+            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowed {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n"
         )
 
         def Run_cc(self, method, ProcName):
