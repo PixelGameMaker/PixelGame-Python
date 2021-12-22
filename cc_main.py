@@ -7,6 +7,29 @@ from PySide2.QtGui import QFontDatabase
 
 from choose_character import Ui_Form
 
+# PYINSTALLER CHECK START
+
+def CheckPyInstaller():
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        print("[INFO] You are running from PyInstaller packed executable. Hopes there is no bug.")
+        return True
+    else:
+        print("[INFO] You are running from normal Python source code.")
+        return False
+
+# PYINSTALLER CHECK END
+
+
+def open_github_website():
+    print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
+    import webbrowser
+
+    webbrowser.open(
+        "https://www.github.com/cytsai1008/PixelRPG-Python",
+        new=0,
+        autoraise=True,
+    )
+    del webbrowser
 
 def json_reset():
     with open("Json/choose.json", "w") as f:
@@ -122,22 +145,25 @@ class MainWindow_cc(QtWidgets.QWidget):
     def play(self):
         self.showMinimized()
         # start game
-        try:
-            print('start game now')
-            exec(open("main.py").read())
-        except FileNotFoundError:
-            print("[ERROR] main.py not found. Are you release?")
+        print("[INFO] Trying to start the game.")
+        import subprocess
+        if CheckPyInstaller():
+            if os.path.exists("main.exe"):
+                try:
+                    subprocess.call(["main.exe"])
+                except FileNotFoundError:
+                    open_github_website()
+            else:
+                open_github_website()
+        elif os.path.exists("main.py"):
             try:
-                import subprocess
-                subprocess.call(["main.exe"])
+                exec(open("main.py").read())
             except FileNotFoundError:
-                print("[ERROR] No game file found. Please retry download.")
-                import webbrowser
-                webbrowser.open('https://www.github.com/cytsai1008/PixelRPG-Python', new=0, autoraise=True)
-                del webbrowser
-        finally:
-            self.showNormal()
-            time.sleep(1)
+                open_github_website()
+        else:
+            open_github_website()
+        self.showNormal()
+        time.sleep(1)
 
 
 if __name__ == "__main__":

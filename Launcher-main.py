@@ -54,6 +54,31 @@ if not os.path.exists("Log"):
 
 # WORKING DIR CHECK END
 
+# PYINSTALLER CHECK START
+
+def CheckPyInstaller():
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        print("[INFO] You are running from PyInstaller packed executable.")
+        return True
+    else:
+        print("[INFO] You are running from normal Python source code.")
+        return False
+
+# PYINSTALLER CHECK END
+
+
+def open_github_website():
+    print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
+    import webbrowser
+
+    webbrowser.open(
+        "https://www.github.com/cytsai1008/PixelRPG-Python",
+        new=0,
+        autoraise=True,
+    )
+    del webbrowser
+
+
 # JSON CHECK START
 
 
@@ -306,28 +331,22 @@ class MainWindow(QtWidgets.QMainWindow):
             self.p.setProcessChannelMode(QProcess.ForwardedChannels)
             self.p.start(ProcName)
 
-        try:
-            open("cc_main.py", "r")
-            Run_cc(self, "python", "cc_main.py")
-        except:
-            print(
-                "[ERROR] cc_main.py not found. Hope there is no bugs in the release version"
-            )
-            try:
-                open("cc_main.exe", "r")
-                Run_cc2(self, "cc_main.exe")
-            except:
-                print(
-                    "[ERROR] cc_main.exe not found. I suggest you re-download game file"
-                )
-                import webbrowser
-
-                webbrowser.open(
-                    "https://www.github.com/cytsai1008/PixelRPG-Python",
-                    new=0,
-                    autoraise=True,
-                )
-                del webbrowser
+        if CheckPyInstaller():
+            if os.path.exists("cc_main.py"):
+                try:
+                    Run_cc2(self, "cc_main.exe")
+                except:
+                    open_github_website()
+            else:
+                open_github_website()
+        else:
+            if os.path.exists("cc_main.py"):
+                try:
+                    Run_cc(self, "python", "cc_main.py")
+                except:
+                    open_github_website()
+            else:
+                open_github_website()
 
 
 if __name__ == "__main__":

@@ -124,8 +124,8 @@ class gameEnv:
             for events in pygame.event.get():
                 if events.type == pygame.QUIT:
                     pygame.quit()
-                    import sys
-                    sys.exit(0)
+                    del pygame.locals
+                    return False
 
                 if events.type == pygame.KEYDOWN:
                     if events.key == pygame.K_0:
