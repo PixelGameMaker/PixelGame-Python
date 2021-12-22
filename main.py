@@ -2,7 +2,7 @@
 """
 Created on Tue Oct 26 21:09:02 2021
 
-@author: howar
+@author: howard
 """
 
 import game_loop
