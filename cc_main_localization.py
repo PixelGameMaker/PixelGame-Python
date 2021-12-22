@@ -10,7 +10,7 @@ def set_hant(self):
     self.ui.Assassin.setText("刺客")
     self.Archer="您將以 弓箭手 進行遊戲"
     self.Knight="您將以 騎士 進行遊戲"
-    self.Magician="您將以 魔法師 進行遊戲"
+    self.Magician="您將以 法師 進行遊戲"
     self.Assassin="您將以 刺客 進行遊戲"
 
 def set_hans(self):
