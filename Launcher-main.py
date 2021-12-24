@@ -68,7 +68,7 @@ def CheckPyInstaller():
 
 
 def open_github_website():
-    print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
+    print("[ERROR] Something went wrong while opening Select Class Window. I suggest you re-download game file")
     import webbrowser
 
     webbrowser.open(
@@ -332,7 +332,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.p.start(ProcName)
 
         if CheckPyInstaller():
-            if os.path.exists("cc_main.py"):
+            if os.path.exists("cc_main.exe"):
                 try:
                     Run_cc2(self, "cc_main.exe")
                 except:

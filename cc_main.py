@@ -21,7 +21,7 @@ def CheckPyInstaller():
 
 
 def open_github_website():
-    print("[ERROR] cc_main.exe not found. I suggest you re-download game file")
+    print("[ERROR] Game not found. I suggest you re-download game file")
     import webbrowser
 
     webbrowser.open(
@@ -153,6 +153,8 @@ class MainWindow_cc(QtWidgets.QWidget):
                     subprocess.call(["main.exe"])
                 except FileNotFoundError:
                     open_github_website()
+                except:
+                    print("[ERROR] Unknown game error, please report to developer.")
             else:
                 open_github_website()
         elif os.path.exists("main.py"):
@@ -160,6 +162,8 @@ class MainWindow_cc(QtWidgets.QWidget):
                 exec(open("main.py").read())
             except FileNotFoundError:
                 open_github_website()
+            except:
+                print("[ERROR] Unknown game error, please report to developer.")
         else:
             open_github_website()
         self.showNormal()
