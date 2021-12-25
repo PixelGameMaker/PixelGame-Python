@@ -14,6 +14,21 @@ from PySide2.QtWidgets import *
 
 
 class Ui_Main_Window(object):
+    def __init__(self):
+        self.Button_Save = None
+        self.Button_Reset = None
+        self.Music_Off = None
+        self.Music_On = None
+        self.label_Music = None
+        self.FPS_Settings = None
+        self.label_FPS = None
+        self.Windowed_Settings = None
+        self.Resolution_Settings = None
+        self.label_Resolution = None
+        self.Graphics_Settings = None
+        self.Background = None
+        self.Button_Play = None
+
     def setupUi(self, Main_Window):
         if not Main_Window.objectName():
             Main_Window.setObjectName(u"Main_Window")
@@ -61,7 +76,7 @@ class Ui_Main_Window(object):
         self.Graphics_Settings.setAcceptDrops(False)
         self.Graphics_Settings.setFlat(False)
         self.Graphics_Settings.setCheckable(False)
-        #self.Graphics_Settings.setChecked(False)
+        # self.Graphics_Settings.setChecked(False)
         self.label_Resolution = QLabel(self.Graphics_Settings)
         self.label_Resolution.setObjectName(u"label_Resolution")
         self.label_Resolution.setGeometry(QRect(20, 20, 81, 21))
@@ -73,7 +88,7 @@ class Ui_Main_Window(object):
         self.Windowed_Settings.setObjectName(u"Windowed_Settings")
         self.Windowed_Settings.setGeometry(QRect(390, 20, 91, 21))
         self.Windowed_Settings.setCheckable(True)
-        #self.Windowed_Settings.setChecked(False)
+        # self.Windowed_Settings.setChecked(False)
         self.label_FPS = QLabel(self.Graphics_Settings)
         self.label_FPS.setObjectName(u"label_FPS")
         self.label_FPS.setGeometry(QRect(20, 50, 81, 21))
@@ -102,6 +117,7 @@ class Ui_Main_Window(object):
         self.retranslateUi(Main_Window)
 
         QMetaObject.connectSlotsByName(Main_Window)
+
     # setupUi
 
     def retranslateUi(self, Main_Window):
@@ -118,4 +134,3 @@ class Ui_Main_Window(object):
         self.Button_Reset.setText(QCoreApplication.translate("Main_Window", u"Reset", None))
         self.Button_Save.setText(QCoreApplication.translate("Main_Window", u"Save", None))
     # retranslateUi
-

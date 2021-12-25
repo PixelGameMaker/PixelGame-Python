@@ -2,7 +2,6 @@ import json
 import os
 import sys
 import time
-from os.path import expanduser
 import logging
 
 import pyautogui
@@ -18,6 +17,7 @@ from Ui_Launcher import Ui_Main_Window
 
 
 def CheckWorkDir():
+    from os.path import expanduser
     HomeDir = expanduser("~")
     HomeDir = HomeDir.lower()
     CurrentDir = os.getcwd()
@@ -38,11 +38,10 @@ def CheckWorkDir():
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C detected. Exiting...")
             sys.exit()
-    del CurrentDir, HomeDir
+    del CurrentDir, HomeDir, expanduser
 
 
 CheckWorkDir()
-del expanduser
 del CheckWorkDir
 
 # create Log folder if not exists
@@ -63,6 +62,7 @@ def CheckPyInstaller():
     else:
         print("[INFO] You are running from normal Python source code.")
         return False
+
 
 # PYINSTALLER CHECK END
 
@@ -181,7 +181,7 @@ def check_lang():
     finally:
         try:
             del lang
-        except:
+        except NameError:
             del locale
             del syslang
 
@@ -231,7 +231,7 @@ def json_save(self):
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super(MainWindow, self).__init__(None)
         self.ui = Ui_Main_Window()
         self.ui.setupUi(self)
         # setup font
@@ -317,8 +317,12 @@ class MainWindow(QtWidgets.QMainWindow):
         with open("Json/config.json", "r") as f:
             data = json.load(f)
         print(
-            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} with windowed {data['windowed']}, music is {data['music']}, fps is {data['fps']}\n"
+            f"[INFO] Starting up the game with the resolution is {data['preferresolution']} \n"
+            f"with windowed {data['windowed']}, \n"
+            f"music is {data['music']}, \n"
+            f"fps is {data['fps']}\n"
         )
+        del data
 
         def Run_cc(self, method, ProcName):
             self.p = QProcess()

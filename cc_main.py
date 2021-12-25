@@ -7,6 +7,7 @@ from PySide2.QtGui import QFontDatabase
 
 from choose_character import Ui_Form
 
+
 # PYINSTALLER CHECK START
 
 def CheckPyInstaller():
@@ -16,6 +17,7 @@ def CheckPyInstaller():
     else:
         print("[INFO] You are running from normal Python source code.")
         return False
+
 
 # PYINSTALLER CHECK END
 
@@ -30,6 +32,7 @@ def open_github_website():
         autoraise=True,
     )
     del webbrowser
+
 
 def json_reset():
     with open("Json/choose.json", "w") as f:
@@ -86,7 +89,7 @@ return_lang = check_lang()
 
 class MainWindow_cc(QtWidgets.QWidget):
     def __init__(self):
-        super(MainWindow_cc, self).__init__()
+        super(MainWindow_cc, self).__init__(None)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
@@ -145,7 +148,7 @@ class MainWindow_cc(QtWidgets.QWidget):
     def play(self):
         self.showMinimized()
         # start game
-        print("[INFO] Trying to start the game.")
+        print(f"[INFO] Trying to start the game with class {data['choose']}.")
         import subprocess
         if CheckPyInstaller():
             if os.path.exists("main.exe"):
