@@ -36,11 +36,9 @@ class gameEnv:
         # self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
         if data['windowed']:
             self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-            pygame.display.set_caption(TITLE)
         else:
             self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
-            pygame.display.set_caption(TITLE)
-
+        pygame.display.set_caption(TITLE)
         # print(data['windowed'])
 
         self.clock = pygame.time.Clock()
@@ -108,8 +106,6 @@ class gameEnv:
 
         self.att = 0
         self.dps = {}
-
-        # music.playMusic()
 
     def mainloop(self):
 
@@ -345,7 +341,7 @@ class gameEnv:
             pygame.event.pump()
 
     def gameSettings(self, lvl, data):
-        for i in range(lvl * 1):
+        for _ in range(lvl * 1):
             index = random.choice(list(data.keys()))
             detail = {'x': random.randint(-displayInfo.current_w, displayInfo.current_w * 2),
                       'y': random.randint(-displayInfo.current_h, displayInfo.current_h * 2),
@@ -357,5 +353,3 @@ class gameEnv:
             summon_enemy = Enemy(detail)
             self.enemy.add(summon_enemy)
             self.all_sprite.add(summon_enemy)
-
-        # summon background
