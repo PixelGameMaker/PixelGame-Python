@@ -41,9 +41,9 @@ def character_surf_initialize():
                          'walking_2': 'assets/image/player/Knight/walkingf_2.png'
                         }
     elif str(choose_chara) == 'Magician':
-        player_images = {'standing' : 'assets/image/player/Archer/standf.png',
-                         'walking_1': 'assets/image/player/Archer/walkingf_1.png',
-                         'walking_2': 'assets/image/player/Archer/walkingf_2.png'
+        player_images = {'standing' : 'assets/image/player/Magician/standf.png',
+                         'walking_1': 'assets/image/player/Magician/walkingf_1.png',
+                         'walking_2': 'assets/image/player/Magician/walkingf_2.png'
                         }
     elif str(choose_chara) == 'Assassin':
         player_images = {'standing' : 'assets/image/player/Archer/standf.png',
