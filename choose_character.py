@@ -69,7 +69,7 @@ class Ui_Form(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.c3 = QLabel(self.gridLayoutWidget_2)
         self.c3.setObjectName("c3")
-        self.c3.setPixmap(QPixmap("assets/image/player/standf.png"))
+        self.c3.setPixmap(QPixmap("Launcher Asset/magician_standf a.png"))
         self.c3.setScaledContents(True)
         self.gridLayout_2.addWidget(self.c3, 0, 0, 1, 1)
         self.c4 = QLabel(self.gridLayoutWidget_2)
