@@ -46,9 +46,9 @@ def character_surf_initialize():
                          'walking_2': 'assets/image/player/Magician/walkingf_2.png'
                         }
     elif str(choose_chara) == 'Assassin':
-        player_images = {'standing' : 'assets/image/player/Archer/standf.png',
-                         'walking_1': 'assets/image/player/Archer/walkingf_1.png',
-                         'walking_2': 'assets/image/player/Archer/walkingf_2.png'
+        player_images = {'standing' : 'assets/image/player/Assassin/standf.png',
+                         'walking_1': 'assets/image/player/Assassin/walkingf_1.png',
+                         'walking_2': 'assets/image/player/Assassin/walkingf_2.png'
                         }
     enemy_images  = {'standing' : 'assets/image/enemy/standing.png',
                      'walking_1': 'assets/image/enemy/walking_1.png',
@@ -58,7 +58,7 @@ def character_surf_initialize():
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
                      'arrow'         : 'assets/image/bullet/arrow.png',
                      'wave'          : 'assets/image/bullet/wave.png',
-                     'magic_particle': 'assets/image/bullet/magic_partical.png'}
+                     'magic_partical': 'assets/image/bullet/magic_partical.png'}
     
     size = (int(SCREEN_WIDTH / 33),
             int(SCREEN_WIDTH / 22))
