@@ -75,7 +75,7 @@ class Ui_Form(object):
         self.gridLayout_2.addWidget(self.c3, 0, 0, 1, 1)
         self.c4 = QLabel(self.gridLayoutWidget_2)
         self.c4.setObjectName("c4")
-        self.c4.setPixmap(QPixmap("assets/image/player/standf.png"))
+        self.c4.setPixmap(QPixmap("Launcher Asset/assassin_standf a.png"))
         #self.c4.setScaledContents(True)
         self.c4.setAlignment(Qt.AlignCenter)
         self.gridLayout_2.addWidget(self.c4, 0, 1, 1, 1)
