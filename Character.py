@@ -58,7 +58,7 @@ def character_surf_initialize():
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
                      'arrow'         : 'assets/image/bullet/arrow.png',
                      'wave'          : 'assets/image/bullet/wave.png',
-                     'magic_partical': 'assets/image/bullet/magic_partical.png'}
+                     'magic_particle': 'assets/image/bullet/magic_particle.png'}
     
     size = (int(SCREEN_WIDTH / 33),
             int(SCREEN_WIDTH / 22))

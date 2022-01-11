@@ -6,7 +6,7 @@
         "strike": 0,
         "cost": 5,
         "size": 0.005,
-        "kind": "magic_partical",
+        "kind": "magic_particle",
         "frequency": 10.0,
         "knockback": 0,
         "range": 1440
