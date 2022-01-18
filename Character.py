@@ -52,7 +52,9 @@ def character_surf_initialize():
                         }
     enemy_images  = {'standing' : 'assets/image/enemy/standing.png',
                      'walking_1': 'assets/image/enemy/walking_1.png',
-                     'walking_2': 'assets/image/enemy/walking_2.png'
+                     'walking_2': 'assets/image/enemy/walking_2.png',
+                     'walking_3': 'assets/image/enemy/walking_3.png',
+                     'walking_4': 'assets/image/enemy/walking_4.png'
                      }
     bullet_images = {'normal_bullet' : 'assets/image/bullet/normal_bullet.png', 
                      'enemy_bullet'  : 'assets/image/bullet/enemy_bullet.png',
@@ -109,6 +111,44 @@ def update_img(entity, direction):
             entity.surf = entity.surf_dict['walking_2']
         else:
             entity.surf = entity.surf_dict['walking_2_reverse']
+    else:
+        entity.images['now'] = 'walking_1'
+        #print('change to walking_1')
+        if direction[0] > 0:
+            entity.surf = entity.surf_dict['walking_1']
+        else:
+            entity.surf = entity.surf_dict['walking_1_reverse']
+
+def update_enemy_img(entity, direction):
+    if time.time() - entity.walking_cd <= 0.25:
+        return
+    #print('updating')
+    entity.walking_cd = time.time()
+    if direction == [0, 0]:
+        entity.surf = entity.surf_dict['standing']
+        entity.images['now'] = 'standing'
+
+    elif entity.images['now'] == 'walking_1':
+        #print('change to walking_2')
+        entity.images['now'] = 'walking_2'
+        if direction[0] > 0:
+            entity.surf = entity.surf_dict['walking_2']
+        else:
+            entity.surf = entity.surf_dict['walking_2_reverse']
+    elif entity.images['now'] == 'walking_2':
+        #print('change to walking_3')
+        entity.images['now'] = 'walking_3'
+        if direction[0] > 0:
+            entity.surf = entity.surf_dict['walking_3']
+        else:
+            entity.surf = entity.surf_dict['walking_3_reverse']
+    elif entity.images['now'] == 'walking_3':
+        #print('change to walking_4')
+        entity.images['now'] = 'walking_4'
+        if direction[0] > 0:
+            entity.surf = entity.surf_dict['walking_4']
+        else:
+            entity.surf = entity.surf_dict['walking_4_reverse']
     else:
         entity.images['now'] = 'walking_1'
         #print('change to walking_1')
@@ -288,7 +328,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.knockback[i] += 0.5
         
         
-        update_img(self, direction)
+        update_enemy_img(self, direction)
         
         self.rect.x = self.pos[0]
         self.rect.y = self.pos[1]
