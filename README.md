@@ -6,7 +6,7 @@
 
 ### From Releases
 
-Goto [Releases](https://github.com/PixelRPG/PixelRPG-Python/releases) and download the latest release.  
+Go to [Releases](https://github.com/cytsai1008/PixelRPG-Python/releases) and download the latest release.  
 Extract the zip and run the `Launcher-main.exe` file.
 
 ### From source code
@@ -19,6 +19,12 @@ conda create -n pixelrpg python=3.6 -c delichon -c conda-forge -c defaults pysid
 
 ## Usage
 
+### From Release  
+
+Double-click the `Launcher-main.exe`  
+
+### From Source
+
 ```bash
 conda activate pixelrpg
 python Launcher-main.py
@@ -28,4 +34,5 @@ python Launcher-main.py
 
 [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
 
-#### Made with ❤ and ☕ by Python
+<bold>Made with ❤ and ☕ by Python</bold>
+
