@@ -79,12 +79,12 @@ def character_surf_initialize():
     size = (int(displayInfo.current_h / 12),
             int(displayInfo.current_h / 12))
     for name, path in enemy_images.items():
-        surf = pygame.image.load(path).convert()
+        surf = pygame.image.load(path).convert_alpha()
         surf = pygame.transform.smoothscale(surf, size)
         surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         enemy_surf[name] = surf
         if 'walking' in name:
-            surf = pygame.image.load(path).convert()
+            surf = pygame.image.load(path).convert_alpha()
             surf = pygame.transform.flip(surf, 1, 0)
             surf = pygame.transform.smoothscale(surf, size)
             surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
