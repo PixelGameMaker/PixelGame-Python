@@ -12,7 +12,6 @@ from PySide2.QtGui import QFontDatabase
 
 from Ui_Launcher import Ui_Main_Window
 
-
 # WORKING DIR CHECK START
 
 
@@ -271,6 +270,16 @@ class MainWindow(QtWidgets.QMainWindow):
         # save button click
         self.ui.Button_Save.clicked.connect(self.json_save)
         self.ui.Button_Reset.clicked.connect(self.json_reset)
+        self.ui.Background.mousePressEvent = self.background_click
+
+    def background_click(self, event):
+        import random
+        rick = random.randint(1, 20)
+        if rick == 10:
+            import webbrowser
+            webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            time.sleep(1)
+            sys.exit(0)
 
     def json_reset(self):
         json_dump()
