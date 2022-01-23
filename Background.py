@@ -15,7 +15,11 @@ def background_surf_init():
     background_surf = {}
     
     floor_image = {'floor':'assets/image/background/floor.png'}
-    wall_image = {'wall' :'assets/image/background/wall.png'}
+    wall_image  = {'wall' : 'assets/image/background/wall.png'}
+    situation_UI = {'UI' : 'assets/image/ui/headover.png',}
+    display_icon = {'hp' : 'assets/image/ui/hp.png',
+                    'mp' : 'assets/image/ui/mp.png',
+                    'exp': 'assets/image/ui/exp.png'}
     
     
     for name, path in floor_image.items():
@@ -26,6 +30,18 @@ def background_surf_init():
         
     size = (int(displayInfo.current_w /32), int(displayInfo.current_h /10.8))
     for name, path in wall_image.items():
+        surf = pygame.image.load(path).convert()
+        surf = pygame.transform.smoothscale(surf, size)
+        background_surf[name] = surf
+    
+    size = (int(displayInfo.current_w /5.4), int(displayInfo.current_h /5.4))
+    for name, path in situation_UI.items():
+        surf = pygame.image.load(path).convert()
+        surf = pygame.transform.smoothscale(surf, size)
+        background_surf[name] = surf
+    
+    size = (int(displayInfo.current_h /54), int(displayInfo.current_h /54))
+    for name, path in display_icon.items():
         surf = pygame.image.load(path).convert()
         surf = pygame.transform.smoothscale(surf, size)
         background_surf[name] = surf
@@ -129,6 +145,73 @@ def wallBysize(groups, size, pos):
         summon_wall = Wall((pos_x, pos_y))
         for group in groups:
                     group.add(summon_wall)
+                    
+
+class Situation_UI(pygame.sprite.Sprite):
+    def __init__(self, detail):
+        super(Situation_UI, self).__init__()
+        
+        self.max_hp = detail['health']
+        self.max_mp = detail['magic point']
+        self.hp = self.max_hp
+        self.mp = self.max_mp
+        self.exp = 0
+        
+        self.surf = background_surf['UI']
+        self.rect = self.surf.get_rect()
+        self.rect.x = displayInfo.current_w - (displayInfo.current_w /5.4)
+        self.rect.y = 0
+        
+        
+    
+    def update(self, detail):
+        self.hp = detail['health']
+        self.mp = detail['magic point']
+        self.exp += detail['exp']
+
+class Situation_display:
+    class backGround(pygame.sprite.Sprite):
+        def __init__(self):
+            super().__init__()
+            
+            self.surf = background_surf['UI']
+            self.rect = self.surf.get_rect()
+            self.rect.x = displayInfo.current_w - displayInfo.current_w /5.4
+            self.rect.y = 0
+            
+            
+        
+        def update(self, detail):
+            self.hp = detail['health']
+            self.mp = detail['magic point']
+            self.exp += detail['exp']
+            
+    class hp(pygame.sprite.Sprite):
+        def __init__(self, pos):
+            super().__init__()
+        
+            self.surf = background_surf['hp'].copy()
+            self.rect = self.surf.get_rect()
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
+    
+    class mp(pygame.sprite.Sprite):
+        def __init__(self, pos):
+            super().__init__()
+        
+            self.surf = background_surf['mp'].copy()
+            self.rect = self.surf.get_rect()
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
+    
+    class exp(pygame.sprite.Sprite):
+        def __init__(self, pos):
+            super().__init__()
+        
+            self.surf = background_surf['exp'].copy()
+            self.rect = self.surf.get_rect()
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
     
     
     
