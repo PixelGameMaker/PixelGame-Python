@@ -1,6 +1,6 @@
 # PixelRPG-Python
 
- A Pixel Art RPG Game Made By Howard, ChengYu, and Taiyou.
+ A Pixel Art RPG Game Made By Howard, ChengYu, and Tyson.
 
 ## Installation
 
@@ -14,12 +14,13 @@ Extract the zip and run the `Launcher-main.exe` file.
 Use the package manager [conda](<https://anaconda.org/>) to install dependent.
 
 ```bash
-conda create -n pixelrpg python=3.6 -c delichon -c conda-forge -c defaults pyside2 pygame
+git clone https://github.com/cytsai1008/PixelRPG-Python
+conda create -n pixelrpg python=3.6 -c delichon -c conda-forge -c defaults pyside2 pygame pyautogui --no-default-packages
 ```
 
 ## Usage
 
-### From Release  
+### From Release
 
 Double-click the `Launcher-main.exe`  
 
