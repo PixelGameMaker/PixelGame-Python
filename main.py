@@ -50,7 +50,7 @@ try:
 
             pygame.quit()
             if not CheckPyInstaller():
-                subprocess.call(['python', 'YouLose.py', '-lv', int(lvl)])
+                subprocess.call(['python', 'YouLose.py', '--lv', int(lvl)])
             else:
                 subprocess.call(['YouLose.exe', '--lv', int(lvl)])
             break
