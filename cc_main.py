@@ -1,6 +1,7 @@
 import json
 import os
 import time
+import traceback
 
 from PySide2 import QtWidgets
 from PySide2.QtGui import QFontDatabase
@@ -162,11 +163,12 @@ class MainWindow_cc(QtWidgets.QWidget):
                 open_github_website()
         elif os.path.exists("main.py"):
             try:
-                exec(open("main.py").read())
+                subprocess.call(["python", "main.py"])
             except FileNotFoundError:
                 open_github_website()
             except:
                 print("[ERROR] Unknown game error, please report to developer.")
+                print(traceback.format_exc())
         else:
             open_github_website()
         self.showNormal()
