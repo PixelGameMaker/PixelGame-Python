@@ -17,6 +17,7 @@ from Ui_Launcher import Ui_Main_Window
 
 def CheckWorkDir():
     from os.path import expanduser
+
     HomeDir = expanduser("~")
     HomeDir = HomeDir.lower()
     CurrentDir = os.getcwd()
@@ -54,6 +55,7 @@ if not os.path.exists("Log"):
 
 # PYINSTALLER CHECK START
 
+
 def CheckPyInstaller():
     if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
         print("[INFO] You are running from PyInstaller packed executable.")
@@ -67,7 +69,9 @@ def CheckPyInstaller():
 
 
 def open_github_website():
-    print("[ERROR] Something went wrong while opening Select Class Window. I suggest you re-download game file")
+    print(
+        "[ERROR] Something went wrong while opening Select Class Window. I suggest you re-download game file"
+    )
     import webbrowser
 
     webbrowser.open(
@@ -274,11 +278,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def background_click(self, event):
         import random
+
         rick = random.randint(1, 20)
         if rick == 10:
             import webbrowser
+
             webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-            time.sleep(1)
             sys.exit(0)
 
     def json_reset(self):

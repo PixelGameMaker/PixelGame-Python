@@ -16,36 +16,38 @@ import time
 import random
 import json
 
-with open('Json/config.json') as f:
+with open("Json/config.json") as f:
     data = json.load(f)
 
 pygame.init()
 
 displayInfo = pygame.display.Info()
 
-screensize = data['preferresolution']
-SCREEN_WIDTH = screensize[0:screensize.index('x') - 1]
+screensize = data["preferresolution"]
+SCREEN_WIDTH = screensize[0: screensize.index("x") - 1]
 SCREEN_WIDTH = int(SCREEN_WIDTH)
-SCREEN_HEIGHT = screensize[screensize.index('x') + 2:]
+SCREEN_HEIGHT = screensize[screensize.index("x") + 2:]
 SCREEN_HEIGHT = int(SCREEN_HEIGHT)
-TITLE = 'lol RPG'
+TITLE = "lol RPG"
 
 
 class gameEnv:
     def __init__(self, config):
 
         # self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
-        if data['windowed']:
+        if data["windowed"]:
             self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
         else:
-            self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
+            self.screen = pygame.display.set_mode(
+                (SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN
+            )
         pygame.display.set_caption(TITLE)
         # print(data['windowed'])
 
         self.clock = pygame.time.Clock()
         pygame.font.init()
-        self.font = pygame.font.Font('assets/fonts/OCRAEXT.TTF', 16)
-        self.music = BackGroundMusic('assets/music/backgroundMusic.mp3', -1)
+        self.font = pygame.font.Font("assets/fonts/OCRAEXT.TTF", 16)
+        self.music = BackGroundMusic("assets/music/backgroundMusic.mp3", -1)
         # self.fps = int(data['fps'])
         self.fps = 60
 
@@ -73,30 +75,32 @@ class gameEnv:
         self.player_group.add(self.player)
         self.all_sprite.add(self.player)
 
-        self.player.set_profession(config['profession'])
+        self.player.set_profession(config["profession"])
 
         self.weapon = Weapon()
         self.weapon.set_weapon(self.player.weapon)
 
-        self.att_text = Text(self.font, 'att:', (5, 5))
-        self.dps_text = Text(self.font, 'dps:', (5, 20))
-        self.enemy_left_text = Text(self.font, 'Enemy Left:', (5, 35))
-        self.resolution_text = Text(self.font, 'resolution:', (5, 50))
-        self.fps_text = Text(self.font, 'fps:', (5, 65))
+        self.att_text = Text(self.font, "att:", (5, 5))
+        self.dps_text = Text(self.font, "dps:", (5, 20))
+        self.enemy_left_text = Text(self.font, "Enemy Left:", (5, 35))
+        self.resolution_text = Text(self.font, "resolution:", (5, 50))
+        self.fps_text = Text(self.font, "fps:", (5, 65))
 
         self.situation_text.add(self.att_text)
         self.situation_text.add(self.dps_text)
         self.situation_text.add(self.enemy_left_text)
         self.situation_text.add(self.resolution_text)
-        self.resolution_text.update('resolution:' + str(SCREEN_WIDTH) + 'x' + str(SCREEN_HEIGHT))
+        self.resolution_text.update(
+            "resolution:" + str(SCREEN_WIDTH) + "x" + str(SCREEN_HEIGHT)
+        )
         self.situation_text.add(self.fps_text)
-        self.fps_text.update('fps:' + str(self.fps))
+        self.fps_text.update("fps:" + str(self.fps))
 
-        # player_situation 
-        self.player_text = Text(self.font, 'player:', (SCREEN_WIDTH - 120, 5))
-        self.player_mp_text = Text(self.font, 'mp:', (SCREEN_WIDTH - 120, 20))
-        self.player_hp_text = Text(self.font, 'hp:', (SCREEN_WIDTH - 120, 35))
-        self.player_weapon_text = Text(self.font, 'weapon:', (SCREEN_WIDTH - 120, 50))
+        # player_situation
+        self.player_text = Text(self.font, "player:", (SCREEN_WIDTH - 120, 5))
+        self.player_mp_text = Text(self.font, "mp:", (SCREEN_WIDTH - 120, 20))
+        self.player_hp_text = Text(self.font, "hp:", (SCREEN_WIDTH - 120, 35))
+        self.player_weapon_text = Text(self.font, "weapon:", (SCREEN_WIDTH - 120, 50))
 
         self.situation_text.add(self.player_text)
         self.situation_text.add(self.player_mp_text)
@@ -107,8 +111,7 @@ class gameEnv:
         wallBysize(groups, (96, 68), (-1920, -1080))
         # wallGenerater('room', groups, (1000, 0))
 
-        detail = {'hp': self.player.health,
-                  'mp': self.player.mp}
+        detail = {"hp": self.player.health, "mp": self.player.mp}
         self.ui = UI_display(detail)
 
         self.att = 0
@@ -120,7 +123,7 @@ class gameEnv:
 
         # switch music mute by launcher
         global collided_enemy
-        if data['music']:
+        if data["music"]:
             self.music.playMusic()
         else:
             self.music.pauseMusic()
@@ -134,20 +137,22 @@ class gameEnv:
 
                 if events.type == pygame.KEYDOWN:
                     if events.key == pygame.K_0:
-                        detail = {'x': random.randint(0, displayInfo.current_w),
-                                  'y': random.randint(0, displayInfo.current_h),
-                                  'health': 1000,
-                                  'speed': 6}
+                        detail = {
+                            "x": random.randint(0, displayInfo.current_w),
+                            "y": random.randint(0, displayInfo.current_h),
+                            "health": 1000,
+                            "speed": 6,
+                        }
                         summon_enemy = Enemy(detail)
                         self.enemy.add(summon_enemy)
                         self.all_sprite.add(summon_enemy)
 
                         # if events.key == pygame.K_1:
                         #    weapon.switch_weapon(1)
-                        # 
+                        #
                         # if events.key == pygame.K_2:
                         #    weapon.switch_weapon(2)
-                        #    
+                        #
                         # if events.key == pygame.K_3:
                         #    weapon.switch_weapon(3)
                         #
@@ -167,8 +172,10 @@ class gameEnv:
 
             key_pressed = list(pygame.key.get_pressed())
 
-            direction = [key_pressed[pygame.K_d] - key_pressed[pygame.K_a],
-                         key_pressed[pygame.K_s] - key_pressed[pygame.K_w]]
+            direction = [
+                key_pressed[pygame.K_d] - key_pressed[pygame.K_a],
+                key_pressed[pygame.K_s] - key_pressed[pygame.K_w],
+            ]
 
             # wall
 
@@ -213,27 +220,30 @@ class gameEnv:
 
             # bullet
             if pygame.mouse.get_pressed()[0]:
-                if time.time() - self.bullet_cd > 1 / self.weapon.detail['frequency']:
+                if time.time() - self.bullet_cd > 1 / self.weapon.detail["frequency"]:
                     # print('summon')
                     self.bullet_cd = time.time()
                     mouse_pos = pygame.mouse.get_pos()
-                    target_direction = [mouse_pos[0] - self.player.rect.centerx,
-                                        mouse_pos[1] - self.player.rect.centery]
+                    target_direction = [
+                        mouse_pos[0] - self.player.rect.centerx,
+                        mouse_pos[1] - self.player.rect.centery,
+                    ]
                     target_direction = get_update_direction(target_direction)
-                    detail = {'knockback': self.weapon.detail['knockback'],
-                              'accuracy': self.weapon.detail['accuracy'],
-                              'damage': self.weapon.detail['damage'],
-                              'strike': self.weapon.detail['strike'],
-                              'speed': self.weapon.detail['speed'],
-                              'cost': self.weapon.detail['cost'],
-                              'size': self.weapon.detail['size'],
-                              'kind': self.weapon.detail['kind'],
-                              'target': 'enemy',
-                              'direction': target_direction,
-                              }
+                    detail = {
+                        "knockback": self.weapon.detail["knockback"],
+                        "accuracy": self.weapon.detail["accuracy"],
+                        "damage": self.weapon.detail["damage"],
+                        "strike": self.weapon.detail["strike"],
+                        "speed": self.weapon.detail["speed"],
+                        "cost": self.weapon.detail["cost"],
+                        "size": self.weapon.detail["size"],
+                        "kind": self.weapon.detail["kind"],
+                        "target": "enemy",
+                        "direction": target_direction,
+                    }
                     # print(direction)
 
-                    if self.player.cost_mp(detail['cost']):
+                    if self.player.cost_mp(detail["cost"]):
                         summon_bullet = Bullet(self.player, detail)
                         self.bullet.add(summon_bullet)
                         self.all_sprite.add(summon_bullet)
@@ -243,20 +253,23 @@ class gameEnv:
                     entity.bullet_cd = time.time()
                     target = entity.target
                     if target is not None:
-                        target_direction = [target.centerx - entity.rect.centerx,
-                                            target.centery - entity.rect.centery]
+                        target_direction = [
+                            target.centerx - entity.rect.centerx,
+                            target.centery - entity.rect.centery,
+                        ]
                         target_direction = get_update_direction(target_direction)
-                        detail = {'knockback': self.weapon.detail['knockback'],
-                                  'accuracy': self.weapon.detail['accuracy'],
-                                  'damage': self.weapon.detail['damage'],
-                                  'strike': self.weapon.detail['strike'],
-                                  'speed': self.weapon.detail['speed'],
-                                  'cost': self.weapon.detail['cost'],
-                                  'size': self.weapon.detail['size'],
-                                  'kind': self.weapon.detail['kind'],
-                                  'target': 'player',
-                                  'direction': target_direction,
-                                  }
+                        detail = {
+                            "knockback": self.weapon.detail["knockback"],
+                            "accuracy": self.weapon.detail["accuracy"],
+                            "damage": self.weapon.detail["damage"],
+                            "strike": self.weapon.detail["strike"],
+                            "speed": self.weapon.detail["speed"],
+                            "cost": self.weapon.detail["cost"],
+                            "size": self.weapon.detail["size"],
+                            "kind": self.weapon.detail["kind"],
+                            "target": "player",
+                            "direction": target_direction,
+                        }
                         summon_bullet = Bullet(entity, detail)
                         self.bullet.add(summon_bullet)
                         self.all_sprite.add(summon_bullet)
@@ -266,37 +279,44 @@ class gameEnv:
             # gun
 
             # text
-            self.att = (self.weapon.detail['damage'] * (
-                    self.weapon.detail['accuracy'] * (1 - self.weapon.detail['strike'])) + \
-                        self.weapon.detail['damage'] * self.weapon.detail['accuracy'] * self.weapon.detail[
-                            'strike'] * 2) * \
-                       self.weapon.detail['frequency']
-            self.att_text.update('att:' + str(self.att))
+            self.att = (
+                               self.weapon.detail["damage"]
+                               * (self.weapon.detail["accuracy"] * (1 - self.weapon.detail["strike"]))
+                               + self.weapon.detail["damage"]
+                               * self.weapon.detail["accuracy"]
+                               * self.weapon.detail["strike"]
+                               * 2
+                       ) * self.weapon.detail["frequency"]
+            self.att_text.update("att:" + str(self.att))
 
             for current_time in list(self.dps.keys()):
                 if time.time() - current_time > 1:
                     self.dps.pop(current_time)
 
-            self.dps_text.update('dps:' + str(round(sum(self.dps.values()) / 1, 2)))
-            self.enemy_left_text.update('Enemy Left:' + str(len(self.enemy)))
+            self.dps_text.update("dps:" + str(round(sum(self.dps.values()) / 1, 2)))
+            self.enemy_left_text.update("Enemy Left:" + str(len(self.enemy)))
 
-            self.player_text.update('Player:')
-            self.player_hp_text.update('hp:' + str(self.player.health))
-            self.player_mp_text.update('mp:' + str(self.player.mp))
-            self.player_weapon_text.update('weapon:' + str(self.weapon.main_hand))
+            self.player_text.update("Player:")
+            self.player_hp_text.update("hp:" + str(self.player.health))
+            self.player_mp_text.update("mp:" + str(self.player.mp))
+            self.player_weapon_text.update("weapon:" + str(self.weapon.main_hand))
 
             # if dps != {} : print(dps)
 
             for entity in self.bullet:
-                if entity.target == 'enemy':
-                    collided_enemy = pygame.sprite.spritecollide(entity, self.enemy, False)
+                if entity.target == "enemy":
+                    collided_enemy = pygame.sprite.spritecollide(
+                        entity, self.enemy, False
+                    )
 
-                elif entity.target == 'player':
+                elif entity.target == "player":
                     group = pygame.sprite.Group()
                     group.add(self.player)
                     collided_enemy = pygame.sprite.spritecollide(entity, group, False)
 
-                if ((entity.rect.x - 960) ** 2 + (entity.rect.y - 540) ** 2) > self.weapon.detail['range'] ** 2:
+                if (
+                        (entity.rect.x - 960) ** 2 + (entity.rect.y - 540) ** 2
+                ) > self.weapon.detail["range"] ** 2:
                     # print('yes')
                     # print(entity.rect.x, entity.rect.y)
                     entity.kill()
@@ -310,16 +330,16 @@ class gameEnv:
                     del entity
                     continue
 
-
                 elif len(collided_enemy) > 0:
-                    detail = {'damage': entity.damage,
-                              'knockback': entity.knockback,
-                              }
+                    detail = {
+                        "damage": entity.damage,
+                        "knockback": entity.knockback,
+                    }
 
                     for collided in collided_enemy:
                         collided.hit(detail, entity.rect)
-                        if entity.target == 'enemy':
-                            self.dps[time.time()] = detail['damage']
+                        if entity.target == "enemy":
+                            self.dps[time.time()] = detail["damage"]
                         entity.kill()
                         # bullet.remove(entity)
                         # print(collided.health)
@@ -334,9 +354,11 @@ class gameEnv:
 
             self.screen.fill((255, 255, 255))
             # ui
-            detail = {'hp': self.player.health,
-                      'mp': self.player.mp,
-                      'exp': self.player.exp}
+            detail = {
+                "hp": self.player.health,
+                "mp": self.player.mp,
+                "exp": self.player.exp,
+            }
 
             self.ui_group = self.ui.update(detail)
 
@@ -372,13 +394,15 @@ class gameEnv:
     def gameSettings(self, lvl, data):
         for i in range(lvl * 1):
             index = random.choice(list(data.keys()))
-            detail = {'x': random.randint(-displayInfo.current_w, displayInfo.current_w * 2),
-                      'y': random.randint(-displayInfo.current_h, displayInfo.current_h * 2),
-                      'health': lvl * data[index]['health'],
-                      'speed': lvl * data[index]['speed'],
-                      'cd': 1 / lvl,
-                      'stay_range': data[index]['stay_range'],
-                      'att_range': data[index]['att_range']}
+            detail = {
+                "x": random.randint(-displayInfo.current_w, displayInfo.current_w * 2),
+                "y": random.randint(-displayInfo.current_h, displayInfo.current_h * 2),
+                "health": lvl * data[index]["health"],
+                "speed": lvl * data[index]["speed"],
+                "cd": 1 / lvl,
+                "stay_range": data[index]["stay_range"],
+                "att_range": data[index]["att_range"],
+            }
             summon_enemy = Enemy(detail)
             self.enemy.add(summon_enemy)
             self.all_sprite.add(summon_enemy)

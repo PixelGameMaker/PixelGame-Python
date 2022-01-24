@@ -11,7 +11,7 @@ Extract the zip and run the `Launcher-main.exe` file.
 
 ### From source code
 
-Use the package manager [conda](<https://anaconda.org/>) to install dependent.
+Use the package manager [conda](https://anaconda.org/) to install dependent.
 
 ```bash
 git clone https://github.com/cytsai1008/PixelRPG-Python
@@ -36,4 +36,3 @@ python Launcher-main.py
 [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
 
 <bold>Made with ❤ and ☕ by Python</bold>
-

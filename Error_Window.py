@@ -51,13 +51,18 @@ class Ui_Form(object):
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
+
     # setupUi
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Game Error", None))
-        self.label.setText(QCoreApplication.translate("Form",
-                                                      u"<html><head/><body><p>Unknown Error Occurred</p><p>Please Report to Developer</p></body></html>",
-                                                      None))
+        self.label.setText(
+            QCoreApplication.translate(
+                "Form",
+                u"<html><head/><body><p>Unknown Error Occurred</p><p>Please Report to Developer</p></body></html>",
+                None,
+            )
+        )
         self.label_2.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-    # retranslateUi
 
+    # retranslateUi

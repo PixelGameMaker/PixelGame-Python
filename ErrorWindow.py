@@ -7,7 +7,9 @@ from PySide2.QtGui import QFontDatabase
 
 from Error_Window import Ui_Form
 
-list_of_files = glob.glob('ErrorLog/*')  # * means all if need specific format then *.csv
+list_of_files = glob.glob(
+    "ErrorLog/*"
+)  # * means all if need specific format then *.csv
 traceback = max(list_of_files, key=os.path.getctime)
 print(traceback)
 

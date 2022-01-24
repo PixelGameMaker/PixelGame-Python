@@ -11,9 +11,12 @@ from choose_character import Ui_Form
 
 # PYINSTALLER CHECK START
 
+
 def CheckPyInstaller():
     if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-        print("[INFO] You are running from PyInstaller packed executable. Hopes there is no bug.")
+        print(
+            "[INFO] You are running from PyInstaller packed executable. Hopes there is no bug."
+        )
         return True
     else:
         print("[INFO] You are running from normal Python source code.")
@@ -58,7 +61,7 @@ except:
 def check_lang():
     # use module locale to check system language
     try:
-        with open("Json/choose.json", "r") as f:
+        with open("Json/config.json", "r") as f:
             lang_config = json.load(f)
             lang = lang_config["lang"]
             print(f"[INFO] Language in config is {lang}")
@@ -66,6 +69,7 @@ def check_lang():
             return lang
     except:
         import locale
+
         syslang = locale.getdefaultlocale()[0].lower()
         if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
             print("[INFO] System language is Chinese Traditional")
@@ -107,42 +111,45 @@ class MainWindow_cc(QtWidgets.QWidget):
 
         if return_lang == "zh-hant":
             from cc_main_localization import set_hant
+
             set_hant(self)
         elif return_lang == "zh-hans":
             from cc_main_localization import set_hans
+
             set_hans(self)
         elif return_lang == "ja":
             from cc_main_localization import set_ja
+
             set_ja(self)
 
-        with open('Json/choose.json', 'r') as f:
+        with open("Json/choose.json", "r") as f:
             config = json.load(f)
-        self.a = config['choose']
-        if self.a == 'Archer':
+        self.a = config["choose"]
+        if self.a == "Archer":
             self.ui.now_choose.setText(self.Archer)
-        elif self.a == 'Knight':
+        elif self.a == "Knight":
             self.ui.now_choose.setText(self.Knight)
-        elif self.a == 'Magician':
+        elif self.a == "Magician":
             self.ui.now_choose.setText(self.Magician)
-        elif self.a == 'Assassin':
+        elif self.a == "Assassin":
             self.ui.now_choose.setText(self.Assassin)
 
     def chooseArcher(self):
-        self.chooseCharacter('Archer', self.Archer)
+        self.chooseCharacter("Archer", self.Archer)
 
     def chooseKnight(self):
-        self.chooseCharacter('Knight', self.Knight)
+        self.chooseCharacter("Knight", self.Knight)
 
     def chooseMagician(self):
-        self.chooseCharacter('Magician', self.Magician)
+        self.chooseCharacter("Magician", self.Magician)
 
     def chooseAssassin(self):
-        self.chooseCharacter('Assassin', self.Assassin)
+        self.chooseCharacter("Assassin", self.Assassin)
 
     def chooseCharacter(self, arg0, arg1):
         nowchoose = arg0
-        with open('Json/choose.json', 'w') as f:
-            data = {'choose': nowchoose}
+        with open("Json/choose.json", "w") as f:
+            data = {"choose": nowchoose}
             json.dump(data, f, indent=4)
         self.ui.now_choose.setText(arg1)
 
@@ -151,6 +158,7 @@ class MainWindow_cc(QtWidgets.QWidget):
         # start game
         print(f"[INFO] Trying to start the game with class {data['choose']}.")
         import subprocess
+
         if CheckPyInstaller():
             if os.path.exists("main.exe"):
                 try:
@@ -166,7 +174,7 @@ class MainWindow_cc(QtWidgets.QWidget):
                 subprocess.call(["python", "main.py"])
             except FileNotFoundError:
                 open_github_website()
-            '''
+            """
             except Exception:
                 print("[ERROR] Unknown game error, please report to developer.")
                 error_data = traceback.format_exc()
@@ -182,7 +190,7 @@ class MainWindow_cc(QtWidgets.QWidget):
                 else:
                     self.p = QProcess()
                     self.p.start("python", "ErrorWindow.py")
-            '''
+            """
 
         else:
             open_github_website()
