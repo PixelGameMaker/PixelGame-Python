@@ -56,8 +56,8 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"You Lose", None))
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"Game Over", None))
         self.label.setText(
-            QCoreApplication.translate("Form", u"<html><head/><body><p>You Lose</p></body></html>", None))
+            QCoreApplication.translate("Form", u"<html><head/><body><p>Game Over</p></body></html>", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Textlabel", None))
     # retranslateUi
