@@ -1,7 +1,7 @@
 import json
 import os
 import time
-import traceback
+
 
 from PySide2 import QtWidgets
 from PySide2.QtGui import QFontDatabase
@@ -166,9 +166,24 @@ class MainWindow_cc(QtWidgets.QWidget):
                 subprocess.call(["python", "main.py"])
             except FileNotFoundError:
                 open_github_website()
-            except:
+            '''
+            except Exception:
                 print("[ERROR] Unknown game error, please report to developer.")
-                print(traceback.format_exc())
+                error_data = traceback.format_exc()
+                # print(error_data)
+                date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
+                if not os.path.exists("ErrorLog"):
+                    os.mkdir("ErrorLog")
+                with open('ErrorLog/traceback_{}.txt'.format(date), 'w') as f:
+                    f.write(error_data)
+                if CheckPyInstaller():
+                    self.p = QProcess()
+                    self.p.start("ErrorWindow.exe")
+                else:
+                    self.p = QProcess()
+                    self.p.start("python", "ErrorWindow.py")
+            '''
+
         else:
             open_github_website()
         self.showNormal()
