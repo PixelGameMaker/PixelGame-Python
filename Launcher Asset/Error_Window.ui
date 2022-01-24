@@ -1,87 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>Form</class>
-    <widget class="QWidget" name="Form">
-        <property name="enabled">
-            <bool>true</bool>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>640</width>
-                <height>480</height>
-            </rect>
-        </property>
-        <property name="minimumSize">
-            <size>
-                <width>640</width>
-                <height>480</height>
-            </size>
-        </property>
-        <property name="maximumSize">
-            <size>
-                <width>640</width>
-                <height>480</height>
-            </size>
-        </property>
-        <property name="font">
-            <font>
-                <family>Unifont</family>
-                <pointsize>22</pointsize>
-            </font>
-        </property>
-        <property name="windowTitle">
-            <string>Form</string>
-        </property>
-        <property name="locale">
-            <locale language="English" country="UnitedStates"/>
-        </property>
-        <widget class="QLabel" name="label">
-            <property name="geometry">
-                <rect>
-                    <x>190</x>
-                    <y>10</y>
-                    <width>271</width>
-                    <height>71</height>
-                </rect>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Unifont</family>
-                    <pointsize>18</pointsize>
-                </font>
-            </property>
-            <property name="locale">
-                <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="text">
-                <string>Unknown Error Occurred</string>
-            </property>
-        </widget>
-        <widget class="QLabel" name="label_2">
-            <property name="geometry">
-                <rect>
-                    <x>10</x>
-                    <y>110</y>
-                    <width>621</width>
-                    <height>361</height>
-                </rect>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Unifont</family>
-                    <pointsize>12</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>TextLabel</string>
-            </property>
-            <property name="alignment">
-                <set>Qt::AlignCenter</set>
-            </property>
-        </widget>
-    </widget>
-    <resources/>
-    <connections/>
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>720</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>720</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Unifont</family>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Launcher Asset/Logo.png</normaloff>Launcher Asset/Logo.png
+   </iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>10</y>
+     <width>271</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Unifont</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="locale">
+    <locale language="English" country="UnitedStates"/>
+   </property>
+   <property name="text">
+    <string>Unknown Error Occurred</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>701</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Unifont</family>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>

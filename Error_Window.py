@@ -18,17 +18,20 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.setEnabled(True)
-        Form.resize(640, 480)
-        Form.setMinimumSize(QSize(640, 480))
-        Form.setMaximumSize(QSize(640, 480))
+        Form.resize(720, 480)
+        Form.setMinimumSize(QSize(720, 480))
+        Form.setMaximumSize(QSize(720, 480))
         font = QFont()
         font.setFamily(u"Unifont")
         font.setPointSize(22)
         Form.setFont(font)
+        icon = QIcon()
+        icon.addFile(u"Launcher Asset/Logo.png", QSize(), QIcon.Normal, QIcon.Off)
+        Form.setWindowIcon(icon)
         Form.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(190, 10, 271, 71))
+        self.label.setGeometry(QRect(230, 10, 271, 71))
         font1 = QFont()
         font1.setFamily(u"Unifont")
         font1.setPointSize(18)
@@ -36,21 +39,21 @@ class Ui_Form(object):
         self.label.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.label_2 = QLabel(Form)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(10, 110, 621, 361))
+        self.label_2.setGeometry(QRect(10, 110, 701, 361))
         font2 = QFont()
         font2.setFamily(u"Unifont")
-        font2.setPointSize(9)
+        font2.setPointSize(15)
         self.label_2.setFont(font2)
         self.label_2.setAlignment(Qt.AlignCenter)
+        self.label_2.setWordWrap(True)
 
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
-
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Error Report", None))
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"Game Error", None))
         self.label.setText(QCoreApplication.translate("Form", u"Unknown Error Occurred", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"TextLabel", None))
     # retranslateUi
