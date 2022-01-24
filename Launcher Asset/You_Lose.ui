@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>Form</class>
+    <widget class="QWidget" name="Form">
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>720</width>
+                <height>270</height>
+            </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>720</width>
+                <height>270</height>
+            </size>
+        </property>
+        <property name="maximumSize">
+            <size>
+                <width>720</width>
+                <height>270</height>
+            </size>
+        </property>
+        <property name="font">
+            <font>
+                <family>Unifont</family>
+                <pointsize>22</pointsize>
+            </font>
+        </property>
+        <property name="windowTitle">
+            <string>You Lose</string>
+        </property>
+        <property name="windowIcon">
+            <iconset>
+                <normaloff>Launcher Asset/Logo.png</normaloff>Launcher Asset/Logo.png
+            </iconset>
+        </property>
+        <property name="locale">
+            <locale language="English" country="UnitedStates"/>
+        </property>
+        <widget class="QLabel" name="label">
+            <property name="geometry">
+                <rect>
+                    <x>210</x>
+                    <y>10</y>
+                    <width>321</width>
+                    <height>71</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Unifont</family>
+                    <pointsize>32</pointsize>
+                </font>
+            </property>
+            <property name="locale">
+                <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You Lose&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                </string>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignCenter</set>
+            </property>
+        </widget>
+        <widget class="QLabel" name="label_2">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>110</y>
+                    <width>720</width>
+                    <height>151</height>
+                </rect>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>0</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Unifont</family>
+                    <pointsize>26</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Textlabel</string>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+                <bool>true</bool>
+            </property>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'Error_Window.ui'
+## Form generated from reading UI file 'You_Lose.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,32 +18,33 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.setEnabled(True)
-        Form.resize(720, 480)
-        Form.setMinimumSize(QSize(720, 480))
-        Form.setMaximumSize(QSize(720, 480))
+        Form.resize(720, 270)
+        Form.setMinimumSize(QSize(720, 270))
+        Form.setMaximumSize(QSize(720, 270))
         font = QFont()
         font.setFamily(u"Unifont")
         font.setPointSize(22)
         Form.setFont(font)
         icon = QIcon()
-        icon.addFile(u"Launcher Asset/Logo_Died.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"Launcher Asset/Logo.png", QSize(), QIcon.Normal, QIcon.Off)
         Form.setWindowIcon(icon)
         Form.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(200, 10, 321, 71))
+        self.label.setGeometry(QRect(210, 10, 321, 71))
         font1 = QFont()
         font1.setFamily(u"Unifont")
-        font1.setPointSize(18)
+        font1.setPointSize(32)
         self.label.setFont(font1)
-        self.label.setAlignment(Qt.AlignCenter)
         self.label.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
+        self.label.setAlignment(Qt.AlignCenter)
         self.label_2 = QLabel(Form)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(10, 110, 701, 361))
+        self.label_2.setGeometry(QRect(10, 110, 720, 151))
+        self.label_2.setMinimumSize(QSize(0, 0))
         font2 = QFont()
         font2.setFamily(u"Unifont")
-        font2.setPointSize(15)
+        font2.setPointSize(26)
         self.label_2.setFont(font2)
         self.label_2.setAlignment(Qt.AlignCenter)
         self.label_2.setWordWrap(True)
@@ -51,13 +52,12 @@ class Ui_Form(object):
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
+
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Game Error", None))
-        self.label.setText(QCoreApplication.translate("Form",
-                                                      u"<html><head/><body><p>Unknown Error Occurred</p><p>Please Report to Developer</p></body></html>",
-                                                      None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"You Lose", None))
+        self.label.setText(
+            QCoreApplication.translate("Form", u"<html><head/><body><p>You Lose</p></body></html>", None))
+        self.label_2.setText(QCoreApplication.translate("Form", u"Textlabel", None))
     # retranslateUi
-

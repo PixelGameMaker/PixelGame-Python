@@ -49,6 +49,7 @@ try:
             import pygame
 
             pygame.quit()
+            subprocess.call(['python', 'YouLose.py --lv {}'.format(lvl)])
             break
 
         else:
