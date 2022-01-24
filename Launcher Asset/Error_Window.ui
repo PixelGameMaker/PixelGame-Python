@@ -32,7 +32,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Game Error</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -45,9 +45,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>200</x>
      <y>10</y>
-     <width>271</width>
+     <width>321</width>
      <height>71</height>
     </rect>
    </property>
@@ -61,7 +61,9 @@
     <locale language="English" country="UnitedStates"/>
    </property>
    <property name="text">
-    <string>Unknown Error Occurred</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unknown Error Occurred&lt;/p&gt;&lt;p&gt;Please Report to
+     Developer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+    </string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

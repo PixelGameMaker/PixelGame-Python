@@ -31,11 +31,12 @@ class Ui_Form(object):
         Form.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(230, 10, 271, 71))
+        self.label.setGeometry(QRect(200, 10, 321, 71))
         font1 = QFont()
         font1.setFamily(u"Unifont")
         font1.setPointSize(18)
         self.label.setFont(font1)
+        self.label.setAlignment(Qt.AlignCenter)
         self.label.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.label_2 = QLabel(Form)
         self.label_2.setObjectName(u"label_2")
@@ -54,6 +55,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Game Error", None))
-        self.label.setText(QCoreApplication.translate("Form", u"Unknown Error Occurred", None))
+        self.label.setText(QCoreApplication.translate("Form",
+                                                      u"<html><head/><body><p>Unknown Error Occurred</p><p>Please Report to Developer</p></body></html>",
+                                                      None))
         self.label_2.setText(QCoreApplication.translate("Form", u"TextLabel", None))
     # retranslateUi
+
