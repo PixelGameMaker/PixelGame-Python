@@ -24,9 +24,9 @@ pygame.init()
 displayInfo = pygame.display.Info()
 
 screensize = data["preferresolution"]
-SCREEN_WIDTH = screensize[0: screensize.index("x") - 1]
+SCREEN_WIDTH = screensize[0 : screensize.index("x") - 1]
 SCREEN_WIDTH = int(SCREEN_WIDTH)
-SCREEN_HEIGHT = screensize[screensize.index("x") + 2:]
+SCREEN_HEIGHT = screensize[screensize.index("x") + 2 :]
 SCREEN_HEIGHT = int(SCREEN_HEIGHT)
 TITLE = "lol RPG"
 
@@ -280,13 +280,13 @@ class gameEnv:
 
             # text
             self.att = (
-                               self.weapon.detail["damage"]
-                               * (self.weapon.detail["accuracy"] * (1 - self.weapon.detail["strike"]))
-                               + self.weapon.detail["damage"]
-                               * self.weapon.detail["accuracy"]
-                               * self.weapon.detail["strike"]
-                               * 2
-                       ) * self.weapon.detail["frequency"]
+                self.weapon.detail["damage"]
+                * (self.weapon.detail["accuracy"] * (1 - self.weapon.detail["strike"]))
+                + self.weapon.detail["damage"]
+                * self.weapon.detail["accuracy"]
+                * self.weapon.detail["strike"]
+                * 2
+            ) * self.weapon.detail["frequency"]
             self.att_text.update("att:" + str(self.att))
 
             for current_time in list(self.dps.keys()):
@@ -315,7 +315,7 @@ class gameEnv:
                     collided_enemy = pygame.sprite.spritecollide(entity, group, False)
 
                 if (
-                        (entity.rect.x - 960) ** 2 + (entity.rect.y - 540) ** 2
+                    (entity.rect.x - 960) ** 2 + (entity.rect.y - 540) ** 2
                 ) > self.weapon.detail["range"] ** 2:
                     # print('yes')
                     # print(entity.rect.x, entity.rect.y)
