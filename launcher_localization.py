@@ -9,6 +9,7 @@ def set_hant(self):
     self.ui.Button_Reset.setText("重設")
     self.ui.Button_Save.setText("儲存")
 
+
 def set_hans(self):
     self.ui.label_Music.setText("音乐：")
     self.ui.Windowed_Settings.setText("窗口化")
@@ -19,7 +20,8 @@ def set_hans(self):
     self.ui.Music_Off.setText("关闭")
     self.ui.Button_Reset.setText("重置")
     self.ui.Button_Save.setText("保存")
-    
+
+
 def set_ja(self):
     self.ui.label_Music.setText("音楽：")
     self.ui.Windowed_Settings.setText("ウィンドウ")
@@ -31,10 +33,11 @@ def set_ja(self):
     self.ui.Button_Reset.setText("リセット")
     self.ui.Button_Save.setText("セーブ")
 
+
 def lang_module(self, lang):
-    if lang == 'zh-hant':
+    if lang == "zh-hant":
         set_hant(self)
-    elif lang == 'zh-hans':
+    elif lang == "zh-hans":
         set_hans(self)
-    elif lang == 'ja':
+    elif lang == "ja":
         set_ja(self)

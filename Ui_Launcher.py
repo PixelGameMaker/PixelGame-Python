@@ -121,16 +121,33 @@ class Ui_Main_Window(object):
     # setupUi
 
     def retranslateUi(self, Main_Window):
-        Main_Window.setWindowTitle(QCoreApplication.translate("Main_Window", u"Game Launcher", None))
-        self.Button_Play.setText(QCoreApplication.translate("Main_Window", u"Select\nClass", None))
+        Main_Window.setWindowTitle(
+            QCoreApplication.translate("Main_Window", u"Game Launcher", None)
+        )
+        self.Button_Play.setText(
+            QCoreApplication.translate("Main_Window", u"Select\nClass", None)
+        )
         self.Background.setText("")
-        self.Graphics_Settings.setTitle(QCoreApplication.translate("Main_Window", u"Graphics Settings", None))
-        self.label_Resolution.setText(QCoreApplication.translate("Main_Window", u"Resolution", None))
-        self.Windowed_Settings.setText(QCoreApplication.translate("Main_Window", u"Windowed", None))
+        self.Graphics_Settings.setTitle(
+            QCoreApplication.translate("Main_Window", u"Graphics Settings", None)
+        )
+        self.label_Resolution.setText(
+            QCoreApplication.translate("Main_Window", u"Resolution", None)
+        )
+        self.Windowed_Settings.setText(
+            QCoreApplication.translate("Main_Window", u"Windowed", None)
+        )
         self.label_FPS.setText(QCoreApplication.translate("Main_Window", u"FPS", None))
-        self.label_Music.setText(QCoreApplication.translate("Main_Window", u"Music", None))
+        self.label_Music.setText(
+            QCoreApplication.translate("Main_Window", u"Music", None)
+        )
         self.Music_On.setText(QCoreApplication.translate("Main_Window", u"On", None))
         self.Music_Off.setText(QCoreApplication.translate("Main_Window", u"Off", None))
-        self.Button_Reset.setText(QCoreApplication.translate("Main_Window", u"Reset", None))
-        self.Button_Save.setText(QCoreApplication.translate("Main_Window", u"Save", None))
+        self.Button_Reset.setText(
+            QCoreApplication.translate("Main_Window", u"Reset", None)
+        )
+        self.Button_Save.setText(
+            QCoreApplication.translate("Main_Window", u"Save", None)
+        )
+
     # retranslateUi
