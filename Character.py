@@ -158,12 +158,17 @@ def update_enemy_img(entity, direction):
             entity.surf = entity.surf_dict['walking_1_reverse']
 
 
+
 def update_bullet_image_direction(image, direction):
     if direction[0] == 0:
         direction[0] += 0.00000001
         
-    angle = 180-math.degrees(math.atan(direction[1] /direction[0]))
-     
+    if direction[0] < 0:    
+        angle = 180-math.degrees(math.atan(direction[1] /direction[0]))
+    else:
+        angle = -math.degrees(math.atan(direction[1] /direction[0]))
+    
+    #print(angle)
     image = pygame.transform.rotate(image, angle)
     return image
     
@@ -236,6 +241,7 @@ class Player(pygame.sprite.Sprite):
         
         self.mp = self.max_mp
         self.speed = self.set_speed
+        self.exp =0
         
         
         
@@ -244,7 +250,7 @@ class Player(pygame.sprite.Sprite):
     def update(self, direction):
         update_img(self, direction)
         if self.mp < self.max_mp:
-            self.mp += 0.5
+            self.mp += 0.1
         
         self.speed = self.set_speed *(1 +self.speedup)
         if self.speedup:
