@@ -1,0 +1,1 @@
+pyinstaller -F .\Launcher-main.py && pyinstaller -F .\cc_main.py && pyinstaller -F .\main.py && pyinstaller -F .\ErrorWindow.py && pyinstaller -F .\YouLose.py
