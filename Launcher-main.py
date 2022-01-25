@@ -2,15 +2,14 @@ import json
 import os
 import sys
 import time
-import logging
 
 import pyautogui
-
 from PySide2 import QtWidgets
 from PySide2.QtCore import QProcess
 from PySide2.QtGui import QFontDatabase
 
 from Ui_Launcher import Ui_Main_Window
+
 
 # WORKING DIR CHECK START
 
