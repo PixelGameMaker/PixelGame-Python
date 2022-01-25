@@ -31,7 +31,7 @@
         "cost": 5,
         "size": 0.01,
         "kind": "wave",
-        "frequency": 3,
+        "frequency": 2,
         "knockback": 1.0,
         "range": 300
     },
@@ -43,7 +43,7 @@
         "cost": 3,
         "size": 0.05,
         "kind": "wave",
-        "frequency": 1.5,
+        "frequency": 4,
         "knockback": 3.0,
         "range": 500
     }
