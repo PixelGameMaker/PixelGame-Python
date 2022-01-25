@@ -51,10 +51,11 @@ try:
             import pygame
 
             pygame.quit()
+            lvls = str(lvl)
             if not CheckPyInstaller():
-                subprocess.call(["python", "YouLose.py", "--lv", int(lvl)])
+                subprocess.call(["python", "YouLose.py", "--lv", lvls])
             else:
-                subprocess.call(["YouLose.exe", "--lv", int(lvl)])
+                subprocess.call(["YouLose.exe", "--lv", lvls])
             break
 
         else:

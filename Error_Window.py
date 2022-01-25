@@ -36,22 +36,19 @@ class Ui_Form(object):
         font1.setFamily(u"Unifont")
         font1.setPointSize(18)
         self.label.setFont(font1)
-        self.label.setAlignment(Qt.AlignCenter)
         self.label.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
-        self.label_2 = QLabel(Form)
+        self.label.setAlignment(Qt.AlignCenter)
+        self.label_2 = QTextBrowser(Form)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(10, 110, 701, 361))
+        self.label_2.setGeometry(QRect(10, 100, 701, 371))
         font2 = QFont()
         font2.setFamily(u"Unifont")
-        font2.setPointSize(15)
+        font2.setPointSize(12)
         self.label_2.setFont(font2)
-        self.label_2.setAlignment(Qt.AlignCenter)
-        self.label_2.setWordWrap(True)
 
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
-
     # setupUi
 
     def retranslateUi(self, Form):

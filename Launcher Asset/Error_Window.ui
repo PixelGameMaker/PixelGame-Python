@@ -36,7 +36,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>Launcher Asset/Logo.png</normaloff>Launcher Asset/Logo.png
+       <normaloff>Launcher Asset/Logo.png</normaloff>Launcher Asset/Logo.png
    </iconset>
   </property>
   <property name="locale">
@@ -54,43 +54,41 @@
    <property name="font">
     <font>
      <family>Unifont</family>
-     <pointsize>18</pointsize>
+        <pointsize>18</pointsize>
     </font>
    </property>
-   <property name="locale">
-    <locale language="English" country="UnitedStates"/>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unknown Error Occurred&lt;/p&gt;&lt;p&gt;Please Report to
-     Developer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-    </string>
-   </property>
+      <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+      </property>
+      <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unknown Error Occurred&lt;/p&gt;&lt;p&gt;Please Report
+              to
+              Developer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+          </string>
+      </property>
+      <property name="alignment">
+          <set>Qt::AlignCenter</set>
+      </property>
   </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>110</y>
-     <width>701</width>
-     <height>361</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Unifont</family>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
+     <widget class="QTextBrowser" name="label_2">
+         <property name="geometry">
+             <rect>
+                 <x>10</x>
+                 <y>100</y>
+                 <width>701</width>
+                 <height>371</height>
+             </rect>
+         </property>
+         <property name="font">
+             <font>
+                 <family>Unifont</family>
+                 <pointsize>15</pointsize>
+             </font>
+         </property>
+         <property name="markdown">
+             <string/>
+         </property>
+     </widget>
  </widget>
  <resources/>
  <connections/>
