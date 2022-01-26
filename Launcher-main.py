@@ -5,7 +5,7 @@ import sys
 import time
 
 import pyautogui
-from PySide2 import QtWidgets
+from PySide2 import QtWidgets,QtGui,QtCore
 from PySide2.QtCore import QProcess, Qt
 from PySide2.QtGui import QFontDatabase, QPixmap
 from PySide2.QtWidgets import QSplashScreen, QProgressBar
@@ -373,6 +373,10 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication()
     pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
     splash = QSplashScreen(pixmap)
+    splashlabel = QtWidgets.QLabel(splash)
+    splashgif = QtGui.QMovie("Launcher Asset/Logo_Splash.gif")
+    splashlabel.setMovie(splashgif)
+    splashgif.start()
     splash.show()
     secret_message = random.randint(1, 1000)
     if secret_message == 34:
@@ -382,6 +386,11 @@ if __name__ == "__main__":
     else:
         splash_message = "Loading..."
     splash.showMessage(splash_message, Qt.AlignBottom, Qt.black)
+    delayTime = 1.3
+    timer=QtCore.QElapsedTimer()
+    timer.start()
+    while timer.elapsed()<delayTime * 1000:
+        app.processEvents()
     window = MainWindow()
     window.show()
     splash.finish(window)
