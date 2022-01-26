@@ -1,12 +1,14 @@
 import json
 import os
+import random
 import sys
 import time
 
 import pyautogui
 from PySide2 import QtWidgets
-from PySide2.QtCore import QProcess
-from PySide2.QtGui import QFontDatabase
+from PySide2.QtCore import QProcess, Qt
+from PySide2.QtGui import QFontDatabase, QPixmap
+from PySide2.QtWidgets import QSplashScreen
 
 from Ui_Launcher import Ui_Main_Window
 
@@ -282,6 +284,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if rick == 10:
             import webbrowser
 
+            print("[INFO] Rick Astley is coming")
             webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             sys.exit(0)
 
@@ -368,6 +371,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
+    pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
+    splash = QSplashScreen(pixmap)
+    splash.show()
+    secret_message = random.randint(1, 50)
+    if secret_message == 34:
+        splash_message = "You can be Rick Rolled by press the image"
+    else:
+        splash_message = "Loading..."
+    splash.showMessage(splash_message, Qt.AlignBottom, Qt.black)
     window = MainWindow()
     window.show()
+    splash.finish(window)
     sys.exit(app.exec_())

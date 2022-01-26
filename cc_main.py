@@ -2,9 +2,10 @@ import json
 import os
 import time
 
-
 from PySide2 import QtWidgets
-from PySide2.QtGui import QFontDatabase
+from PySide2.QtCore import Qt, QProcess
+from PySide2.QtGui import QFontDatabase, QPixmap
+from PySide2.QtWidgets import QSplashScreen
 
 from choose_character import Ui_Form
 
@@ -157,12 +158,14 @@ class MainWindow_cc(QtWidgets.QWidget):
         self.showMinimized()
         # start game
         print(f"[INFO] Trying to start the game with class {data['choose']}.")
-        import subprocess
+        # import subprocess
 
         if CheckPyInstaller():
             if os.path.exists("main.exe"):
                 try:
-                    subprocess.call(["main.exe"])
+                    self.p = QProcess()
+                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                    self.p.start("main.exe")
                 except FileNotFoundError:
                     open_github_website()
                 except:
@@ -171,7 +174,9 @@ class MainWindow_cc(QtWidgets.QWidget):
                 open_github_website()
         elif os.path.exists("main.py"):
             try:
-                subprocess.call(["python", "main.py"])
+                self.p = QProcess()
+                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                self.p.start("python", ["main.py"])
             except FileNotFoundError:
                 open_github_website()
             """
@@ -194,7 +199,7 @@ class MainWindow_cc(QtWidgets.QWidget):
 
         else:
             open_github_website()
-        self.showNormal()
+        # self.showNormal()
         time.sleep(1)
 
 
@@ -202,6 +207,11 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication()
+    pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
+    splash = QSplashScreen(pixmap)
+    splash.show()
+    splash.showMessage("Magician makes our game suck...", Qt.AlignBottom, Qt.black)
     window = MainWindow_cc()
     window.show()
+    splash.finish(window)
     sys.exit(app.exec_())

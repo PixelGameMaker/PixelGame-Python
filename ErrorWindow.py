@@ -3,7 +3,9 @@ import os
 import sys
 
 from PySide2 import QtWidgets
-from PySide2.QtGui import QFontDatabase
+from PySide2.QtCore import Qt
+from PySide2.QtGui import QFontDatabase, QPixmap
+from PySide2.QtWidgets import QSplashScreen
 
 from Error_Window import Ui_Form
 
@@ -25,6 +27,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
+    pixmap = QPixmap("Launcher Asset/Logo_Died.png")
+    splash = QSplashScreen(pixmap)
+    splash.show()
+    splash.showMessage("Oops! Something went wrong...", Qt.AlignBottom, Qt.black)
+    app.processEvents()
     window = MainWindow()
     window.show()
+    splash.finish(window)
     sys.exit(app.exec_())

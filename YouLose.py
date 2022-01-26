@@ -2,7 +2,9 @@ import argparse
 import sys
 
 from PySide2 import QtWidgets
-from PySide2.QtGui import QFontDatabase
+from PySide2.QtCore import Qt
+from PySide2.QtGui import QFontDatabase, QPixmap
+from PySide2.QtWidgets import QSplashScreen
 
 from You_Lose import Ui_Form
 
@@ -31,6 +33,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
+    pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
+    splash = QSplashScreen(pixmap)
+    splash.show()
+    splash.showMessage("Thanks for playing", Qt.AlignBottom, Qt.black)
     window = MainWindow()
     window.show()
+    splash.finish(window)
     sys.exit(app.exec_())
