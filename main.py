@@ -51,11 +51,10 @@ try:
             import pygame
 
             pygame.quit()
-            lvls = str(lvl)
             if not CheckPyInstaller():
-                subprocess.call(["python", "YouLose.py", "--lv", lvls])
+                subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
             else:
-                subprocess.call(["YouLose.exe", "--lv", lvls])
+                subprocess.call(["YouLose.exe", "--lv", str(lvl)])
             break
 
         else:
@@ -71,7 +70,7 @@ except Exception:
     date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
     if not os.path.exists("ErrorLog"):
         os.mkdir("ErrorLog")
-    with open("ErrorLog/traceback_{}.txt".format(date), "w") as f:
+    with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "w") as f:
         f.write(error_data)
     if CheckPyInstaller():
         subprocess.call("ErrorWindow.exe")
