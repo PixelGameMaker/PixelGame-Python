@@ -216,9 +216,9 @@ if __name__ == "__main__":
     splash.show()
     splash.showMessage("Magician makes our game suck...", Qt.AlignBottom, Qt.black)
     delayTime = 1.3
-    timer=QtCore.QElapsedTimer()
+    timer = QtCore.QElapsedTimer()
     timer.start()
-    while timer.elapsed()<delayTime * 1000:
+    while timer.elapsed() < delayTime * 1000:
         app.processEvents()
     window = MainWindow_cc()
     window.show()
