@@ -5,10 +5,10 @@ import sys
 import time
 
 import pyautogui
-from PySide2 import QtWidgets,QtGui,QtCore
+from PySide2 import QtWidgets, QtGui, QtCore
 from PySide2.QtCore import QProcess, Qt
 from PySide2.QtGui import QFontDatabase, QPixmap
-from PySide2.QtWidgets import QSplashScreen, QProgressBar
+from PySide2.QtWidgets import QSplashScreen
 
 from Ui_Launcher import Ui_Main_Window
 
@@ -387,9 +387,9 @@ if __name__ == "__main__":
         splash_message = "Loading..."
     splash.showMessage(splash_message, Qt.AlignBottom, Qt.black)
     delayTime = 1.3
-    timer=QtCore.QElapsedTimer()
+    timer = QtCore.QElapsedTimer()
     timer.start()
-    while timer.elapsed()<delayTime * 1000:
+    while timer.elapsed() < delayTime * 1000:
         app.processEvents()
     window = MainWindow()
     window.show()
