@@ -1,6 +1,7 @@
 import glob
 import os
 import sys
+import time
 
 from PySide2 import QtWidgets
 from PySide2.QtCore import Qt
@@ -31,6 +32,8 @@ if __name__ == "__main__":
     splash = QSplashScreen(pixmap)
     splash.show()
     splash.showMessage("Oops! Something went wrong...", Qt.AlignBottom, Qt.black)
+    time.sleep(2)
+    splash.showMessage("Loading error messages...", Qt.AlignBottom, Qt.black)
     app.processEvents()
     window = MainWindow()
     window.show()

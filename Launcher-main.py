@@ -8,7 +8,7 @@ import pyautogui
 from PySide2 import QtWidgets
 from PySide2.QtCore import QProcess, Qt
 from PySide2.QtGui import QFontDatabase, QPixmap
-from PySide2.QtWidgets import QSplashScreen
+from PySide2.QtWidgets import QSplashScreen, QProgressBar
 
 from Ui_Launcher import Ui_Main_Window
 
@@ -374,9 +374,11 @@ if __name__ == "__main__":
     pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
     splash = QSplashScreen(pixmap)
     splash.show()
-    secret_message = random.randint(1, 50)
+    secret_message = random.randint(1, 1000)
     if secret_message == 34:
         splash_message = "You can be Rick Rolled by press the image"
+    elif secret_message == 615:
+        splash_message = "Tetora is my husband"
     else:
         splash_message = "Loading..."
     splash.showMessage(splash_message, Qt.AlignBottom, Qt.black)
