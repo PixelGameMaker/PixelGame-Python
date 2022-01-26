@@ -1,11 +1,12 @@
 * text=auto
 
 # Enforce Unix newlines
-*.py    text eol=lf linguist-vendored
+*.py    text eol=lf
 *.json  text eol=lf
 *.md    text eol=lf
 *.txt   text eol=lf
 *.ui    text eol=lf
+*.cmd linguist-vendored
 # Don't diff or textually merge source maps
 *.map   binary
 
