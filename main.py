@@ -57,15 +57,12 @@ try:
             import pygame
 
             pygame.quit()
+            with open("Json/save.json",'w') as b:
+                save = {"level":lvl}
+                json.dump(save, b, indent=4)
             if not CheckPyInstaller():
-                with open("Json/save.json",'w')as b:
-                    save={"level":lvl}
-                    json.dump(save,b,indent=4)
                 subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
             else:
-                with open("Json/save.json",'w')as b:
-                    save={"level":lvl}
-                    json.dump(save,b,indent=4)
                 subprocess.call(["realese/YouLose.exe", "--lv", str(lvl)])
             break
         else:
