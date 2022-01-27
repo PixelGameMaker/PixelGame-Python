@@ -21,6 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(None)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         if level >= 5:
             self.ui.label_2.setText(

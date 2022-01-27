@@ -35,6 +35,41 @@ def open_github_website():
     del webbrowser
 
 
+def check_lang():
+    # use module locale to check system language
+    try:
+        with open("Json/config.json", "r") as f:
+            lang_config = json.load(f)
+            lang = lang_config["lang"]
+            print(f"[INFO] Language in config is {lang}")
+            print("[INFO] Skipping system language detection")
+            return lang
+    except:
+        import locale
+
+        syslang = locale.getdefaultlocale()[0].lower()
+        if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
+            print("[INFO] System language is Chinese Traditional")
+            del locale
+            return "zh-hant"
+        elif syslang in ["zh_cn", "zh_sg", "zh_my", "zh_hans"]:
+            print("[INFO] System language is Chinese Simplified")
+            del locale
+            return "zh-hans"
+        elif syslang in ["ja_jp", "ja"]:
+            print("[INFO] System language is Japanese")
+            del locale
+            return "ja"
+        else:
+            print("[INFO] System language current is not support, set to English")
+            del locale
+            return "en"
+
+
+return_lang = check_lang()
+del check_lang
+
+
 class mainwindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(mainwindow, self).__init__(None)
@@ -46,6 +81,9 @@ class mainwindow(QtWidgets.QMainWindow):
             "Do you want continue?"
         )
         self.ui.text.setText(text)
+        from start_local import lang_module
+
+        lang_module(self, return_lang, int(data["level"]))
         self.ui.play1.clicked.connect(self.play1)
         self.ui.play2.clicked.connect(self.play2)
 

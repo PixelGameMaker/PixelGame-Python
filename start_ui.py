@@ -14,6 +14,11 @@ from PySide2.QtWidgets import *
 
 
 class Ui_Form(object):
+    def __init__(self):
+        self.text = None
+        self.play1 = None
+        self.play2 = None
+
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
