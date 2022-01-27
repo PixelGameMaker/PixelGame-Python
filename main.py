@@ -36,7 +36,13 @@ data = json.load(fo)
 fo.close()
 del fo
 
-lvl = 0
+if not os.path.isfile("Json/save.json"):
+    lvl = 0
+else:
+    with open("Json/save.json",'r')as s:
+        save = json.load(s)
+        lvl = int(save["level"])-1
+
 
 try:
     while True:
@@ -52,11 +58,16 @@ try:
 
             pygame.quit()
             if not CheckPyInstaller():
+                with open("Json/save.json",'w')as b:
+                    save={"level":lvl}
+                    json.dump(save,b,indent=4)
                 subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
             else:
+                with open("Json/save.json",'w')as b:
+                    save={"level":lvl}
+                    json.dump(save,b,indent=4)
                 subprocess.call(["YouLose.exe", "--lv", str(lvl)])
             break
-
         else:
             print("pass")
 

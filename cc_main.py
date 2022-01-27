@@ -159,48 +159,56 @@ class MainWindow_cc(QtWidgets.QWidget):
         # start game
         print(f"[INFO] Trying to start the game with class {data['choose']}.")
         # import subprocess
-
-        if CheckPyInstaller():
-            if os.path.exists("main.exe"):
+        if os.path.isfile('Json/save.json'):
+            if CheckPyInstaller():
+                if os.path.exists("start.exe"):
+                    try:
+                        self.p = QProcess()
+                        self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                        self.p.start("start.exe")
+                    except FileNotFoundError:
+                        open_github_website()
+                    except:
+                        print("[ERROR] Unknown game error, please report to developer.")
+                else:
+                    open_github_website()
+            elif os.path.exists("start.py"):
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("main.exe")
+                    self.p.start("python", ["start.py"])
                 except FileNotFoundError:
                     open_github_website()
-                except:
-                    print("[ERROR] Unknown game error, please report to developer.")
             else:
                 open_github_website()
-        elif os.path.exists("main.py"):
-            try:
-                self.p = QProcess()
-                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                self.p.start("python", ["main.py"])
-            except FileNotFoundError:
-                open_github_website()
-            """
-            except Exception:
-                print("[ERROR] Unknown game error, please report to developer.")
-                error_data = traceback.format_exc()
-                # print(error_data)
-                date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
-                if not os.path.exists("ErrorLog"):
-                    os.mkdir("ErrorLog")
-                with open('ErrorLog/traceback_{}.txt'.format(date), 'w') as f:
-                    f.write(error_data)
-                if CheckPyInstaller():
-                    self.p = QProcess()
-                    self.p.start("ErrorWindow.exe")
+            # self.showNormal()
+            time.sleep(1)
+        elif not os.path.isfile('Json/save.json'):
+            if CheckPyInstaller():
+                if os.path.exists("main.exe"):
+                    try:
+                        self.p = QProcess()
+                        self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                        self.p.start("main.exe")
+                    except FileNotFoundError:
+                        open_github_website()
+                    except:
+                        print("[ERROR] Unknown game error, please report to developer.")
                 else:
+                    open_github_website()
+            elif os.path.exists("main.py"):
+                try:
                     self.p = QProcess()
-                    self.p.start("python", "ErrorWindow.py")
-            """
+                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                    self.p.start("python", ["main.py"])
+                except FileNotFoundError:
+                    open_github_website()
+            else:
+                open_github_website()
+            # self.showNormal()
+            time.sleep(1)
 
-        else:
-            open_github_website()
-        # self.showNormal()
-        time.sleep(1)
+       
 
 
 if __name__ == "__main__":
