@@ -71,7 +71,7 @@ try:
         else:
             print("pass")
 
-except Exception:
+except:
     print("[ERROR] Unknown game error, please report to developer.")
     import pygame
 
@@ -81,7 +81,8 @@ except Exception:
     date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
     if not os.path.exists("ErrorLog"):
         os.mkdir("ErrorLog")
-    with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "w") as f:
+    with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
+        f.write("Error Occurred on lv." + str(lvl) + "\n\n")
         f.write(error_data)
     if CheckPyInstaller():
         subprocess.call("ErrorWindow.exe")

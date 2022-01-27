@@ -1,6 +1,6 @@
 def set_hant(self):
-    self.ui.cc1.setText("選弓箭手")
-    self.ui.cc2.setText("選騎士")
+    self.ui.cc1.setText("弓箭手")
+    self.ui.cc2.setText("騎士")
     self.ui.play.setText("開始遊戲")
     self.ui.cc3.setText("法師")
     self.ui.cc4.setText("刺客")
@@ -15,11 +15,11 @@ def set_hant(self):
 
 
 def set_hans(self):
-    self.ui.cc1.setText("选弓箭手")
-    self.ui.cc2.setText("选骑士")
+    self.ui.cc1.setText("弓箭手")
+    self.ui.cc2.setText("骑士")
     self.ui.play.setText("开始游戏")
-    self.ui.cc3.setText("选法师")
-    self.ui.cc4.setText("选刺客")
+    self.ui.cc3.setText("法师")
+    self.ui.cc4.setText("刺客")
     self.ui.Archer.setText("弓箭手")
     self.ui.Knight.setText("骑士")
     self.ui.Magician.setText("法师")

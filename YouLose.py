@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from PySide2 import QtWidgets
+from PySide2 import QtWidgets, QtGui, QtCore
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QFontDatabase, QPixmap
 from PySide2.QtWidgets import QSplashScreen
@@ -35,8 +35,17 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication()
     pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
     splash = QSplashScreen(pixmap)
+    splashlabel = QtWidgets.QLabel(splash)
+    splashgif = QtGui.QMovie("Launcher Asset/Logo_Splash.gif")
+    splashlabel.setMovie(splashgif)
+    splashgif.start()
     splash.show()
     splash.showMessage("Thanks for playing", Qt.AlignBottom, Qt.black)
+    delayTime = 1.3
+    timer = QtCore.QElapsedTimer()
+    timer.start()
+    while timer.elapsed() < delayTime * 1000:
+        app.processEvents()
     window = MainWindow()
     window.show()
     splash.finish(window)
