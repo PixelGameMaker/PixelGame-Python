@@ -60,7 +60,7 @@ try:
         else:
             print("pass")
 
-except Exception:
+except:
     print("[ERROR] Unknown game error, please report to developer.")
     import pygame
 
