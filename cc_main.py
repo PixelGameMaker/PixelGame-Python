@@ -161,11 +161,12 @@ class MainWindow_cc(QtWidgets.QWidget):
         # import subprocess
         if os.path.isfile('Json/save.json'):
             if CheckPyInstaller():
-                if os.path.exists("start.exe"):
+                if os.path.exists("realese/start.exe"):
+                    print('True')
                     try:
                         self.p = QProcess()
                         self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                        self.p.start("start.exe")
+                        self.p.start("realese/start.exe")
                     except FileNotFoundError:
                         open_github_website()
                     except:
@@ -173,6 +174,7 @@ class MainWindow_cc(QtWidgets.QWidget):
                 else:
                     open_github_website()
             elif os.path.exists("start.py"):
+                print('False')
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
@@ -185,11 +187,12 @@ class MainWindow_cc(QtWidgets.QWidget):
             time.sleep(1)
         elif not os.path.isfile('Json/save.json'):
             if CheckPyInstaller():
-                if os.path.exists("main.exe"):
+                if os.path.exists("realese/main.exe"):
+                    print('True')
                     try:
                         self.p = QProcess()
                         self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                        self.p.start("main.exe")
+                        self.p.start("realese/main.exe")
                     except FileNotFoundError:
                         open_github_website()
                     except:
@@ -197,6 +200,7 @@ class MainWindow_cc(QtWidgets.QWidget):
                 else:
                     open_github_website()
             elif os.path.exists("main.py"):
+                print('False')
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)

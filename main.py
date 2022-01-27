@@ -66,7 +66,7 @@ try:
                 with open("Json/save.json",'w')as b:
                     save={"level":lvl}
                     json.dump(save,b,indent=4)
-                subprocess.call(["YouLose.exe", "--lv", str(lvl)])
+                subprocess.call(["realese/YouLose.exe", "--lv", str(lvl)])
             break
         else:
             print("pass")
@@ -85,6 +85,6 @@ except:
         f.write("Error Occurred on lv." + str(lvl) + "\n\n")
         f.write(error_data)
     if CheckPyInstaller():
-        subprocess.call("ErrorWindow.exe")
+        subprocess.call("realese/ErrorWindow.exe")
     else:
         subprocess.call(["python", "ErrorWindow.py"])

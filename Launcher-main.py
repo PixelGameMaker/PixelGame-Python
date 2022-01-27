@@ -352,21 +352,23 @@ class MainWindow(QtWidgets.QMainWindow):
             self.p.start(ProcName)
 
         if CheckPyInstaller():
-            if os.path.exists("cc_main.exe"):
+            if os.path.exists("realese/cc_main.exe"):
+                print('True')
                 try:
-                    Run_cc2(self, "cc_main.exe")
+                    Run_cc2(self, "realese/cc_main.exe")
                 except:
                     open_github_website()
             else:
                 open_github_website()
         else:
+            print('False')
             if os.path.exists("cc_main.py"):
                 try:
                     Run_cc(self, "python", "cc_main.py")
                 except:
                     open_github_website()
             else:
-                open_github_website()
+                open_github_website()  
 
 
 if __name__ == "__main__":

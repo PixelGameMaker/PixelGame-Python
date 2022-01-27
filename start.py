@@ -46,11 +46,11 @@ class mainwindow(QtWidgets.QMainWindow):
     def play1(self):
         self.showMinimized()
         if CheckPyInstaller():
-            if os.path.exists("main.exe"):
+            if os.path.exists("realese/main.exe"):
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("main.exe")
+                    self.p.start("realese/main.exe")
                 except FileNotFoundError:
                     open_github_website()
                 except:
@@ -73,11 +73,11 @@ class mainwindow(QtWidgets.QMainWindow):
             level = {"level": 0 }
             json.dump(level,s,indent=4)
         if CheckPyInstaller():
-            if os.path.exists("main.exe"):
+            if os.path.exists("realese/main.exe"):
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("main.exe")
+                    self.p.start("realese/main.exe")
                 except FileNotFoundError:
                     open_github_website()
                 except:
