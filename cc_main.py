@@ -159,7 +159,7 @@ class MainWindow_cc(QtWidgets.QWidget):
         # start game
         print(f"[INFO] Trying to start the game with class {data['choose']}.")
         # import subprocess
-        if os.path.isfile('Json/save.json'):
+        if os.path.isfile("Json/save.json"):
             if CheckPyInstaller():
                 if os.path.exists("start.exe"):
                     try:
@@ -183,7 +183,7 @@ class MainWindow_cc(QtWidgets.QWidget):
                 open_github_website()
             # self.showNormal()
             time.sleep(1)
-        elif not os.path.isfile('Json/save.json'):
+        elif not os.path.isfile("Json/save.json"):
             if CheckPyInstaller():
                 if os.path.exists("main.exe"):
                     try:
@@ -207,8 +207,6 @@ class MainWindow_cc(QtWidgets.QWidget):
                 open_github_website()
             # self.showNormal()
             time.sleep(1)
-
-       
 
 
 if __name__ == "__main__":

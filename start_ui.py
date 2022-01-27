@@ -1,50 +1,62 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\start.ui',
-# licensing of '.\start.ui' applies.
-#
-# Created: Thu Jan 27 12:33:13 2022
-#      by: pyside2-uic  running on PySide2 5.13.2
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'start.ui'
+##
+## Created by: Qt User Interface Compiler version 5.15.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        if not Form.objectName():
+            Form.setObjectName(u"Form")
         Form.resize(640, 480)
-        Form.setMinimumSize(QtCore.QSize(640, 480))
-        Form.setMaximumSize(QtCore.QSize(640, 480))
-        self.text = QtWidgets.QLabel(Form)
-        self.text.setGeometry(QtCore.QRect(90, 50, 461, 101))
-        font = QtGui.QFont()
-        font.setFamily("Unifont")
+        Form.setMinimumSize(QSize(640, 480))
+        Form.setMaximumSize(QSize(640, 480))
+        Form.setWindowTitle(u"Game Save Choose")
+        icon = QIcon()
+        icon.addFile(u"Launcher Asset/Logo.png", QSize(), QIcon.Normal, QIcon.Off)
+        Form.setWindowIcon(icon)
+        self.text = QLabel(Form)
+        self.text.setObjectName(u"text")
+        self.text.setGeometry(QRect(90, 50, 461, 101))
+        self.text.setAlignment(Qt.AlignCenter)
+        self.play1 = QPushButton(Form)
+        self.play1.setObjectName(u"play1")
+        self.play1.setGeometry(QRect(20, 310, 281, 131))
+        font = QFont()
+        font.setFamily(u"Unifont")
         font.setPointSize(18)
+        # font.setStyleStrategy(QFont.NoAntialias)
         self.text.setFont(font)
-        self.text.setObjectName("text")
-        self.play1 = QtWidgets.QPushButton(Form)
-        self.play1.setGeometry(QtCore.QRect(20, 310, 281, 131))
-        font = QtGui.QFont()
-        font.setFamily("Unifont")
-        font.setPointSize(18)
         self.play1.setFont(font)
-        self.play1.setObjectName("play1")
-        self.play2 = QtWidgets.QPushButton(Form)
-        self.play2.setGeometry(QtCore.QRect(340, 310, 281, 131))
-        font = QtGui.QFont()
-        font.setFamily("Unifont")
-        font.setPointSize(18)
+        self.play2 = QPushButton(Form)
+        self.play2.setObjectName(u"play2")
+        self.play2.setGeometry(QRect(340, 310, 281, 131))
         self.play2.setFont(font)
-        self.play2.setObjectName("play2")
 
         self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+
+        QMetaObject.connectSlotsByName(Form)
+
+    # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtWidgets.QApplication.translate("Form", "Form", None, -1))
-        self.text.setText(QtWidgets.QApplication.translate("Form", "TextLabel", None, -1))
-        self.play1.setText(QtWidgets.QApplication.translate("Form", "Yes,let me continue.", None, -1))
-        self.play2.setText(QtWidgets.QApplication.translate("Form", "No,let me \n"
-        "start from beginning.", None, -1))
+        self.text.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.play1.setText(
+            QCoreApplication.translate("Form", u"Yes,let me continue.", None)
+        )
+        self.play2.setText(
+            QCoreApplication.translate(
+                "Form", u"No,let me \n" "start from beginning.", None
+            )
+        )
 
+    # retranslateUi
