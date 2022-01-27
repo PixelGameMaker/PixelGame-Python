@@ -39,10 +39,9 @@ del fo
 if not os.path.isfile("Json/save.json"):
     lvl = 0
 else:
-    with open("Json/save.json",'r')as s:
+    with open("Json/save.json", "r") as s:
         save = json.load(s)
-        lvl = int(save["level"])-1
-
+        lvl = int(save["level"]) - 1
 
 try:
     while True:
@@ -57,8 +56,8 @@ try:
             import pygame
 
             pygame.quit()
-            with open("Json/save.json",'w') as b:
-                save = {"level":lvl}
+            with open("Json/save.json", "w") as b:
+                save = {"level": lvl}
                 json.dump(save, b, indent=4)
             if not CheckPyInstaller():
                 subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
@@ -81,6 +80,9 @@ except:
     with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
         f.write("Error Occurred on lv." + str(lvl) + "\n\n")
         f.write(error_data)
+    with open("Json/save.json", "w") as b:
+        save = {"level": lvl}
+        json.dump(save, b, indent=4)
     if CheckPyInstaller():
         subprocess.call("realese/ErrorWindow.exe")
     else:
