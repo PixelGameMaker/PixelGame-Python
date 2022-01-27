@@ -67,27 +67,25 @@ def check_lang():
             lang = lang_config["lang"]
             print(f"[INFO] Language in config is {lang}")
             print("[INFO] Skipping system language detection")
-            return lang
+            syslang = lang
     except:
         import locale
 
         syslang = locale.getdefaultlocale()[0].lower()
-        if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
-            print("[INFO] System language is Chinese Traditional")
-            del locale
-            return "zh-hant"
-        elif syslang in ["zh_cn", "zh_sg", "zh_my", "zh_hans"]:
-            print("[INFO] System language is Chinese Simplified")
-            del locale
-            return "zh-hans"
-        elif syslang in ["ja_jp", "ja"]:
-            print("[INFO] System language is Japanese")
-            del locale
-            return "ja"
-        else:
-            print("[INFO] System language current is not support, set to English")
-            del locale
-            return "en"
+        del locale
+
+    if syslang in ["zh_tw", "zh_hk", "zh_mo", "zh_hant"]:
+        print("[INFO] System language is Chinese Traditional")
+        return "zh-hant"
+    elif syslang in ["zh_cn", "zh_sg", "zh_my", "zh_hans"]:
+        print("[INFO] System language is Chinese Simplified")
+        return "zh-hans"
+    elif syslang in ["ja_jp", "ja"]:
+        print("[INFO] System language is Japanese")
+        return "ja"
+    else:
+        print("[INFO] System language current is not support, set to English")
+        return "en"
 
 
 return_lang = check_lang()
