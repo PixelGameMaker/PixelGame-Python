@@ -281,6 +281,9 @@ class MainWindow(QtWidgets.QMainWindow):
             import webbrowser
 
             print("[INFO] Rick Astley is coming")
+            QtWidgets.QMessageBox.information(
+                self, "Look what have you done!", "Never Gonna Give You Up :)"
+            )
             webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             sys.exit(0)
 
