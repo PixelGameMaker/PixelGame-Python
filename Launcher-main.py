@@ -6,9 +6,9 @@ import time
 
 import pyautogui
 from PySide2 import QtWidgets, QtGui, QtCore
-from PySide2.QtCore import QProcess, Qt
-from PySide2.QtGui import QFontDatabase, QPixmap
-from PySide2.QtWidgets import QSplashScreen
+# from PySide2.QtCore import QProcess, Qt
+# from PySide2.QtGui import QFontDatabase, QPixmap
+# from PySide2.QtWidgets import QSplashScreen
 
 from Ui_Launcher import Ui_Main_Window
 
@@ -235,7 +235,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_Main_Window()
         self.ui.setupUi(self)
         # setup font
-        QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
+        QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         # add combo box text from config.json
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
@@ -340,14 +340,14 @@ class MainWindow(QtWidgets.QMainWindow):
         del data
 
         def Run_cc(self, method, ProcName):
-            self.p = QProcess()
-            self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+            self.p = QtCore.QProcess()
+            self.p.setProcessChannelMode(QtCore.QProcess.ForwardedChannels)
             self.p.start(method, [ProcName])
             print("[INFO] Play Button clicked, please select character to play")
 
         def Run_cc2(self, ProcName):
-            self.p = QProcess()
-            self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+            self.p = QtCore.QProcess()
+            self.p.setProcessChannelMode(QtCore.QProcess.ForwardedChannels)
             self.p.start(ProcName)
 
         if CheckPyInstaller():
@@ -370,8 +370,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
-    pixmap = QPixmap("Launcher Asset/Logo_Splash.png")
-    splash = QSplashScreen(pixmap)
+    pixmap = QtGui.QPixmap("Launcher Asset/Logo_Splash.png")
+    splash = QtWidgets.QSplashScreen(pixmap)
     splashlabel = QtWidgets.QLabel(splash)
     splashgif = QtGui.QMovie("Launcher Asset/Logo_Splash.gif")
     splashlabel.setMovie(splashgif)
@@ -384,7 +384,7 @@ if __name__ == "__main__":
         splash_message = "Tetora is my husband"
     else:
         splash_message = "Loading..."
-    splash.showMessage(splash_message, Qt.AlignBottom, Qt.black)
+    splash.showMessage(splash_message, QtCore.Qt.AlignBottom, QtCore.Qt.black)
     delayTime = 1.3
     timer = QtCore.QElapsedTimer()
     timer.start()
