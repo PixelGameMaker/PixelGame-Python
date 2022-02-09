@@ -12,7 +12,6 @@ import pyautogui
 from PySide2 import QtWidgets, QtCore, QtGui
 from PySide2.QtCore import QProcess
 
-
 import cc_main_localization
 import launcher_localization
 import start_local
@@ -96,7 +95,7 @@ def json_dump():
     width, height = pyautogui.size()
     screensize = f"{width} x {height}"
     print(f"[INFO] Your screen size is {screensize}")
-    with open("Json/config.json", "w") as f:
+    with open("Json/config.json", "w") as g:
         # add resolution, music, windowed to json
         if width > 1920 and height > 1080:
             json.dump(
@@ -107,7 +106,7 @@ def json_dump():
                     "windowed": False,
                     "fps": 60,
                 },
-                f,
+                g,
                 indent=4,
             )
         else:
@@ -119,10 +118,11 @@ def json_dump():
                     "windowed": False,
                     "fps": 60,
                 },
-                f,
+                g,
                 indent=4,
             )
-        # add resolution 2k and 4k if screensize over 1920 x 1080
+    del g, screensize, width, height
+    # add resolution 2k and 4k if screensize over 1920 x 1080
 
 
 if not os.path.isfile("Json/config.json"):
@@ -140,7 +140,7 @@ try:
         music = config["music"]
         windowed = config["windowed"]
         fps = config["fps"]
-    del config
+    del config, f
 
 except:
     print("[WARN] config.json corrupt.")
@@ -155,14 +155,14 @@ finally:
     print(f"[INFO] The windowed in config is {config['windowed']}")
     print(f"[INFO] The fps in config is {config['fps']}")
     print("[INFO] Starting launcher window")
-
-save = {}
+    del f
 
 
 def json_reset():
     with open("Json/choose.json", "w") as f:
         choose_data = {"choose": "Archer"}
         json.dump(choose_data, f, indent=4)
+    del f, choose_data
 
 
 if not os.path.isfile("Json/choose.json"):
@@ -173,6 +173,7 @@ if not os.path.isfile("Json/choose.json"):
 try:
     with open("Json/choose.json", "r") as f:
         choose_data = json.load(f)
+    del f
 except:
     print("[WARN] choose.json is broken.")
     print("[WARN] Creating new choose.json.")
@@ -233,6 +234,7 @@ def json_save(self):
     # write to config.json
     with open("Json/config.json", "r") as f:
         a = json.load(f)
+    del f
     with open("Json/config.json", "w") as f:
         # add dict
         try:
@@ -254,12 +256,13 @@ def json_save(self):
                 "fps": fps,
             }
         json.dump(choose_data, f, indent=4)
-    del a, choose_data
+    del a, choose_data, f
 
 
 class Launcher_Window(QtWidgets.QMainWindow):
     def __init__(self):
         super(Launcher_Window, self).__init__(None)
+        self.cc = Choose_Character_Window()
         self.ui = launcher_window()
         self.ui.setupUi(self)
         # setup font
@@ -319,6 +322,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
         print("[INFO] Reset config.json")
         with open("Json/config.json", "r") as f:
             config = json.load(f)
+        del f
         self.ui.Windowed_Settings.setChecked(False)
         self.ui.Music_On.setChecked(True)
         self.ui.Music_Off.setChecked(False)
@@ -350,11 +354,11 @@ class Launcher_Window(QtWidgets.QMainWindow):
             }
             json.dump(data, f, indent=4)
         print("[INFO] Save config.json")
-        del preferresolution, windowed, music, fps, data
+        del preferresolution, windowed, music, fps, data, f
 
     def Play(self):
         print("[INFO] Starting game and saving settings data")
-        #self.showMinimized()
+        self.showMinimized()
         json_save(self)
         with open("Json/config.json", "r") as f:
             data = json.load(f)
@@ -365,7 +369,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
             f"fps is {data['fps']}\n"
         )
         del data
-        self.cc = Choose_Character_Window()
+        # self.cc = Choose_Character_Window()
         self.cc.show()
         """
         def Run_cc(self, method, ProcName):
@@ -401,14 +405,17 @@ class Launcher_Window(QtWidgets.QMainWindow):
 class Choose_Character_Window(QtWidgets.QWidget):
     def __init__(self):
         super(Choose_Character_Window, self).__init__(None)
+        self.start = None
         self.ui = choose_character_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
+        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.ui.cc1.clicked.connect(self.chooseArcher)
         self.ui.cc2.clicked.connect(self.chooseKnight)
         self.ui.cc3.clicked.connect(self.chooseMagician)
         self.ui.cc4.clicked.connect(self.chooseAssassin)
         self.ui.play.clicked.connect(self.play)
+        # self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowStaysOnTopHint)
 
         self.Archer = "You will play 'Archer' in game."
         self.Knight = "You will play 'Knight' in game."
@@ -453,6 +460,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
             choose_data = {"choose": nowchoose}
             json.dump(choose_data, f, indent=4)
         self.ui.now_choose.setText(arg1)
+        del f, choose_data
 
     def play(self):
         self.showMinimized()
@@ -461,10 +469,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
         # import subprocess
         if os.path.isfile("Json/save.json"):
             print('The save.json exist')
-            with open("Json/save.json", "r") as f:
-                global save
-                save = json.load(f)
-            
+            """
             if CheckPyInstaller():
                 if os.path.exists("start.exe"):
                     try:
@@ -487,9 +492,11 @@ class Choose_Character_Window(QtWidgets.QWidget):
                     open_github_website()
             else:
                 open_github_website()
+            """
+            self.start = Start_Window()
+            self.start.show()
             # self.showNormal()
-            time.sleep(1)
-        elif not os.path.isfile("Json/save.json"):
+        else:
             print("The save.json doesn't exist")
             if CheckPyInstaller():
                 if os.path.exists("main.exe"):
@@ -513,19 +520,19 @@ class Choose_Character_Window(QtWidgets.QWidget):
             else:
                 open_github_website()
             # self.showNormal()
-            time.sleep(1)
-        
+        time.sleep(1)
 
 
 class Start_Window(QtWidgets.QMainWindow):
     def __init__(self):
         super(Start_Window, self).__init__(None)
+        self.p = None
         self.ui = start_window()
         self.ui.setupUi(self)
-        if os.path.exists('Json/save.json'):
-            with open('Json/save.json') as s:
-                save = json.load(s)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
+        with open("Json/save.json", "r") as f:
+            save = json.load(f)
+            del f
         text = (
             f"You have arrived the level {int(save['level'])} \n"
             "Do you want continue?"
@@ -538,7 +545,6 @@ class Start_Window(QtWidgets.QMainWindow):
 
     def play1(self):
         self.showMinimized()
-        """
         if CheckPyInstaller():
             if os.path.exists("main.exe"):
                 try:
@@ -562,14 +568,13 @@ class Start_Window(QtWidgets.QMainWindow):
             open_github_website()
             print("[ERROR] Unknown game error, please report to developer.")
         # self.showNormal()
-        """
 
     def play2(self):
         self.showMinimized()
         with open("Json/save.json", "w") as s:
             level = {"level": 0}
             json.dump(level, s, indent=4)
-        """
+
         if CheckPyInstaller():
             try:
                 self.p = QProcess()
@@ -584,7 +589,6 @@ class Start_Window(QtWidgets.QMainWindow):
                 self.p.start("python", ["main.py"])
             except FileNotFoundError:
                 open_github_website()
-        """
 
 
 if __name__ == "__main__":
@@ -606,7 +610,7 @@ if __name__ == "__main__":
         splash_message = "Loading..."
     # splash.setFont(u"Unifont")
     splash.showMessage(splash_message, QtCore.Qt.AlignBottom, QtCore.Qt.black)
-    delayTime = 1.3
+    delayTime = 1.5
     timer = QtCore.QElapsedTimer()
     timer.start()
     while timer.elapsed() < delayTime * 1000:
