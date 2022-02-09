@@ -10,6 +10,8 @@ import webbrowser
 
 import pyautogui
 from PySide2 import QtWidgets, QtCore, QtGui
+from PySide2.QtCore import QProcess
+
 
 import cc_main_localization
 import launcher_localization
@@ -352,7 +354,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
 
     def Play(self):
         print("[INFO] Starting game and saving settings data")
-        self.showMinimized()
+        #self.showMinimized()
         json_save(self)
         with open("Json/config.json", "r") as f:
             data = json.load(f)
@@ -363,6 +365,8 @@ class Launcher_Window(QtWidgets.QMainWindow):
             f"fps is {data['fps']}\n"
         )
         del data
+        self.cc = Choose_Character_Window()
+        self.cc.show()
         """
         def Run_cc(self, method, ProcName):
             self.p = QtCore.QProcess()
@@ -456,10 +460,11 @@ class Choose_Character_Window(QtWidgets.QWidget):
         print(f"[INFO] Trying to start the game with class {choose_data['choose']}.")
         # import subprocess
         if os.path.isfile("Json/save.json"):
+            print('The save.json exist')
             with open("Json/save.json", "r") as f:
                 global save
                 save = json.load(f)
-            """
+            
             if CheckPyInstaller():
                 if os.path.exists("start.exe"):
                     try:
@@ -476,7 +481,8 @@ class Choose_Character_Window(QtWidgets.QWidget):
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("python", ["start.py"])
+                    self.start = Start_Window()
+                    self.start.show()
                 except FileNotFoundError:
                     open_github_website()
             else:
@@ -484,6 +490,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
             # self.showNormal()
             time.sleep(1)
         elif not os.path.isfile("Json/save.json"):
+            print("The save.json doesn't exist")
             if CheckPyInstaller():
                 if os.path.exists("main.exe"):
                     try:
@@ -507,7 +514,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
                 open_github_website()
             # self.showNormal()
             time.sleep(1)
-        """
+        
 
 
 class Start_Window(QtWidgets.QMainWindow):
@@ -515,6 +522,9 @@ class Start_Window(QtWidgets.QMainWindow):
         super(Start_Window, self).__init__(None)
         self.ui = start_window()
         self.ui.setupUi(self)
+        if os.path.exists('Json/save.json'):
+            with open('Json/save.json') as s:
+                save = json.load(s)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         text = (
             f"You have arrived the level {int(save['level'])} \n"
