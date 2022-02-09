@@ -1,4 +1,3 @@
-# import requests
 # import datetime
 # import subprocess
 import json
@@ -9,6 +8,7 @@ import time
 import webbrowser
 
 import pyautogui
+import requests
 from PySide2 import QtWidgets, QtCore, QtGui
 from PySide2.QtCore import QProcess
 
@@ -259,6 +259,19 @@ def json_save(self):
     del a, choose_data, f
 
 
+try:
+    update_check = requests.get("https://api.github.com/repos/cytsai1008/PixelRPG-Python/tags").json()
+    if update_check[0]["name"] != "0.0.3-Alpha":
+        print("[INFO] New version available.")
+        updateable = True
+    else:
+        print("[INFO] No new version available.")
+        updateable = False
+except:
+    print("[WARN] Can't check update.")
+    updateable = False
+
+
 class Launcher_Window(QtWidgets.QMainWindow):
     def __init__(self):
         super(Launcher_Window, self).__init__(None)
@@ -268,14 +281,20 @@ class Launcher_Window(QtWidgets.QMainWindow):
         # setup font
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         # add combo box text from config.json
+        launcher_localization.lang_module(self, return_lang)
+        # localization
+        if updateable:
+            update_text = launcher_localization.update_word(return_lang)
+            if QtWidgets.QMessageBox.Yes == QtWidgets.QMessageBox.information(self, "Update Available", update_text,
+                                                                              QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                                                              QtWidgets.QMessageBox.No):
+                open_github_website()
+
         self.ui.Resolution_Settings.addItems(config["resolution"])
         # set combo box text from config.json if preferresolution exist
         self.ui.Resolution_Settings.setCurrentText(config["preferresolution"])
         print(f"[INFO] Prefer resolution is {config['preferresolution']}")
 
-        # localization
-
-        launcher_localization.lang_module(self, return_lang)
         # setting up environment
 
         if config["windowed"]:
