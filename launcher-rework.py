@@ -1,24 +1,22 @@
 # import requests
-import os
-import pyautogui
-import time
 # import datetime
 # import subprocess
 import json
+import os
 import random
 import sys
+import time
 import webbrowser
 
+import pyautogui
 from PySide2 import QtWidgets, QtCore, QtGui
 
-from Ui_Launcher import Ui_Main_Window as launcher_window
-import launcher_localization
-
-from choose_character import Ui_Form as choose_character_window
 import cc_main_localization
-
-from start_ui import Ui_Form as start_window
+import launcher_localization
 import start_local
+from Ui_Launcher import Ui_Main_Window as launcher_window
+from choose_character import Ui_Form as choose_character_window
+from start_ui import Ui_Form as start_window
 
 
 # WORKING DIR CHECK START
@@ -155,6 +153,8 @@ finally:
     print(f"[INFO] The windowed in config is {config['windowed']}")
     print(f"[INFO] The fps in config is {config['fps']}")
     print("[INFO] Starting launcher window")
+
+save = {}
 
 
 def json_reset():
@@ -456,6 +456,9 @@ class Choose_Character_Window(QtWidgets.QWidget):
         print(f"[INFO] Trying to start the game with class {choose_data['choose']}.")
         # import subprocess
         if os.path.isfile("Json/save.json"):
+            with open("Json/save.json", "r") as f:
+                global save
+                save = json.load(f)
             """
             if CheckPyInstaller():
                 if os.path.exists("start.exe"):
@@ -504,6 +507,73 @@ class Choose_Character_Window(QtWidgets.QWidget):
                 open_github_website()
             # self.showNormal()
             time.sleep(1)
+        """
+
+
+class Start_Window(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Start_Window, self).__init__(None)
+        self.ui = start_window()
+        self.ui.setupUi(self)
+        QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
+        text = (
+            f"You have arrived the level {int(save['level'])} \n"
+            "Do you want continue?"
+        )
+        self.ui.text.setText(text)
+
+        start_local.lang_module(self, return_lang, int(save["level"]))
+        self.ui.play1.clicked.connect(self.play1)
+        self.ui.play2.clicked.connect(self.play2)
+
+    def play1(self):
+        self.showMinimized()
+        """
+        if CheckPyInstaller():
+            if os.path.exists("main.exe"):
+                try:
+                    self.p = QProcess()
+                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                    self.p.start("main.exe")
+                except FileNotFoundError:
+                    open_github_website()
+                except:
+                    print("[ERROR] Unknown game error, please report to developer.")
+            else:
+                open_github_website()
+        elif os.path.exists("main.py"):
+            try:
+                self.p = QProcess()
+                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                self.p.start("python", ["main.py"])
+            except FileNotFoundError:
+                open_github_website()
+        else:
+            open_github_website()
+            print("[ERROR] Unknown game error, please report to developer.")
+        # self.showNormal()
+        """
+
+    def play2(self):
+        self.showMinimized()
+        with open("Json/save.json", "w") as s:
+            level = {"level": 0}
+            json.dump(level, s, indent=4)
+        """
+        if CheckPyInstaller():
+            try:
+                self.p = QProcess()
+                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                self.p.start("main.exe")
+            except FileNotFoundError:
+                open_github_website()
+        else:
+            try:
+                self.p = QProcess()
+                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                self.p.start("python", ["main.py"])
+            except FileNotFoundError:
+                open_github_website()
         """
 
 
