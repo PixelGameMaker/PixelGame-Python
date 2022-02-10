@@ -463,7 +463,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
         del f, choose_data
 
     def play(self):
-        self.showMinimized()
+        # self.showMinimized()
         # start game
         print(f"[INFO] Trying to start the game with class {choose_data['choose']}.")
         # import subprocess
@@ -529,7 +529,7 @@ class Start_Window(QtWidgets.QMainWindow):
         self.ui.play2.clicked.connect(self.play2)
 
     def play1(self):
-        self.showMinimized()
+        # self.showMinimized()
         if CheckPyInstaller():
             if os.path.exists("release/main.exe"):
                 try:
@@ -561,7 +561,7 @@ class Start_Window(QtWidgets.QMainWindow):
         self.close()
 
     def play2(self):
-        self.showMinimized()
+        # self.showMinimized()
         with open("Json/save.json", "w") as s:
             level = {"level": 0}
             json.dump(level, s, indent=4)
