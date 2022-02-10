@@ -4,14 +4,14 @@ Created on Tue Oct 26 21:09:02 2021
 
 @author: howard
 """
+import json
 import os
 import subprocess
 import sys
-from datetime import datetime
 import traceback
+from datetime import datetime
 
 import game_loop
-import json
 
 
 def CheckPyInstaller():

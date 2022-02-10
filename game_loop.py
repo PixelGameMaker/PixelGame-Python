@@ -363,8 +363,15 @@ class gameEnv:
 
             self.ui_group = self.ui.update(detail)
 
-            blit_sprite = [self.floor, self.wall, self.bullet, self.enemy, self.player_group, self.situation_text,
-                           self.ui_group]
+            blit_sprite = [
+                self.floor,
+                self.wall,
+                self.bullet,
+                self.enemy,
+                self.player_group,
+                self.situation_text,
+                self.ui_group,
+            ]
 
             for group in blit_sprite:
                 for entity in group:
