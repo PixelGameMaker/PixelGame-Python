@@ -411,7 +411,6 @@ class Launcher_Window(QtWidgets.QMainWindow):
 class Choose_Character_Window(QtWidgets.QWidget):
     def __init__(self):
         super(Choose_Character_Window, self).__init__(None)
-        self.start = Start_Window()
         self.ui = choose_character_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
@@ -476,7 +475,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
         if save_exists:
             print("The save.json exist")
 
-            # self.start = Start_Window()
+            self.start = Start_Window()
             self.start.show()
             self.start.showNormal()
             # self.showNormal()

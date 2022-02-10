@@ -66,6 +66,12 @@ try:
                     else:
                         subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
                 else:
+                    lvl = -2
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+            elif isSave == 'X':
                     lvl = -1
                     if not CheckPyInstaller():
                         subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
