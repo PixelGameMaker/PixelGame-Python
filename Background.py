@@ -201,10 +201,10 @@ class Situation_display:
             self.rect.x = displayInfo.current_w - displayInfo.current_w / 5.4
             self.rect.y = 0
 
-        def update(self, detail):
-            self.hp = detail["health"]
-            self.mp = detail["magic point"]
-            self.exp += detail["exp"]
+        #def update(self, detail):
+        #    self.hp = detail["health"]
+        #    self.mp = detail["magic point"]
+        #    self.exp += detail["exp"]
 
     class hp(pygame.sprite.Sprite):
         def __init__(self, pos):
