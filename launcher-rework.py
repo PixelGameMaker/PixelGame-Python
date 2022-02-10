@@ -596,11 +596,13 @@ class Start_Window(QtWidgets.QMainWindow):
             except FileNotFoundError:
                 QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
                 open_github_website()
+
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
             print("[ERROR] Unknown game error, please report to developer.")
             open_github_website()
         # self.showNormal()
+        self.close()
 
     def play2(self):
         self.showMinimized()
@@ -624,6 +626,7 @@ class Start_Window(QtWidgets.QMainWindow):
             except FileNotFoundError:
                 QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
                 open_github_website()
+        self.close()
 
 
 if __name__ == "__main__":
