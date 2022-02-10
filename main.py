@@ -84,6 +84,6 @@ except:
         save = {"level": lvl}
         json.dump(save, b, indent=4)
     if CheckPyInstaller():
-        subprocess.call("realese/ErrorWindow.exe")
+        subprocess.call("release/ErrorWindow.exe")
     else:
         subprocess.call(["python", "ErrorWindow.py"])
