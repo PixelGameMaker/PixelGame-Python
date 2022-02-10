@@ -49,20 +49,27 @@ try:
 
         game.gameSettings(lvl, data)
 
-        isPass = game.mainloop()
+        isPass, isSave = game.mainloop()
 
         if not isPass:
             print("Loss\n")
             import pygame
 
             pygame.quit()
-            with open("Json/save.json", "w") as b:
-                save = {"level": lvl}
-                json.dump(save, b, indent=4)
-            if not CheckPyInstaller():
-                subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-            else:
-                subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+            if isSave in ['SAVE_QUIT','SAVE_DEAD']:
+                with open("Json/save.json", "w") as b:
+                    save = {"level": lvl}
+                    json.dump(save, b, indent=4)
+                if isSave == 'SAVE_DEAD':
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                else:
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", -1])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", -1])
             break
         else:
             print("pass")

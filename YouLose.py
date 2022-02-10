@@ -28,8 +28,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 f"Wow! You are better than 99% of the players!\n"
                 f"You died at Lv.{level}!"
             )
-        else:
+        elif level >= 0:
             self.ui.label_2.setText(f"You died at Lv.{level}!\n" f"Keep going!")
+        else:
+            self.ui.label_2.setText('U have quitted the game.') #TODO 等橙油來改
 
     def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
         super(MainWindow, self)
