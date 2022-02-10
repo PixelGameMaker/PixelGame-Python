@@ -57,6 +57,12 @@ del CheckWorkDir
 if not os.path.exists("Log"):
     os.makedirs("Log")
 
+if not os.path.isfile("Json/save.json"):
+    save_exists = False
+    with open("Json/save.json", "w") as f:
+        json.dump({"level": 0}, f)
+else:
+    save_exists = True
 
 # TODO: rewrite print to logging
 
@@ -492,32 +498,9 @@ class Choose_Character_Window(QtWidgets.QWidget):
         # start game
         print(f"[INFO] Trying to start the game with class {choose_data['choose']}.")
         # import subprocess
-        if os.path.isfile("Json/save.json"):
+        if save_exists:
             print('The save.json exist')
-            """
-            if CheckPyInstaller():
-                if os.path.exists("start.exe"):
-                    try:
-                        self.p = QProcess()
-                        self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                        self.p.start("start.exe")
-                    except FileNotFoundError:
-                        open_github_website()
-                    except:
-                        print("[ERROR] Unknown game error, please report to developer.")
-                else:
-                    open_github_website()
-            elif os.path.exists("start.py"):
-                try:
-                    self.p = QProcess()
-                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.start = Start_Window()
-                    self.start.show()
-                except FileNotFoundError:
-                    open_github_website()
-            else:
-                open_github_website()
-            """
+
             # self.start = Start_Window()
             self.start.show()
             self.start.showNormal()
