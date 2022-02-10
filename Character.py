@@ -444,7 +444,7 @@ class Text(pygame.sprite.Sprite):
         self.rect.y = pos[1]
 
     def update(self, text, pos=None, color=(0, 255, 0)):
-        if pos != None:
+        if pos is not None:
             self.rect.x = pos[0]
             self.rect.y = pos[1]
         self.surf = self.font.render(text, True, color)
