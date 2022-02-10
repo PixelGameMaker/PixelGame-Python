@@ -62,7 +62,7 @@ try:
             if not CheckPyInstaller():
                 subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
             else:
-                subprocess.call(["realese/YouLose.exe", "--lv", str(lvl)])
+                subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
             break
         else:
             print("pass")
