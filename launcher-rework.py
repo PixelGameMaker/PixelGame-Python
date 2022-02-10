@@ -390,6 +390,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
         del data
         # self.cc = Choose_Character_Window()
         self.cc.show()
+        self.cc.showNormal()
         """
         def Run_cc(self, method, ProcName):
             self.p = QtCore.QProcess()
@@ -514,6 +515,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
             """
             # self.start = Start_Window()
             self.start.show()
+            self.start.showNormal()
             # self.showNormal()
         else:
             print("The save.json doesn't exist")
