@@ -101,7 +101,11 @@ def character_surf_initialize():
         surf.set_colorkey((0, 0, 0), pygame.RLEACCEL)
         bullet_surf[name] = surf
     
-    bullet_surf['magic_particle'] = pygame.transform.smoothscale(bullet_surf['magic_particle'], 0.005)
+    size = (
+            int(displayInfo.current_h * 0.005 * 2.5),
+            int(displayInfo.current_h * 0.005 * 2.5),
+        )
+    bullet_surf['magic_particle'] = pygame.transform.smoothscale(bullet_surf['magic_particle'], size)
 
 
 def update_img(entity, direction):
