@@ -133,7 +133,7 @@ class gameEnv:
                 if events.type == pygame.QUIT:
                     pygame.quit()
                     del pygame.locals
-                    return False
+                    return False, "X"
 
                 if events.type == pygame.KEYDOWN:
                     if events.key == pygame.K_0:
@@ -168,7 +168,7 @@ class gameEnv:
                     if events.key == pygame.K_ESCAPE:
                         pygame.quit()
                         del pygame.locals
-                        return False
+                        return False, 'SAVE_QUIT'
 
             key_pressed = list(pygame.key.get_pressed())
 
@@ -362,14 +362,15 @@ class gameEnv:
 
             self.ui_group = self.ui.update(detail)
 
-            blit_sprite = []
-            blit_sprite.append(self.floor)
-            blit_sprite.append(self.wall)
-            blit_sprite.append(self.bullet)
-            blit_sprite.append(self.enemy)
-            blit_sprite.append(self.player_group)
-            blit_sprite.append(self.situation_text)
-            blit_sprite.append(self.ui_group)
+            blit_sprite = [
+                self.floor,
+                self.wall,
+                self.bullet,
+                self.enemy,
+                self.player_group,
+                self.situation_text,
+                self.ui_group,
+            ]
 
             for group in blit_sprite:
                 for entity in group:
@@ -382,10 +383,10 @@ class gameEnv:
             #    self.screen.blit(entity.surf, entity.rect)
             #
             if len(self.enemy) <= 0:
-                return True  # pass
+                return True, 'SAVE' # pass
 
             if self.player.health <= 0:
-                return False  # loss
+                return False, 'SAVE_DEAD' # loss
 
             self.clock.tick(self.fps)
             pygame.display.flip()
