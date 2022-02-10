@@ -56,7 +56,7 @@ try:
             import pygame
 
             pygame.quit()
-            if isSave in ['SAVE_QUIT','SAVE_DEAD']:
+            if isSave in ['SAVE_QUIT', 'SAVE_DEAD']:
                 with open("Json/save.json", "w") as b:
                     save = {"level": lvl}
                     json.dump(save, b, indent=4)

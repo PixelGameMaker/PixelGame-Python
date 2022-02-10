@@ -23,7 +23,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
-        if level >= 5:
+        if level == -1:
+            self.ui.label_2.setText("Haha, you didn't save the file. :)\n"
+                                    "Remember next time don't click the X button.")
+        elif level >= 5:
             self.ui.label_2.setText(
                 f"Wow! You are better than 99% of the players!\n"
                 f"You died at Lv.{level}!"
@@ -31,7 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
         elif level >= 0:
             self.ui.label_2.setText(f"You died at Lv.{level}!\n" f"Keep going!")
         else:
-            self.ui.label_2.setText('U have quitted the game.') #TODO 等橙油來改
+            self.ui.label_2.setText("You have quit the game.")
 
     def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
         super(MainWindow, self)
