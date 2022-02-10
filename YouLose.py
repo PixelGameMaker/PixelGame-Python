@@ -31,6 +31,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.ui.label_2.setText(f"You died at Lv.{level}!\n" f"Keep going!")
 
+    def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
+        super(MainWindow, self)
+        if event.key() == QtCore.Qt.Key_Escape:
+            self.close()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
