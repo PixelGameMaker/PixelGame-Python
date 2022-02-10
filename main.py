@@ -4,14 +4,14 @@ Created on Tue Oct 26 21:09:02 2021
 
 @author: howard
 """
+import json
 import os
 import subprocess
 import sys
-from datetime import datetime
 import traceback
+from datetime import datetime
 
 import game_loop
-import json
 
 
 def CheckPyInstaller():
@@ -49,20 +49,28 @@ try:
 
         game.gameSettings(lvl, data)
 
-        isPass = game.mainloop()
+        isPass, isSave = game.mainloop()
 
         if not isPass:
             print("Loss\n")
             import pygame
 
             pygame.quit()
-            with open("Json/save.json", "w") as b:
-                save = {"level": lvl}
-                json.dump(save, b, indent=4)
-            if not CheckPyInstaller():
-                subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-            else:
-                subprocess.call(["YouLose.exe", "--lv", str(lvl)])
+            if isSave in ['SAVE_QUIT','SAVE_DEAD']:
+                with open("Json/save.json", "w") as b:
+                    save = {"level": lvl}
+                    json.dump(save, b, indent=4)
+                if isSave == 'SAVE_DEAD':
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                else:
+                    lvl = -1
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
             break
         else:
             print("pass")
@@ -84,6 +92,6 @@ except:
         save = {"level": lvl}
         json.dump(save, b, indent=4)
     if CheckPyInstaller():
-        subprocess.call("ErrorWindow.exe")
+        subprocess.call("release/ErrorWindow.exe")
     else:
         subprocess.call(["python", "ErrorWindow.py"])

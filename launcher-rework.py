@@ -57,6 +57,12 @@ del CheckWorkDir
 if not os.path.exists("Log"):
     os.makedirs("Log")
 
+if not os.path.isfile("Json/save.json"):
+    save_exists = False
+    with open("Json/save.json", "w") as f:
+        json.dump({"level": 0}, f, indent=4)
+else:
+    save_exists = True
 
 # TODO: rewrite print to logging
 
@@ -262,7 +268,9 @@ def json_save(self):
 
 
 try:
-    update_check = requests.get("https://api.github.com/repos/cytsai1008/PixelRPG-Python/tags").json()
+    update_check = requests.get(
+        "https://api.github.com/repos/cytsai1008/PixelRPG-Python/tags"
+    ).json()
     if update_check[0]["name"] != current_version:
         print("[INFO] New version available.")
         updateable = True
@@ -287,9 +295,13 @@ class Launcher_Window(QtWidgets.QMainWindow):
         # localization
         if updateable:
             update_text = launcher_localization.update_word(return_lang)
-            if QtWidgets.QMessageBox.Yes == QtWidgets.QMessageBox.information(self, "Update Available", update_text,
-                                                                              QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
-                                                                              QtWidgets.QMessageBox.No):
+            if QtWidgets.QMessageBox.Yes == QtWidgets.QMessageBox.information(
+                    self,
+                    "Update Available",
+                    update_text,
+                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                    QtWidgets.QMessageBox.No,
+            ):
                 open_github_website()
                 # sys.exit()
 
@@ -380,7 +392,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
 
     def Play(self):
         print("[INFO] Starting game and saving settings data")
-        self.showMinimized()
+        # self.showMinimized()
         json_save(self)
         with open("Json/config.json", "r") as f:
             data = json.load(f)
@@ -394,35 +406,6 @@ class Launcher_Window(QtWidgets.QMainWindow):
         # self.cc = Choose_Character_Window()
         self.cc.show()
         self.cc.showNormal()
-        """
-        def Run_cc(self, method, ProcName):
-            self.p = QtCore.QProcess()
-            self.p.setProcessChannelMode(QtCore.QProcess.ForwardedChannels)
-            self.p.start(method, [ProcName])
-            print("[INFO] Play Button clicked, please select character to play")
-
-        def Run_cc2(self, ProcName):
-            self.p = QtCore.QProcess()
-            self.p.setProcessChannelMode(QtCore.QProcess.ForwardedChannels)
-            self.p.start(ProcName)
-
-        if CheckPyInstaller():
-            if os.path.exists("cc_main.exe"):
-                try:
-                    Run_cc2(self, "cc_main.exe")
-                except:
-                    open_github_website()
-            else:
-                open_github_website()
-        else:
-            if os.path.exists("cc_main.py"):
-                try:
-                    Run_cc(self, "python", "cc_main.py")
-                except:
-                    open_github_website()
-            else:
-                open_github_website()
-        """
 
 
 class Choose_Character_Window(QtWidgets.QWidget):
@@ -486,36 +469,13 @@ class Choose_Character_Window(QtWidgets.QWidget):
         del f, choose_data
 
     def play(self):
-        self.showMinimized()
+        # self.showMinimized()
         # start game
         print(f"[INFO] Trying to start the game with class {choose_data['choose']}.")
         # import subprocess
-        if os.path.isfile("Json/save.json"):
-            print('The save.json exist')
-            """
-            if CheckPyInstaller():
-                if os.path.exists("start.exe"):
-                    try:
-                        self.p = QProcess()
-                        self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                        self.p.start("start.exe")
-                    except FileNotFoundError:
-                        open_github_website()
-                    except:
-                        print("[ERROR] Unknown game error, please report to developer.")
-                else:
-                    open_github_website()
-            elif os.path.exists("start.py"):
-                try:
-                    self.p = QProcess()
-                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.start = Start_Window()
-                    self.start.show()
-                except FileNotFoundError:
-                    open_github_website()
-            else:
-                open_github_website()
-            """
+        if save_exists:
+            print("The save.json exist")
+
             # self.start = Start_Window()
             self.start.show()
             self.start.showNormal()
@@ -523,18 +483,24 @@ class Choose_Character_Window(QtWidgets.QWidget):
         else:
             print("The save.json doesn't exist")
             if CheckPyInstaller():
-                if os.path.exists("main.exe"):
+                if os.path.exists("release/main.exe"):
                     try:
                         self.p = QProcess()
                         self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                        self.p.start("main.exe")
+                        self.p.start("release/main.exe")
                     except FileNotFoundError:
-                        QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                        QtWidgets.QMessageBox.warning(
+                            self,
+                            "Error",
+                            "Game file corrupt, please retry download it.",
+                        )
                         open_github_website()
                     except:
                         print("[ERROR] Unknown game error, please report to developer.")
                 else:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                    QtWidgets.QMessageBox.warning(
+                        self, "Error", "Game file corrupt, please retry download it."
+                    )
                     open_github_website()
             elif os.path.exists("main.py"):
                 try:
@@ -542,10 +508,14 @@ class Choose_Character_Window(QtWidgets.QWidget):
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
                     self.p.start("python", ["main.py"])
                 except FileNotFoundError:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                    QtWidgets.QMessageBox.warning(
+                        self, "Error", "Game file corrupt, please retry download it."
+                    )
                     open_github_website()
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                QtWidgets.QMessageBox.warning(
+                    self, "Error", "Game file corrupt, please retry download it."
+                )
                 open_github_website()
             # self.showNormal()
 
@@ -557,9 +527,13 @@ class Start_Window(QtWidgets.QMainWindow):
         self.ui = start_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
-        with open("Json/save.json", "r") as f:
-            save = json.load(f)
-            del f
+        if os.path.exists("Json/save.json"):
+            with open("Json/save.json", "r") as f:
+                save = json.load(f)
+                del f
+        else:
+            save = {"level": 0}
+
         text = (
             f"You have arrived the level {int(save['level'])} \n"
             "Do you want continue?"
@@ -571,20 +545,24 @@ class Start_Window(QtWidgets.QMainWindow):
         self.ui.play2.clicked.connect(self.play2)
 
     def play1(self):
-        self.showMinimized()
+        # self.showMinimized()
         if CheckPyInstaller():
-            if os.path.exists("main.exe"):
+            if os.path.exists("release/main.exe"):
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("main.exe")
+                    self.p.start("release/main.exe")
                 except FileNotFoundError:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                    QtWidgets.QMessageBox.warning(
+                        self, "Error", "Game file corrupt, please retry download it."
+                    )
                     open_github_website()
                 except:
                     print("[ERROR] Unknown game error, please report to developer.")
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                QtWidgets.QMessageBox.warning(
+                    self, "Error", "Game file corrupt, please retry download it."
+                )
                 open_github_website()
         elif os.path.exists("main.py"):
             try:
@@ -592,18 +570,22 @@ class Start_Window(QtWidgets.QMainWindow):
                 self.p.setProcessChannelMode(QProcess.ForwardedChannels)
                 self.p.start("python", ["main.py"])
             except FileNotFoundError:
-                QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                QtWidgets.QMessageBox.warning(
+                    self, "Error", "Game file corrupt, please retry download it."
+                )
                 open_github_website()
 
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+            QtWidgets.QMessageBox.warning(
+                self, "Error", "Game file corrupt, please retry download it."
+            )
             print("[ERROR] Unknown game error, please report to developer.")
             open_github_website()
         # self.showNormal()
         self.close()
 
     def play2(self):
-        self.showMinimized()
+        # self.showMinimized()
         with open("Json/save.json", "w") as s:
             level = {"level": 0}
             json.dump(level, s, indent=4)
@@ -612,9 +594,11 @@ class Start_Window(QtWidgets.QMainWindow):
             try:
                 self.p = QProcess()
                 self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                self.p.start("main.exe")
+                self.p.start("release/main.exe")
             except FileNotFoundError:
-                QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                QtWidgets.QMessageBox.warning(
+                    self, "Error", "Game file corrupt, please retry download it."
+                )
                 open_github_website()
         else:
             try:
@@ -622,7 +606,9 @@ class Start_Window(QtWidgets.QMainWindow):
                 self.p.setProcessChannelMode(QProcess.ForwardedChannels)
                 self.p.start("python", ["main.py"])
             except FileNotFoundError:
-                QtWidgets.QMessageBox.warning(self, "Error", "Game file corrupt, please retry download it.")
+                QtWidgets.QMessageBox.warning(
+                    self, "Error", "Game file corrupt, please retry download it."
+                )
                 open_github_website()
         self.close()
 
