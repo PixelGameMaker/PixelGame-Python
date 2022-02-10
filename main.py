@@ -66,10 +66,11 @@ try:
                     else:
                         subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
                 else:
+                    lvl = -1
                     if not CheckPyInstaller():
-                        subprocess.call(["python", "YouLose.py", "--lv", -1])
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
                     else:
-                        subprocess.call(["release/YouLose.exe", "--lv", -1])
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
             break
         else:
             print("pass")
