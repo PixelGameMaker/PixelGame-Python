@@ -386,7 +386,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
 
     def Play(self):
         print("[INFO] Starting game and saving settings data")
-        self.showMinimized()
+        #self.showMinimized()
         json_save(self)
         with open("Json/config.json", "r") as f:
             data = json.load(f)
@@ -511,9 +511,13 @@ class Start_Window(QtWidgets.QMainWindow):
         self.ui = start_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
-        with open("Json/save.json", "r") as f:
-            save = json.load(f)
-            del f
+        if os.path.exists("Json/save.json"):
+            with open("Json/save.json", "r") as f:
+                save = json.load(f)
+                del f
+        else:
+            save = {'level': 0 }
+        
         text = (
             f"You have arrived the level {int(save['level'])} \n"
             "Do you want continue?"
