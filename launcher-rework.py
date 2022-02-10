@@ -24,9 +24,9 @@ from start_ui import Ui_Form as start_window
 
 
 def CheckWorkDir():
-    from os.path import expanduser
+    # from os.path import expanduser
 
-    HomeDir = expanduser("~")
+    HomeDir = os.path.expanduser("~")
     HomeDir = HomeDir.lower()
     CurrentDir = os.getcwd()
     CurrentDir = CurrentDir.lower()
@@ -46,7 +46,7 @@ def CheckWorkDir():
         except KeyboardInterrupt:
             print("[WARN] Ctrl+C detected. Exiting...")
             sys.exit()
-    del CurrentDir, HomeDir, expanduser
+    del CurrentDir, HomeDir
 
 
 CheckWorkDir()
@@ -424,7 +424,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
 class Choose_Character_Window(QtWidgets.QWidget):
     def __init__(self):
         super(Choose_Character_Window, self).__init__(None)
-        self.start = None
+        self.start = Start_Window()
         self.ui = choose_character_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
@@ -512,7 +512,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
             else:
                 open_github_website()
             """
-            self.start = Start_Window()
+            # self.start = Start_Window()
             self.start.show()
             # self.showNormal()
         else:
@@ -539,7 +539,6 @@ class Choose_Character_Window(QtWidgets.QWidget):
             else:
                 open_github_website()
             # self.showNormal()
-        time.sleep(1)
 
 
 class Start_Window(QtWidgets.QMainWindow):
