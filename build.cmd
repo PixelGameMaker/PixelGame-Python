@@ -1,1 +1,1 @@
-pyinstaller -F .\launcher-rework.py --icon=Logo.ico && pyinstaller -F .\main.py && pyinstaller -F .\ErrorWindow.py && pyinstaller -F .\YouLose.py
+pyinstaller -F .\launcher-rework.py --icon=Logo.ico && pyinstaller -F .\main.py --icon=Logo.ico && pyinstaller -F .\ErrorWindow.py --icon=Logo.ico && pyinstaller -F .\YouLose.py --icon=Logo.ico
