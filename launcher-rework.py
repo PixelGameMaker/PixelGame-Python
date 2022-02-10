@@ -60,7 +60,7 @@ if not os.path.exists("Log"):
 if not os.path.isfile("Json/save.json"):
     save_exists = False
     with open("Json/save.json", "w") as f:
-        json.dump({"level": 0}, f)
+        json.dump({"level": 0}, f, indent=4)
 else:
     save_exists = True
 
@@ -400,37 +400,6 @@ class Launcher_Window(QtWidgets.QMainWindow):
         # self.cc = Choose_Character_Window()
         self.cc.show()
         self.cc.showNormal()
-        """
-        def Run_cc(self, method, ProcName):
-            self.p = QtCore.QProcess()
-            self.p.setProcessChannelMode(QtCore.QProcess.ForwardedChannels)
-            self.p.start(method, [ProcName])
-            print("[INFO] Play Button clicked, please select character to play")
-
-        def Run_cc2(self, ProcName):
-            self.p = QtCore.QProcess()
-            self.p.setProcessChannelMode(QtCore.QProcess.ForwardedChannels)
-            self.p.start(ProcName)
-
-        if CheckPyInstaller():
-            if os.path.exists("realese/cc_main.exe"):
-                print('True')
-                try:
-                    Run_cc2(self, "realese/cc_main.exe")
-                except:
-                    open_github_website()
-            else:
-                open_github_website()
-        else:
-            print('False')
-            if os.path.exists("cc_main.py"):
-                try:
-                    Run_cc(self, "python", "cc_main.py")
-                except:
-                    open_github_website()
-            else:
-                open_github_website()  
-        """
 
 
 class Choose_Character_Window(QtWidgets.QWidget):
