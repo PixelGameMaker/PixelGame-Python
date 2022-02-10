@@ -35,7 +35,6 @@ class gameEnv:
     def __init__(self, config):
 
         # self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
-        self.ui_group = None
         if data["windowed"]:
             self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
         else:
@@ -363,8 +362,14 @@ class gameEnv:
 
             self.ui_group = self.ui.update(detail)
 
-            blit_sprite = [self.floor, self.wall, self.bullet, self.enemy, self.player_group, self.situation_text,
-                           self.ui_group]
+            blit_sprite = []
+            blit_sprite.append(self.floor)
+            blit_sprite.append(self.wall)
+            blit_sprite.append(self.bullet)
+            blit_sprite.append(self.enemy)
+            blit_sprite.append(self.player_group)
+            blit_sprite.append(self.situation_text)
+            blit_sprite.append(self.ui_group)
 
             for group in blit_sprite:
                 for entity in group:
