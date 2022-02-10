@@ -8,6 +8,7 @@ def set_hant(self):
     self.ui.Music_Off.setText("關閉")
     self.ui.Button_Reset.setText("重設")
     self.ui.Button_Save.setText("儲存")
+    # update_text = "偵測到新版本，是否更新？"
 
 
 def set_hans(self):
@@ -20,6 +21,7 @@ def set_hans(self):
     self.ui.Music_Off.setText("关闭")
     self.ui.Button_Reset.setText("重置")
     self.ui.Button_Save.setText("保存")
+    # update_text = "检测到新版本，是否更新？"
 
 
 def set_ja(self):
@@ -32,6 +34,7 @@ def set_ja(self):
     self.ui.Music_Off.setText("オフ")
     self.ui.Button_Reset.setText("リセット")
     self.ui.Button_Save.setText("セーブ")
+    # update_text = "新しいバージョンを検出しました。\nアップデートしますか？"
 
 
 def lang_module(self, lang):
@@ -41,3 +44,15 @@ def lang_module(self, lang):
         set_hans(self)
     elif lang == "ja":
         set_ja(self)
+
+
+def update_word(lang) -> str:
+    if lang == "zh-hant":
+        update_text = "偵測到新版本，是否更新？"
+    elif lang == "zh-hans":
+        update_text = "检测到新版本，是否更新？"
+    elif lang == "ja":
+        update_text = "新しいバージョンを検出しました。\nアップデートしますか？"
+    else:
+        update_text = "New version detected.\nUpdate?"
+    return str(update_text)
