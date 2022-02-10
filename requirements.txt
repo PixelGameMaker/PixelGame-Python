@@ -1,6 +1,4 @@
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
-# platform: win-64
-pyside2~=5.13.2
-pygame~=1.9.4
-pyautogui~=0.9.53
+PyAutoGUI==0.9.53
+requests==2.27.1
+pygame==1.9.4
+PySide2==5.13.2
