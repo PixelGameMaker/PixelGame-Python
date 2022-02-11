@@ -27,7 +27,7 @@ Use the package manager [conda](https://anaconda.org/) to install dependent.
 
 ```bash
 git clone https://github.com/cytsai1008/PixelRPG-Python
-conda create -n pixelrpg python=3.6 -c delichon -c conda-forge -c defaults pyside2 pygame pyautogui --no-default-packages
+conda create -n pixelrpg python=3.6 -c delichon -c conda-forge -c defaults pyside2 pygame pyautogui requests --no-default-packages
 ```
 
 ## Usage
