@@ -6,6 +6,7 @@ import random
 import sys
 import time
 import webbrowser
+from datetime import datetime
 
 import pyautogui
 import requests
@@ -57,12 +58,18 @@ del CheckWorkDir
 if not os.path.exists("Log"):
     os.makedirs("Log")
 
-if not os.path.isfile("Json/save.json"):
+date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
+# sys.stdout = open(f"Log/{date}_log.txt", "w")
+# todo: https://stackoverflow.com/questions/19425736/how-to-redirect-stdout-and-stderr-to-logger-in-python
+
+"""if not os.path.isfile("Json/save.json"):
     save_exists = False
     with open("Json/save.json", "w") as f:
         json.dump({"level": 0}, f, indent=4)
 else:
     save_exists = True
+"""
+
 
 # TODO: rewrite print to logging
 
@@ -472,7 +479,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
         # start game
         print(f"[INFO] Trying to start the game with class {choose_data['choose']}.")
         # import subprocess
-        if save_exists:
+        if os.path.exists("Json/save.json"):
             print("The save.json exist")
 
             self.start = Start_Window()
