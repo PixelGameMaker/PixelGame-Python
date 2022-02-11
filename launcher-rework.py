@@ -481,27 +481,31 @@ class Choose_Character_Window(QtWidgets.QWidget):
             # self.showNormal()
         else:
             print("The save.json doesn't exist")
-            if CheckPyInstaller():
-                if os.path.exists("release/main.exe"):
-                    try:
-                        self.p = QProcess()
-                        self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                        self.p.start("release/main.exe")
-                    except FileNotFoundError:
-                        QtWidgets.QMessageBox.warning(
-                            self,
-                            "Error",
-                            "Game file corrupt, please retry download it.",
-                        )
-                        open_github_website()
-                    except:
-                        print("[ERROR] Unknown game error, please report to developer.")
-                else:
+            if CheckPyInstaller() and os.path.exists("release/main.exe"):
+                try:
+                    self.p = QProcess()
+                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
+                    self.p.start("release/main.exe")
+                except FileNotFoundError:
                     QtWidgets.QMessageBox.warning(
-                        self, "Error", "Game file corrupt, please retry download it."
+                        self,
+                        "Error",
+                        "Game file corrupt, please retry download it.",
                     )
                     open_github_website()
-            elif os.path.exists("main.py"):
+                except:
+                    print("[ERROR] Unknown game error, please report to developer.")
+            elif (
+                    CheckPyInstaller()
+                    and not os.path.exists("release/main.exe")
+                    or not CheckPyInstaller()
+                    and not os.path.exists("main.py")
+            ):
+                QtWidgets.QMessageBox.warning(
+                    self, "Error", "Game file corrupt, please retry download it."
+                )
+                open_github_website()
+            else:
                 try:
                     self.p = QProcess()
                     self.p.setProcessChannelMode(QProcess.ForwardedChannels)
@@ -511,12 +515,6 @@ class Choose_Character_Window(QtWidgets.QWidget):
                         self, "Error", "Game file corrupt, please retry download it."
                     )
                     open_github_website()
-            else:
-                QtWidgets.QMessageBox.warning(
-                    self, "Error", "Game file corrupt, please retry download it."
-                )
-                open_github_website()
-            # self.showNormal()
 
 
 class Start_Window(QtWidgets.QMainWindow):
