@@ -168,7 +168,7 @@ class gameEnv:
                     if events.key == pygame.K_ESCAPE:
                         pygame.quit()
                         del pygame.locals
-                        return False, 'SAVE_QUIT'
+                        return False, "SAVE_QUIT"
 
             key_pressed = list(pygame.key.get_pressed())
 
@@ -383,10 +383,10 @@ class gameEnv:
             #    self.screen.blit(entity.surf, entity.rect)
             #
             if len(self.enemy) <= 0:
-                return True, 'SAVE' # pass
+                return True, "SAVE"  # pass
 
             if self.player.health <= 0:
-                return False, 'SAVE_DEAD' # loss
+                return False, "SAVE_DEAD"  # loss
 
             self.clock.tick(self.fps)
             pygame.display.flip()
