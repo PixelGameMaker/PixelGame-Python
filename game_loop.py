@@ -162,8 +162,10 @@ class gameEnv:
                     if events.key == pygame.K_m:
                         if self.music.getBusy():
                             self.music.playMusic()
+                            data["music"] = True
                         else:
                             self.music.pauseMusic()
+                            data["music"] = False
 
                     if events.key == pygame.K_ESCAPE:
                         pygame.quit()
