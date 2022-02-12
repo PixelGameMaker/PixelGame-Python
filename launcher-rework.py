@@ -25,7 +25,7 @@ current_version = "0.1.0b"
 # WORKING DIR CHECK START
 
 
-def CheckWorkDir():
+def CheckWorkDir() -> None:
     # from os.path import expanduser
 
     HomeDir = os.path.expanduser("~")
@@ -78,7 +78,7 @@ else:
 # PYINSTALLER CHECK START
 
 
-def CheckPyInstaller():
+def CheckPyInstaller() -> bool:
     if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
         print("[INFO] You are running from PyInstaller packed executable.")
         return True
@@ -90,7 +90,7 @@ def CheckPyInstaller():
 # PYINSTALLER CHECK END
 
 
-def open_github_website():
+def open_github_website() -> None:
     print(
         "[ERROR] Something went wrong while opening Select Class Window. I suggest you re-download game file"
     )
@@ -106,7 +106,7 @@ def open_github_website():
 # JSON CHECK START
 
 
-def json_dump():
+def json_dump() -> None:
     width, height = pyautogui.size()
     screensize = f"{width} x {height}"
     print(f"[INFO] Your screen size is {screensize}")
@@ -155,7 +155,7 @@ try:
         music = config["music"]
         windowed = config["windowed"]
         fps = config["fps"]
-    del config, f
+    del config, f, resolution, preferresolution, music, windowed, fps
 
 except:
     print("[WARN] config.json corrupt.")
@@ -173,7 +173,7 @@ finally:
     del f
 
 
-def json_reset():
+def json_reset() -> None:
     with open("Json/choose.json", "w") as f:
         choose_data = {"choose": "Archer"}
         json.dump(choose_data, f, indent=4)
@@ -200,7 +200,7 @@ except:
 # SYSTEM LANGUAGE CHECK START
 
 
-def check_lang():
+def check_lang() -> str:
     # use module locale to check system language
     try:
         with open("Json/config.json", "r") as f:
@@ -237,7 +237,7 @@ del check_lang
 # SYSTEM LANGUAGE CHECK END
 
 
-def json_save(self):
+def json_save(self) -> None:
     # get resolution from combo box
     preferresolution = self.ui.Resolution_Settings.currentText()
     # get windowed from check box
@@ -271,7 +271,7 @@ def json_save(self):
                 "fps": fps,
             }
         json.dump(choose_data, f, indent=4)
-    del a, choose_data, f
+    del a, choose_data, f, preferresolution, music, windowed, fps
 
 
 try:
@@ -280,6 +280,9 @@ try:
     ).json()
     if update_check[0]["name"] != current_version:
         print("[INFO] New version available.")
+        print(
+            f"[INFO] Current version is {current_version}, Newest version is {update_check[0]['name']}"
+        )
         updateable = True
     else:
         print("[INFO] No new version available.")
@@ -287,10 +290,12 @@ try:
 except:
     print("[WARN] Can't check update.")
     updateable = False
+finally:
+    del update_check, current_version
 
 
 class Launcher_Window(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super(Launcher_Window, self).__init__(None)
         self.cc = Choose_Character_Window()
         self.ui = launcher_window()
@@ -344,7 +349,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
         self.ui.Button_Reset.clicked.connect(self.json_reset)
         self.ui.Background.mousePressEvent = self.background_click
 
-    def background_click(self, event):
+    def background_click(self, event) -> None:
         import random
 
         rick = random.randint(1, 20)
@@ -358,7 +363,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
             webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             sys.exit(0)
 
-    def json_reset(self):
+    def json_reset(self) -> None:
         json_dump()
         print("[INFO] Reset config.json")
         with open("Json/config.json", "r") as f:
@@ -373,8 +378,9 @@ class Launcher_Window(QtWidgets.QMainWindow):
         self.ui.Resolution_Settings.addItems(config["resolution"])
         self.ui.Resolution_Settings.setCurrentText(screensize)
         self.ui.FPS_Settings.setValue(60)
+        del screensize, width, height, config
 
-    def json_save(self):
+    def json_save(self) -> None:
         # get resolution from combo box
         preferresolution = self.ui.Resolution_Settings.currentText()
         # get windowed from check box
@@ -397,7 +403,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
         print("[INFO] Save config.json")
         del preferresolution, windowed, music, fps, data, f
 
-    def Play(self):
+    def Play(self) -> None:
         print("[INFO] Starting game and saving settings data")
         # self.showMinimized()
         json_save(self)
@@ -409,7 +415,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
             f"music is {data['music']}, \n"
             f"fps is {data['fps']}\n"
         )
-        del data
+        del data, f
         # self.cc = Choose_Character_Window()
         self.cc.show()
         self.cc.showNormal()
@@ -418,6 +424,7 @@ class Launcher_Window(QtWidgets.QMainWindow):
 class Choose_Character_Window(QtWidgets.QWidget):
     def __init__(self):
         super(Choose_Character_Window, self).__init__(None)
+        self.start = None
         self.ui = choose_character_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
@@ -444,6 +451,7 @@ class Choose_Character_Window(QtWidgets.QWidget):
 
         with open("Json/choose.json", "r") as f:
             choose_config = json.load(f)
+        del f
         self.a = choose_config["choose"]
         if self.a == "Archer":
             self.ui.now_choose.setText(self.Archer)
@@ -534,7 +542,7 @@ class Start_Window(QtWidgets.QMainWindow):
         if os.path.exists("Json/save.json"):
             with open("Json/save.json", "r") as f:
                 save = json.load(f)
-                del f
+            del f
         else:
             save = {"level": 0}
 
@@ -593,6 +601,7 @@ class Start_Window(QtWidgets.QMainWindow):
         with open("Json/save.json", "w") as s:
             level = {"level": 0}
             json.dump(level, s, indent=4)
+        del s, level
 
         if CheckPyInstaller():
             try:

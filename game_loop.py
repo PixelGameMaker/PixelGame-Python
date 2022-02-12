@@ -5,16 +5,17 @@ Created on Mon Jul 19 16:01:18 2021
 @author: 
 """
 
-from Character import character_surf_initialize, get_update_direction
-from Character import Player, Bullet, Enemy, Weapon, Text
-from Background import background_surf_init, Floor, wallBysize
-from BackGroundMusic import BackGroundMusic
-from UI_display import UI_display
+import json
+import random
+import time
 
 import pygame.locals
-import time
-import random
-import json
+
+from BackGroundMusic import BackGroundMusic
+from Background import background_surf_init, Floor, wallBysize
+from Character import Player, Bullet, Enemy, Weapon, Text
+from Character import character_surf_initialize, get_update_direction
+from UI_display import UI_display
 
 with open("Json/config.json") as f:
     data = json.load(f)
@@ -24,11 +25,11 @@ pygame.init()
 displayInfo = pygame.display.Info()
 
 screensize = data["preferresolution"]
-SCREEN_WIDTH = screensize[0 : screensize.index("x") - 1]
+SCREEN_WIDTH = screensize[0: screensize.index("x") - 1]
 SCREEN_WIDTH = int(SCREEN_WIDTH)
-SCREEN_HEIGHT = screensize[screensize.index("x") + 2 :]
+SCREEN_HEIGHT = screensize[screensize.index("x") + 2:]
 SCREEN_HEIGHT = int(SCREEN_HEIGHT)
-TITLE = "lol RPG"
+TITLE = "Unnamed RPG"
 
 
 class gameEnv:
@@ -36,10 +37,10 @@ class gameEnv:
 
         # self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
         if data["windowed"]:
-            self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+            self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT], pygame.DOUBLEBUF)
         else:
             self.screen = pygame.display.set_mode(
-                (SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN
+                (SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF
             )
         pygame.display.set_caption(TITLE)
         # print(data['windowed'])
@@ -280,13 +281,13 @@ class gameEnv:
 
             # text
             self.att = (
-                self.weapon.detail["damage"]
-                * (self.weapon.detail["accuracy"] * (1 - self.weapon.detail["strike"]))
-                + self.weapon.detail["damage"]
-                * self.weapon.detail["accuracy"]
-                * self.weapon.detail["strike"]
-                * 2
-            ) * self.weapon.detail["frequency"]
+                               self.weapon.detail["damage"]
+                               * (self.weapon.detail["accuracy"] * (1 - self.weapon.detail["strike"]))
+                               + self.weapon.detail["damage"]
+                               * self.weapon.detail["accuracy"]
+                               * self.weapon.detail["strike"]
+                               * 2
+                       ) * self.weapon.detail["frequency"]
             self.att_text.update("att:" + str(self.att))
 
             for current_time in list(self.dps.keys()):
@@ -315,7 +316,7 @@ class gameEnv:
                     collided_enemy = pygame.sprite.spritecollide(entity, group, False)
 
                 if (
-                    (entity.rect.x - 960) ** 2 + (entity.rect.y - 540) ** 2
+                        (entity.rect.x - 960) ** 2 + (entity.rect.y - 540) ** 2
                 ) > self.weapon.detail["range"] ** 2:
                     # print('yes')
                     # print(entity.rect.x, entity.rect.y)
