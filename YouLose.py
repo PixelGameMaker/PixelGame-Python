@@ -24,8 +24,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         if level == -1:
-            self.ui.label_2.setText("Haha, you didn't save the file. :)\n"
-                                    "Remember next time don't click the X button.")
+            self.ui.label_2.setText(
+                "Haha, you didn't save the file. :)\n"
+                "Remember next time don't click the X button."
+            )
         elif level >= 5:
             self.ui.label_2.setText(
                 f"Wow! You are better than 99% of the players!\n"
