@@ -412,12 +412,8 @@ class Launcher_Window(QtWidgets.QMainWindow):
             f"fps is {data['fps']}\n"
         )
         del data, f
-        Youlose = Youlose_Window(0)
-        Youlose.show()
-        '''
         self.cc.show()
         self.cc.showNormal()
-        '''
 
 
 class Choose_Character_Window(QtWidgets.QWidget):
@@ -558,9 +554,9 @@ class Start_Window(QtWidgets.QMainWindow):
         self.close()
         lvl = main()
         print(f'level = {lvl}')
-        Youlose = Youlose_Window(lvl)
-        Youlose.show()
-        Youlose.showNormal()
+        self.Youlose = Youlose_Window(lvl)
+        self.Youlose.show()
+        self.Youlose.showNormal()
         print('done')
 
     def play2(self):
@@ -572,9 +568,9 @@ class Start_Window(QtWidgets.QMainWindow):
         self.close()
         lvl = main()
         print(f'level = {lvl}')
-        Youlose = Youlose_Window(lvl)
-        Youlose.show()
-        Youlose.showNormal()
+        self.Youlose = Youlose_Window(lvl)
+        self.Youlose.show()
+        self.Youlose.showNormal()
         print('done')
 
 class Youlose_Window(QtWidgets.QMainWindow):
