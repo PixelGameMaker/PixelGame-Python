@@ -27,6 +27,7 @@ from You_Lose import Ui_Form as youlose_window
 
 current_version = "0.1.0b"
 
+
 # WORKING DIR CHECK START
 
 
@@ -536,8 +537,9 @@ class Start_Window(QtWidgets.QMainWindow):
         self.Youlose.show()
         self.Youlose.showNormal()
 
+
 class Youlose_Window(QtWidgets.QMainWindow):
-    def __init__(self, level = None):
+    def __init__(self, level=None):
         super(Youlose_Window, self).__init__(None)
         self.level = level
         self.ui = youlose_window()
@@ -562,20 +564,20 @@ class Youlose_Window(QtWidgets.QMainWindow):
     def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
         super(Youlose_Window, self)
         if event.key() == QtCore.Qt.Key_Escape:
-            self.close() 
+            self.close()
+
 
 def main():
     import game_loop
 
     with open("Json/choose.json", "r") as m:
         main_choose = json.load(m)
-        config = {"profession": str(main_choose["choose"])}
+    choose = {"profession": str(main_choose["choose"])}
 
-    game = game_loop.gameEnv(config)
+    game = game_loop.gameEnv(choose)
 
-    fo = open("assets/enemy.json", "r")
-    data = json.load(fo)
-    fo.close()
+    with open("assets/enemy.json", "r") as fo:
+        data = json.load(fo)
     del fo
 
     if not os.path.isfile("Json/save.json"):
@@ -607,9 +609,21 @@ def main():
                     else:
                         lvl = -2
                         return lvl
+                        '''
+                        if not CheckPyInstaller():
+                            subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                        else:
+                            subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                            '''
                 elif isSave == "X":
                     lvl = -1
                     return lvl
+                    '''
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                        '''
                 break
             else:
                 print("pass")
