@@ -1,24 +1,30 @@
-# import datetime
-# import subprocess
 import json
 import os
 import random
 import sys
 import time
 import webbrowser
+import traceback
+import subprocess
 from datetime import datetime
 
 import pyautogui
 import requests
 from PySide2 import QtWidgets, QtCore, QtGui
 from PySide2.QtCore import QProcess
+from PySide2.QtGui import QFontDatabase
 
 import cc_main_localization
 import launcher_localization
 import start_local
+import game_loop
 from Ui_Launcher import Ui_Main_Window as launcher_window
 from choose_character import Ui_Form as choose_character_window
 from start_ui import Ui_Form as start_window
+from You_Lose import Ui_Form as youlose_window
+
+# This is the All-In-One version. 
+# Only the error window will be put outside.
 
 current_version = "0.1.0b"
 
@@ -59,16 +65,6 @@ if not os.path.exists("Log"):
     os.makedirs("Log")
 
 date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
-# sys.stdout = open(f"Log/{date}_log.txt", "w")
-# todo: https://stackoverflow.com/questions/19425736/how-to-redirect-stdout-and-stderr-to-logger-in-python
-
-"""if not os.path.isfile("Json/save.json"):
-    save_exists = False
-    with open("Json/save.json", "w") as f:
-        json.dump({"level": 0}, f, indent=4)
-else:
-    save_exists = True
-"""
 
 
 # TODO: rewrite print to logging
@@ -416,9 +412,12 @@ class Launcher_Window(QtWidgets.QMainWindow):
             f"fps is {data['fps']}\n"
         )
         del data, f
-        # self.cc = Choose_Character_Window()
+        Youlose = Youlose_Window(0)
+        Youlose.show()
+        '''
         self.cc.show()
         self.cc.showNormal()
+        '''
 
 
 class Choose_Character_Window(QtWidgets.QWidget):
@@ -535,7 +534,6 @@ class Choose_Character_Window(QtWidgets.QWidget):
 class Start_Window(QtWidgets.QMainWindow):
     def __init__(self):
         super(Start_Window, self).__init__(None)
-        self.p = None
         self.ui = start_window()
         self.ui.setupUi(self)
         QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
@@ -557,44 +555,13 @@ class Start_Window(QtWidgets.QMainWindow):
         self.ui.play2.clicked.connect(self.play2)
 
     def play1(self):
-        # self.showMinimized()
-        if CheckPyInstaller():
-            if os.path.exists("release/main.exe"):
-                try:
-                    self.p = QProcess()
-                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("release/main.exe")
-                except FileNotFoundError:
-                    QtWidgets.QMessageBox.warning(
-                        self, "Error", "Game file corrupt, please retry download it."
-                    )
-                    open_github_website()
-                except:
-                    print("[ERROR] Unknown game error, please report to developer.")
-            else:
-                QtWidgets.QMessageBox.warning(
-                    self, "Error", "Game file corrupt, please retry download it."
-                )
-                open_github_website()
-        elif os.path.exists("main.py"):
-            try:
-                self.p = QProcess()
-                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                self.p.start("python", ["main.py"])
-            except FileNotFoundError:
-                QtWidgets.QMessageBox.warning(
-                    self, "Error", "Game file corrupt, please retry download it."
-                )
-                open_github_website()
-
-        else:
-            QtWidgets.QMessageBox.warning(
-                self, "Error", "Game file corrupt, please retry download it."
-            )
-            print("[ERROR] Unknown game error, please report to developer.")
-            open_github_website()
-        # self.showNormal()
         self.close()
+        lvl = main()
+        print(f'level = {lvl}')
+        Youlose = Youlose_Window(lvl)
+        Youlose.show()
+        Youlose.showNormal()
+        print('done')
 
     def play2(self):
         # self.showMinimized()
@@ -602,28 +569,129 @@ class Start_Window(QtWidgets.QMainWindow):
             level = {"level": 0}
             json.dump(level, s, indent=4)
         del s, level
-
-        if CheckPyInstaller():
-            try:
-                self.p = QProcess()
-                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                self.p.start("release/main.exe")
-            except FileNotFoundError:
-                QtWidgets.QMessageBox.warning(
-                    self, "Error", "Game file corrupt, please retry download it."
-                )
-                open_github_website()
-        else:
-            try:
-                self.p = QProcess()
-                self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                self.p.start("python", ["main.py"])
-            except FileNotFoundError:
-                QtWidgets.QMessageBox.warning(
-                    self, "Error", "Game file corrupt, please retry download it."
-                )
-                open_github_website()
         self.close()
+        lvl = main()
+        print(f'level = {lvl}')
+        Youlose = Youlose_Window(lvl)
+        Youlose.show()
+        Youlose.showNormal()
+        print('done')
+
+class Youlose_Window(QtWidgets.QMainWindow):
+    def __init__(self, level = None):
+        super(Youlose_Window, self).__init__(None)
+        self.level = level
+        self.ui = youlose_window()
+        self.ui.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
+        print(self.level)
+        if self.level == -1:
+            self.ui.label_2.setText(
+                "Haha, you didn't save the file. :)\n"
+                "Remember next time don't click the X button."
+            )
+        elif self.level >= 5:
+            self.ui.label_2.setText(
+                f"Wow! You are better than 99% of the players!\n"
+                f"You died at Lv.{level}!"
+            )
+        elif self.level >= 0:
+            self.ui.label_2.setText(f"You died at Lv.{level}!\n" f"Keep going!")
+        else:
+            self.ui.label_2.setText("You have quit the game.")
+
+    def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
+        super(Youlose_Window, self)
+        if event.key() == QtCore.Qt.Key_Escape:
+            self.close() 
+
+def main():
+    with open("Json/choose.json", "r") as m:
+        main_choose = json.load(m)
+    config = {"profession": str(main_choose["choose"])}
+
+    game = game_loop.gameEnv(config)
+
+    fo = open("assets/enemy.json", "r")
+    data = json.load(fo)
+    fo.close()
+    del fo
+
+    if not os.path.isfile("Json/save.json"):
+        lvl = 0
+    else:
+        with open("Json/save.json", "r") as s:
+            save = json.load(s)
+            lvl = int(save["level"]) - 1
+
+    try:
+        while True:
+            lvl += 1
+
+            game.gameSettings(lvl, data)
+
+            isPass, isSave = game.mainloop()
+
+            if not isPass:
+                print("Loss\n")
+                import pygame
+
+                pygame.quit()
+                if isSave in ["SAVE_QUIT", "SAVE_DEAD"]:
+                    with open("Json/save.json", "w") as b:
+                        save = {"level": lvl}
+                        json.dump(save, b, indent=4)
+                    if isSave == "SAVE_DEAD":
+                        return lvl
+                        '''
+                        if not CheckPyInstaller():
+                            subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                        else:
+                            subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                            '''
+                    else:
+                        lvl = -2
+                        return lvl
+                        '''
+                        if not CheckPyInstaller():
+                            subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                        else:
+                            subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                            '''
+                elif isSave == "X":
+                    lvl = -1
+                    return lvl
+                    '''
+                    if not CheckPyInstaller():
+                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
+                    else:
+                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
+                        '''
+                break
+            else:
+                print("pass")
+
+    except:
+        print("[ERROR] Unknown game error, please report to developer.")
+        import pygame
+
+        pygame.quit()
+        error_data = traceback.format_exc()
+        print(error_data)
+        date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
+        if not os.path.exists("ErrorLog"):
+            os.mkdir("ErrorLog")
+        with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
+            f.write("Error Occurred on lv." + str(lvl) + "\n\n")
+            f.write(error_data)
+        with open("Json/save.json", "w") as b:
+            save = {"level": lvl}
+            json.dump(save, b, indent=4)
+        if CheckPyInstaller():
+            subprocess.call("release/ErrorWindow.exe")
+        else:
+            subprocess.call(["python", "ErrorWindow.py"])
 
 
 if __name__ == "__main__":
