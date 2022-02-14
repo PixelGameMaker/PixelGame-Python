@@ -36,6 +36,7 @@ class gameEnv:
     def __init__(self, config):
 
         # self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
+        pygame.event.set_allowed([pygame.locals.KEYDOWN, pygame.locals.QUIT])
         if data["windowed"]:
             self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT], pygame.DOUBLEBUF)
         else:

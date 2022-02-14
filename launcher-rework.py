@@ -11,7 +11,6 @@ from datetime import datetime
 import pyautogui
 import requests
 from PySide2 import QtWidgets, QtCore, QtGui
-from PySide2.QtCore import QProcess
 from PySide2.QtGui import QFontDatabase
 
 import cc_main_localization
@@ -26,6 +25,7 @@ from You_Lose import Ui_Form as youlose_window
 # Except the error window will be put outside.
 
 current_version = "0.1.1-Beta"
+
 
 # WORKING DIR CHECK START
 
@@ -536,8 +536,9 @@ class Start_Window(QtWidgets.QMainWindow):
         self.Youlose.show()
         self.Youlose.showNormal()
 
+
 class Youlose_Window(QtWidgets.QMainWindow):
-    def __init__(self, level = None):
+    def __init__(self, level=None):
         super(Youlose_Window, self).__init__(None)
         self.level = level
         self.ui = youlose_window()
@@ -562,20 +563,20 @@ class Youlose_Window(QtWidgets.QMainWindow):
     def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
         super(Youlose_Window, self)
         if event.key() == QtCore.Qt.Key_Escape:
-            self.close() 
+            self.close()
+
 
 def main():
     import game_loop
 
     with open("Json/choose.json", "r") as m:
         main_choose = json.load(m)
-        config = {"profession": str(main_choose["choose"])}
+    choose = {"profession": str(main_choose["choose"])}
 
-    game = game_loop.gameEnv(config)
+    game = game_loop.gameEnv(choose)
 
-    fo = open("assets/enemy.json", "r")
-    data = json.load(fo)
-    fo.close()
+    with open("assets/enemy.json", "r") as fo:
+        data = json.load(fo)
     del fo
 
     if not os.path.isfile("Json/save.json"):
@@ -602,11 +603,9 @@ def main():
                     with open("Json/save.json", "w") as b:
                         save = {"level": lvl}
                         json.dump(save, b, indent=4)
-                    if isSave == "SAVE_DEAD":
-                        return lvl
-                    else:
+                    if isSave != "SAVE_DEAD":
                         lvl = -2
-                        return lvl
+                    return lvl
                 elif isSave == "X":
                     lvl = -1
                     return lvl
