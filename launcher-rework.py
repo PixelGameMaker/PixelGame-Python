@@ -23,9 +23,9 @@ from start_ui import Ui_Form as start_window
 from You_Lose import Ui_Form as youlose_window
 
 # This is the All-In-One version. 
-# Only the error window will be put outside.
+# Except the error window will be put outside.
 
-current_version = "0.1.0b"
+current_version = "0.1.1-Beta"
 
 # WORKING DIR CHECK START
 
