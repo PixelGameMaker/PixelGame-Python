@@ -17,7 +17,6 @@ from PySide2.QtGui import QFontDatabase
 import cc_main_localization
 import launcher_localization
 import start_local
-import game_loop
 from Ui_Launcher import Ui_Main_Window as launcher_window
 from choose_character import Ui_Form as choose_character_window
 from start_ui import Ui_Form as start_window
@@ -488,43 +487,11 @@ class Choose_Character_Window(QtWidgets.QWidget):
             self.start = Start_Window()
             self.start.show()
             self.start.showNormal()
-            # self.showNormal()
         else:
-            print("The save.json doesn't exist")
-            if CheckPyInstaller() and os.path.exists("release/main.exe"):
-                try:
-                    self.p = QProcess()
-                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("release/main.exe")
-                except FileNotFoundError:
-                    QtWidgets.QMessageBox.warning(
-                        self,
-                        "Error",
-                        "Game file corrupt, please retry download it.",
-                    )
-                    open_github_website()
-                except:
-                    print("[ERROR] Unknown game error, please report to developer.")
-            elif (
-                    CheckPyInstaller()
-                    and not os.path.exists("release/main.exe")
-                    or not CheckPyInstaller()
-                    and not os.path.exists("main.py")
-            ):
-                QtWidgets.QMessageBox.warning(
-                    self, "Error", "Game file corrupt, please retry download it."
-                )
-                open_github_website()
-            else:
-                try:
-                    self.p = QProcess()
-                    self.p.setProcessChannelMode(QProcess.ForwardedChannels)
-                    self.p.start("python", ["main.py"])
-                except FileNotFoundError:
-                    QtWidgets.QMessageBox.warning(
-                        self, "Error", "Game file corrupt, please retry download it."
-                    )
-                    open_github_website()
+            lvl = main()
+            self.Youlose = Youlose_Window(lvl)
+            self.Youlose.show()
+            self.Youlose.showNormal()
 
 
 class Start_Window(QtWidgets.QMainWindow):
@@ -553,11 +520,9 @@ class Start_Window(QtWidgets.QMainWindow):
     def play1(self):
         self.close()
         lvl = main()
-        print(f'level = {lvl}')
         self.Youlose = Youlose_Window(lvl)
         self.Youlose.show()
         self.Youlose.showNormal()
-        print('done')
 
     def play2(self):
         # self.showMinimized()
@@ -567,11 +532,9 @@ class Start_Window(QtWidgets.QMainWindow):
         del s, level
         self.close()
         lvl = main()
-        print(f'level = {lvl}')
         self.Youlose = Youlose_Window(lvl)
         self.Youlose.show()
         self.Youlose.showNormal()
-        print('done')
 
 class Youlose_Window(QtWidgets.QMainWindow):
     def __init__(self, level = None):
@@ -581,7 +544,6 @@ class Youlose_Window(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
-        print(self.level)
         if self.level == -1:
             self.ui.label_2.setText(
                 "Haha, you didn't save the file. :)\n"
@@ -603,9 +565,11 @@ class Youlose_Window(QtWidgets.QMainWindow):
             self.close() 
 
 def main():
+    import game_loop
+
     with open("Json/choose.json", "r") as m:
         main_choose = json.load(m)
-    config = {"profession": str(main_choose["choose"])}
+        config = {"profession": str(main_choose["choose"])}
 
     game = game_loop.gameEnv(config)
 
@@ -640,30 +604,12 @@ def main():
                         json.dump(save, b, indent=4)
                     if isSave == "SAVE_DEAD":
                         return lvl
-                        '''
-                        if not CheckPyInstaller():
-                            subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-                        else:
-                            subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
-                            '''
                     else:
                         lvl = -2
                         return lvl
-                        '''
-                        if not CheckPyInstaller():
-                            subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-                        else:
-                            subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
-                            '''
                 elif isSave == "X":
                     lvl = -1
                     return lvl
-                    '''
-                    if not CheckPyInstaller():
-                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-                    else:
-                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
-                        '''
                 break
             else:
                 print("pass")

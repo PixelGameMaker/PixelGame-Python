@@ -133,7 +133,6 @@ class gameEnv:
             for events in pygame.event.get():
                 if events.type == pygame.QUIT:
                     pygame.quit()
-                    del pygame.locals
                     return False, "X"
 
                 if events.type == pygame.KEYDOWN:
@@ -170,7 +169,6 @@ class gameEnv:
 
                     if events.key == pygame.K_ESCAPE:
                         pygame.quit()
-                        del pygame.locals
                         return False, "SAVE_QUIT"
 
             key_pressed = list(pygame.key.get_pressed())
