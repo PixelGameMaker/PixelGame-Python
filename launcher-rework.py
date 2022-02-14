@@ -11,7 +11,6 @@ from datetime import datetime
 import pyautogui
 import requests
 from PySide2 import QtWidgets, QtCore, QtGui
-from PySide2.QtCore import QProcess
 from PySide2.QtGui import QFontDatabase
 
 import cc_main_localization
@@ -604,26 +603,12 @@ def main():
                     with open("Json/save.json", "w") as b:
                         save = {"level": lvl}
                         json.dump(save, b, indent=4)
-                    if isSave == "SAVE_DEAD":
-                        return lvl
-                    else:
+                    if isSave != "SAVE_DEAD":
                         lvl = -2
-                        return lvl
-                        '''
-                        if not CheckPyInstaller():
-                            subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-                        else:
-                            subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
-                            '''
+                    return lvl
                 elif isSave == "X":
                     lvl = -1
                     return lvl
-                    '''
-                    if not CheckPyInstaller():
-                        subprocess.call(["python", "YouLose.py", "--lv", str(lvl)])
-                    else:
-                        subprocess.call(["release/YouLose.exe", "--lv", str(lvl)])
-                        '''
                 break
             else:
                 print("pass")
