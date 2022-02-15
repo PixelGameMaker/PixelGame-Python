@@ -11,7 +11,6 @@ from datetime import datetime
 import pyautogui
 import requests
 from PySide2 import QtWidgets, QtCore, QtGui
-from PySide2.QtGui import QFontDatabase
 
 import cc_main_localization
 import launcher_localization
