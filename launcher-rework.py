@@ -543,7 +543,7 @@ class Youlose_Window(QtWidgets.QMainWindow):
         self.ui = youlose_window()
         self.ui.setupUi(self)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-        QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
+        QtGui.QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
         if self.level == -1:
             self.ui.label_2.setText(
                 "Haha, you didn't save the file. :)\n"
