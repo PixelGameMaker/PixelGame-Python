@@ -86,7 +86,7 @@ def CheckPyInstaller() -> bool:
 
 def open_github_website() -> None:
     print(
-        "[ERROR] Something went wrong while opening Select Class Window. I suggest you re-download game file"
+        "[INFO] Opening https://github.com/cytsai1008/PixelRPG-Python"
     )
 
     webbrowser.open(
