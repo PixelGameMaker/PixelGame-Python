@@ -518,10 +518,25 @@ class Start_Window(QtWidgets.QMainWindow):
 
     def play1(self):
         self.close()
-        lvl = main()
-        self.Youlose = Youlose_Window(lvl)
-        self.Youlose.show()
-        self.Youlose.showNormal()
+        try:
+            lvl = main()
+        except:
+            error_data = traceback.format_exc()
+            print(error_data)
+            date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
+            if not os.path.exists("ErrorLog"):
+                os.mkdir("ErrorLog")
+            with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
+                f.write("Error Occurred while init pygame" + "\n\n")
+                f.write(error_data)
+                if CheckPyInstaller():
+                    subprocess.call("release/ErrorWindow.exe")
+                else:
+                    subprocess.call(["python", "ErrorWindow.py"])
+        else:
+            self.Youlose = Youlose_Window(lvl)
+            self.Youlose.show()
+            self.Youlose.showNormal()
 
     def play2(self):
         # self.showMinimized()
@@ -530,10 +545,25 @@ class Start_Window(QtWidgets.QMainWindow):
             json.dump(level, s, indent=4)
         del s, level
         self.close()
-        lvl = main()
-        self.Youlose = Youlose_Window(lvl)
-        self.Youlose.show()
-        self.Youlose.showNormal()
+        try:
+            lvl = main()
+        except:
+            error_data = traceback.format_exc()
+            print(error_data)
+            date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
+            if not os.path.exists("ErrorLog"):
+                os.mkdir("ErrorLog")
+            with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
+                f.write("Error Occurred while init pygame" + "\n\n")
+                f.write(error_data)
+                if CheckPyInstaller():
+                    subprocess.call("release/ErrorWindow.exe")
+                else:
+                    subprocess.call(["python", "ErrorWindow.py"])
+        else:
+            self.Youlose = Youlose_Window(lvl)
+            self.Youlose.show()
+            self.Youlose.showNormal()
 
 
 class Youlose_Window(QtWidgets.QMainWindow):
