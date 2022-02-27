@@ -244,6 +244,9 @@ class Player(pygame.sprite.Sprite):
 
         self.walking_cd = time.time()
         self.speedup_cd = time.time()
+        
+        self._x = 0
+        self._y = 0
 
     def set_profession(self, profession):
         self.health = self.profession[profession]["health"]
@@ -256,9 +259,13 @@ class Player(pygame.sprite.Sprite):
         self.exp = 0
 
     def update(self, direction):
+        self._x += direction[0] *self.speed
+        self._y += direction[1] *self.speed
+        print(self._x,self._y)
         update_img(self, direction)
         if self.mp < self.max_mp:
             self.mp += 0.1
+            
 
         self.speed = self.set_speed * (1 + self.speedup)
         if self.speedup:
