@@ -69,8 +69,8 @@ class Floor(pygame.sprite.Sprite):
             -player_direction[1] * player_speed,
         ]
 
-        self.rect.x += direction[0]
-        self.rect.y += direction[1]
+        self.rect.x += int(direction[0])
+        self.rect.y += int(direction[1])
 
 
 wall = {
@@ -121,8 +121,8 @@ class Wall(pygame.sprite.Sprite):
             -player_direction[1] * player_speed,
         ]
 
-        self.rect.x += direction[0]
-        self.rect.y += direction[1]
+        self.rect.x += int(direction[0])
+        self.rect.y += int(direction[1])
 
 
 def wallGenerater(dtype, groups, pos):

@@ -243,7 +243,7 @@ class Player(pygame.sprite.Sprite):
         self.knockback = [0, 0]
 
         self.walking_cd = time.time()
-        self.speedup_cd = time.time()
+        self.speedup_cd = time.time() +4
         
         self._x = 0
         self._y = 0
@@ -258,18 +258,18 @@ class Player(pygame.sprite.Sprite):
         self.speed = self.set_speed
         self.exp = 0
 
-    def update(self, direction):
+    def update(self, direction, during):
         self._x += direction[0] *self.speed
         self._y += direction[1] *self.speed
-        print(self._x,self._y)
+        #print(self._x,self._y)
         update_img(self, direction)
         if self.mp < self.max_mp:
             self.mp += 0.1
             
 
-        self.speed = self.set_speed * (1 + self.speedup)
-        if self.speedup:
-            self.speedup -= 1
+        self.speed = self.set_speed * (1 + self.speedup *0.5)
+        if self.speedup >0:
+            self.speedup -= during *8
 
     def hit(self, detail, bullet_rect):
         self.health -= detail["damage"]
