@@ -365,7 +365,6 @@ class gameEnv:
             self.ui_group = self.ui.update(detail)
 
             blit_sprite = [
-                self.floor,
                 self.wall,
                 self.bullet,
                 self.enemy,
@@ -374,9 +373,16 @@ class gameEnv:
                 self.ui_group,
             ]
 
+            for floor in self.floor:
+                self.screen.blit(floor.surf, floor.rect)
+                
             for group in blit_sprite:
                 for entity in group:
-                    self.screen.blit(entity.surf, entity.rect)
+                    if  entity.rect.x <= displayInfo.current_w and entity.rect.x >= 0 and\
+                        entity.rect.y <= displayInfo.current_h and entity.rect.y >= 0:
+                            self.screen.blit(entity.surf, entity.rect)
+            
+            
 
             # for entity in self.all_sprite:
             #    self.screen.blit(entity.surf, entity.rect)
@@ -398,8 +404,8 @@ class gameEnv:
         for i in range(lvl * 1):
             index = random.choice(list(data.keys()))
             detail = {
-                "x": random.randint(-displayInfo.current_w, displayInfo.current_w * 2),
-                "y": random.randint(-displayInfo.current_h, displayInfo.current_h * 2),
+                "x": random.randint(-displayInfo.current_w, displayInfo.current_w * 2) - self.player._x,
+                "y": random.randint(-displayInfo.current_h, displayInfo.current_h * 2) - self.player._y,
                 "health": lvl * data[index]["health"],
                 "speed": lvl * data[index]["speed"],
                 "cd": 1 / lvl,
