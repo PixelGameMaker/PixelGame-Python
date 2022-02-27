@@ -170,27 +170,6 @@ def wallBysize(groups, size, pos):
             group.add(summon_wall)
 
 
-class Situation_UI(pygame.sprite.Sprite):
-    def __init__(self, detail):
-        super(Situation_UI, self).__init__()
-
-        self.max_hp = detail["health"]
-        self.max_mp = detail["magic point"]
-        self.hp = self.max_hp
-        self.mp = self.max_mp
-        self.exp = 0
-
-        self.surf = background_surf["UI"]
-        self.rect = self.surf.get_rect()
-        self.rect.x = displayInfo.current_w - (displayInfo.current_w / 5.4)
-        self.rect.y = 0
-
-    def update(self, detail):
-        self.hp = detail["health"]
-        self.mp = detail["magic point"]
-        self.exp += detail["exp"]
-
-
 class Situation_display:
     class backGround(pygame.sprite.Sprite):
         def __init__(self):
