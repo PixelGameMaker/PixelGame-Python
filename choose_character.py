@@ -134,7 +134,7 @@ class Ui_Form(object):
         # self.c4.setText(_translate("Form", "TextLabel"))
         self.cc3.setText(_translate("Form", "Choose this"))
         self.cc4.setText(_translate("Form", "Choose this"))
-        self.Archer.setText(_translate("Form", "Archere"))
+        self.Archer.setText(_translate("Form", "Archer"))
         self.Knight.setText(_translate("Form", "Knight"))
         self.Magician.setText(_translate("Form", "Magician"))
         self.Assassin.setText(_translate("Form", "Assassin"))
