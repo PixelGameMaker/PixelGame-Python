@@ -521,7 +521,7 @@ class Start_Window(QtWidgets.QMainWindow):
             lvl = main()
         except:
             if not lvl:
-                lvl = "-1"
+                lvl = "-2"
             error_data = traceback.format_exc()
             print(error_data)
             date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
@@ -552,7 +552,7 @@ class Start_Window(QtWidgets.QMainWindow):
             lvl = main()
         except:
             if not lvl:
-                lvl = "-1"
+                lvl = "-2"
             error_data = traceback.format_exc()
             print(error_data)
             date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
