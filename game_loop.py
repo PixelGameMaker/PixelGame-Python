@@ -38,7 +38,9 @@ class gameEnv:
         # self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
         pygame.event.set_allowed([pygame.locals.KEYDOWN, pygame.locals.QUIT])
         if data["windowed"]:
-            self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT], pygame.DOUBLEBUF)
+            self.screen = pygame.display.set_mode(
+                [SCREEN_WIDTH, SCREEN_HEIGHT], pygame.DOUBLEBUF
+            )
         else:
             self.screen = pygame.display.set_mode(
                 (SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF
@@ -129,11 +131,11 @@ class gameEnv:
             self.music.playMusic()
         else:
             self.music.pauseMusic()
-        
+
         during_time = 0.01
         while True:
             start_time = time.time()
-            
+
             for events in pygame.event.get():
                 if events.type == pygame.QUIT:
                     pygame.quit()
@@ -184,14 +186,14 @@ class gameEnv:
 
             # wall
 
-            self.wall.update(self.player.speed *during_time, [direction[0], 0])
+            self.wall.update(self.player.speed * during_time, [direction[0], 0])
             if pygame.sprite.spritecollide(self.player, self.wall, False):
-                self.wall.update(self.player.speed *during_time, [-direction[0], 0])
+                self.wall.update(self.player.speed * during_time, [-direction[0], 0])
                 direction[0] = 0
 
-            self.wall.update(self.player.speed *during_time, [0, direction[1]])
+            self.wall.update(self.player.speed * during_time, [0, direction[1]])
             if pygame.sprite.spritecollide(self.player, self.wall, False):
-                self.wall.update(self.player.speed *during_time, [0, -direction[1]])
+                self.wall.update(self.player.speed * during_time, [0, -direction[1]])
                 direction[1] = 0
                 print(direction)
 
@@ -209,7 +211,7 @@ class gameEnv:
                 if sprite.rect.y > SCREEN_HEIGHT:
                     sprite.rect.y -= SCREEN_HEIGHT * 2
 
-            self.floor.update(self.player.speed *during_time, direction)
+            self.floor.update(self.player.speed * during_time, direction)
 
             # player
             if key_pressed[pygame.K_SPACE]:
@@ -222,7 +224,9 @@ class gameEnv:
             # print(direction)
 
             # enemy
-            self.enemy.update(self.player.rect, direction, self.player.speed *during_time)
+            self.enemy.update(
+                self.player.rect, direction, self.player.speed * during_time
+            )
 
             # bullet
             if pygame.mouse.get_pressed()[0]:
@@ -280,7 +284,7 @@ class gameEnv:
                         self.bullet.add(summon_bullet)
                         self.all_sprite.add(summon_bullet)
 
-            self.bullet.update(direction, self.player.speed *during_time)
+            self.bullet.update(direction, self.player.speed * during_time)
 
             # gun
 
@@ -379,14 +383,14 @@ class gameEnv:
 
             for floor in self.floor:
                 self.screen.blit(floor.surf, floor.rect)
-                
+
             for group in blit_sprite:
                 for entity in group:
-                    if  entity.rect.x <= displayInfo.current_w +100 and entity.rect.x >= 0 -100 and\
-                        entity.rect.y <= displayInfo.current_h +100 and entity.rect.y >= 0 -100:
-                            self.screen.blit(entity.surf, entity.rect)
-            
-            
+                    if (
+                            displayInfo.current_w + 100 >= entity.rect.x >= 0 - 100
+                            and displayInfo.current_h + 100 >= entity.rect.y >= 0 - 100
+                    ):
+                        self.screen.blit(entity.surf, entity.rect)
 
             # for entity in self.all_sprite:
             #    self.screen.blit(entity.surf, entity.rect)
@@ -400,10 +404,10 @@ class gameEnv:
             if self.player.health <= 0:
                 return False, "SAVE_DEAD"  # loss
 
-            #self.clock.tick(self.fps)
+            # self.clock.tick(self.fps)
             pygame.display.flip()
             pygame.event.pump()
-            
+
             end_time = time.time()
             during_time = end_time - start_time
 
@@ -411,8 +415,10 @@ class gameEnv:
         for i in range(lvl * 1):
             index = random.choice(list(data.keys()))
             detail = {
-                "x": random.randint(-displayInfo.current_w, displayInfo.current_w * 2) - self.player._x,
-                "y": random.randint(-displayInfo.current_h, displayInfo.current_h * 2) - self.player._y,
+                "x": random.randint(-displayInfo.current_w, displayInfo.current_w * 2)
+                     - self.player._x,
+                "y": random.randint(-displayInfo.current_h, displayInfo.current_h * 2)
+                     - self.player._y,
                 "health": lvl * data[index]["health"],
                 "speed": lvl * data[index]["speed"],
                 "cd": 1 / lvl,
@@ -424,4 +430,3 @@ class gameEnv:
             self.all_sprite.add(summon_enemy)
 
         # summon background
-

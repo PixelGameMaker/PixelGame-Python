@@ -20,7 +20,7 @@ from choose_character import Ui_Form as choose_character_window
 from start_ui import Ui_Form as start_window
 from You_Lose import Ui_Form as youlose_window
 
-# This is the All-In-One version. 
+# This is the All-In-One version.
 # Except the error window will be put outside.
 
 current_version = "0.1.1-Beta"
@@ -85,9 +85,7 @@ def CheckPyInstaller() -> bool:
 
 
 def open_github_website() -> None:
-    print(
-        "[INFO] Opening https://github.com/cytsai1008/PixelRPG-Python"
-    )
+    print("[INFO] Opening https://github.com/cytsai1008/PixelRPG-Python")
 
     webbrowser.open(
         "https://www.github.com/cytsai1008/PixelRPG-Python",
@@ -270,7 +268,7 @@ def json_save(self) -> None:
 
 try:
     update_check = requests.get(
-        "https://api.github.com/repos/cytsai1008/PixelRPG-Python/tags"
+        "https://api.github.com/repos/PixelGameMaker/PixelRPG-Python/tags"
     ).json()
     if update_check[0]["name"] != current_version:
         print("[INFO] New version available.")
@@ -429,10 +427,10 @@ class Choose_Character_Window(QtWidgets.QWidget):
         self.ui.play.clicked.connect(self.play)
         # self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowStaysOnTopHint)
 
-        self.Archer = "You will play 'Archer' in game."
-        self.Knight = "You will play 'Knight' in game."
-        self.Magician = "You will play 'Magician' in game."
-        self.Assassin = "You will play 'Assassin' in game."
+        self.Archer = "You will play Archer in game."
+        self.Knight = "You will play Knight in game."
+        self.Magician = "You will play Magician in game."
+        self.Assassin = "You will play Assassin in game."
 
         if return_lang == "zh-hant":
             cc_main_localization.set_hant(self)
@@ -518,9 +516,12 @@ class Start_Window(QtWidgets.QMainWindow):
 
     def play1(self):
         self.close()
+        lvl = None
         try:
             lvl = main()
         except:
+            if not lvl:
+                lvl = "-1"
             error_data = traceback.format_exc()
             print(error_data)
             date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
@@ -529,6 +530,7 @@ class Start_Window(QtWidgets.QMainWindow):
             with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
                 f.write("Error Occurred while init pygame" + "\n\n")
                 f.write(error_data)
+                f.close()
                 if CheckPyInstaller():
                     subprocess.call("release/ErrorWindow.exe")
                 else:
@@ -545,9 +547,12 @@ class Start_Window(QtWidgets.QMainWindow):
             json.dump(level, s, indent=4)
         del s, level
         self.close()
+        lvl = None
         try:
             lvl = main()
         except:
+            if not lvl:
+                lvl = "-1"
             error_data = traceback.format_exc()
             print(error_data)
             date = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
@@ -556,6 +561,7 @@ class Start_Window(QtWidgets.QMainWindow):
             with open("ErrorLog/traceback_{}_lv.{}.txt".format(date, lvl), "a") as f:
                 f.write("Error Occurred while init pygame" + "\n\n")
                 f.write(error_data)
+                f.close()
                 if CheckPyInstaller():
                     subprocess.call("release/ErrorWindow.exe")
                 else:
@@ -587,7 +593,7 @@ class Youlose_Window(QtWidgets.QMainWindow):
         elif self.level >= 0:
             self.ui.label_2.setText(f"You died at Lv.{level}!\n" f"Keep going!")
         else:
-            self.ui.label_2.setText("You have quit the game.")
+            self.ui.label_2.setText("You have quited the game.")
 
     def keyPressEvent(self, event):  # 設定鍵盤按鍵映射
         super(Youlose_Window, self)

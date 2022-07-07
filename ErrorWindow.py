@@ -16,6 +16,8 @@ list_of_files = glob.glob(
 traceback = max(list_of_files, key=os.path.getctime)
 print(traceback)
 
+error_msg = str(open(traceback, "r").read())
+
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -23,7 +25,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         QFontDatabase.addApplicationFont("Launcher Asset/unifont-14.0.01.ttf")
-        self.ui.label_2.setText(open(traceback).read())
+        self.ui.label_2.setText(error_msg)
 
 
 if __name__ == "__main__":
